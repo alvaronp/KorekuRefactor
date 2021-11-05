@@ -2,6 +2,7 @@ package es.unex.giiis.koreku;
 //Ejemplo
 //angel r
 //segunda prueba
+//HOLAA
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,5 +36,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }
