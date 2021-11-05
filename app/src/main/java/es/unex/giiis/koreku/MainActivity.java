@@ -1,5 +1,5 @@
 package es.unex.giiis.koreku;
-
+//Ejemplo
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
