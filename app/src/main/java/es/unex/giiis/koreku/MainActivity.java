@@ -5,7 +5,6 @@ package es.unex.giiis.koreku;
 //GGUIBERT PRUEBA
 //linea 6 angel 19:09
 //19;11;40
-//me cago en to macho
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
