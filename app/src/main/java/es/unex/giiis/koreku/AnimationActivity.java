@@ -1,5 +1,5 @@
 package es.unex.giiis.koreku;
-
+/// HolaMultiverso
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,5 +29,6 @@ public class AnimationActivity extends AppCompatActivity {
                 }
             }
         };td.start();
+
     }
 }
