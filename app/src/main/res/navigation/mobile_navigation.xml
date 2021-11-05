@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_games">
+
+    <fragment
+        android:id="@+id/navigation_games"
+        android:name="es.unex.giiis.koreku.ui.games.GameFragment"
+        android:label="@string/title_games"
+        tools:layout="@layout/fragment_game" />
+
+    <fragment
+        android:id="@+id/navigation_consoles"
+        android:name="es.unex.giiis.koreku.ui.consoles.ConsoleFragment"
+        android:label="@string/title_consoles"
+        tools:layout="@layout/fragment_console" />
+
+    <fragment
+        android:id="@+id/navigation_services"
+        android:name="es.unex.giiis.koreku.ui.services.ServiceFragment"
+        android:label="@string/title_services"
+        tools:layout="@layout/fragment_services" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="es.unex.giiis.koreku.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

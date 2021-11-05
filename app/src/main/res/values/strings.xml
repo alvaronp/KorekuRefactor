@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Koreku</string>
+    <string name="title_games">Juegos</string>
+    <string name="title_consoles">Consolas</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_services">Plataformas</string>
+
+</resources>
