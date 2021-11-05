@@ -1,10 +1,5 @@
 package es.unex.giiis.koreku;
-//Ejemplo
-//angel r
-//segunda prueba
-//GGUIBERT PRUEBA
-//linea 6 angel 19:09
-//19;11;40
+//esto es una prueba 19:28
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
