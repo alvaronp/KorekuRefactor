@@ -1,6 +1,11 @@
 package es.unex.giiis.koreku;
-
+//Ejemplo
+//angel r
+//segunda prueba
+//GGUIBERT PRUEBA
+//linea 6 angel 19:09
 import android.os.Bundle;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
