@@ -1,5 +1,5 @@
 package es.unex.giiis.koreku;
-//esto es una prueba 19:28
+//ahora sin el token
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
