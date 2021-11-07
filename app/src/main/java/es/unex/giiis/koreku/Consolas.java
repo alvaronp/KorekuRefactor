@@ -40,9 +40,9 @@ public class Consolas {
 	private String title = new String();
 	@TypeConverters(DateConverter.class)
 	private Date date = new Date();
-	@ColumnInfo(name="title")
+	@ColumnInfo(name="company")
 	private String company = new String();
-	@ColumnInfo(name="title")
+	@ColumnInfo(name="image")
 	private String image = new String();
 	@Ignore
     Consolas(String title, Date date, String company, String image) {
