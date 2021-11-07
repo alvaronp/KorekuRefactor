@@ -46,7 +46,7 @@ public class KorekuDbHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_CONSOLA =
             "DROP TABLE IF EXISTS " + DBContract.Consolas.TABLE_NAME;
     private static final String SQL_DELETE_PERFIL =
-            "DROP TABLE IF EXISTS " + DBContract.Consolas.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + DBContract.Perfil.TABLE_NAME;
 
     public KorekuDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,7 +63,7 @@ public class KorekuDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_GAME);
         db.execSQL(SQL_DELETE_CONSOLA);
-        db.execSQL(SQL_CREATE_PERFIL);
+        db.execSQL(SQL_DELETE_PERFIL);
         onCreate(db);
     }
 }
