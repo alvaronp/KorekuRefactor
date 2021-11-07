@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 public final class DBContract {
     private DBContract() {}
 
-    public static class TodoGame implements BaseColumns {
+    public static class Games implements BaseColumns {
         public static final String TABLE_NAME = "game";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_STATUS = "status";

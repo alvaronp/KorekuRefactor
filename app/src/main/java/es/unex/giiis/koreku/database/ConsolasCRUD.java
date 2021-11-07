@@ -11,18 +11,18 @@ import java.util.List;
 
 import es.unex.giiis.koreku.Consolas;
 
-public final class ConsolasItemCRUD {
+public final class ConsolasCRUD {
 
-    private ToDoManagerDbHelper mDbHelper;
-    private static ConsolasItemCRUD mInstance;
+    private KorekuDbHelper mDbHelper;
+    private static ConsolasCRUD mInstance;
 
-    private ConsolasItemCRUD(Context context) {
-        mDbHelper = new ToDoManagerDbHelper(context);
+    private ConsolasCRUD(Context context) {
+        mDbHelper = new KorekuDbHelper(context);
     }
 
-    public static ConsolasItemCRUD getInstance(Context context){
+    public static ConsolasCRUD getInstance(Context context){
         if (mInstance == null)
-            mInstance = new ConsolasItemCRUD(context);
+            mInstance = new ConsolasCRUD(context);
 
         return mInstance;
     }

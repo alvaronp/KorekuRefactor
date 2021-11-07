@@ -17,7 +17,7 @@ import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.StatusConverter;
 
 @Entity(tableName = "game")
-public class ToDoGame {
+public class Games {
 
 	@Ignore
 	public static final String ITEM_SEP = System.getProperty("line.separator");
@@ -58,7 +58,7 @@ public class ToDoGame {
 	private String image = new String();
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-    ToDoGame(String title, Status status, Date buydate, String desc, String image) {
+	Games(String title, Status status, Date buydate, String desc, String image) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
@@ -67,12 +67,12 @@ public class ToDoGame {
 	}
 
 	@Ignore
-	public ToDoGame(long ID, String title, String status, String buydate, String desc, String image) {
+	public Games(long ID, String title, String status, String buydate, String desc, String image) {
         this.id = ID;
         this.title = title;
         this.status = Status.valueOf(status);
         try {
-            this.buydate = ToDoGame.FORMAT.parse(buydate);
+            this.buydate = Games.FORMAT.parse(buydate);
         } catch (ParseException e) {
             this.buydate = new Date();
         }
@@ -82,20 +82,20 @@ public class ToDoGame {
 
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
-    ToDoGame(Intent intent) {
-		id = intent.getLongExtra(ToDoGame.ID,0); //TODO think best default value for ID
-		title = intent.getStringExtra(ToDoGame.TITLE);
-		status = Status.valueOf(intent.getStringExtra(ToDoGame.STATUS));
+	Games(Intent intent) {
+		id = intent.getLongExtra(Games.ID,0);
+		title = intent.getStringExtra(Games.TITLE);
+		status = Status.valueOf(intent.getStringExtra(Games.STATUS));
 		try {
-			buydate = ToDoGame.FORMAT.parse(intent.getStringExtra(ToDoGame.BUYDATE));
+			buydate = Games.FORMAT.parse(intent.getStringExtra(Games.BUYDATE));
 		} catch (ParseException e) {
 			buydate = new Date();
 		}
-		desc = intent.getStringExtra(ToDoGame.DESC);
-		image = intent.getStringExtra(ToDoGame.IMAGE);
+		desc = intent.getStringExtra(Games.DESC);
+		image = intent.getStringExtra(Games.IMAGE);
 	}
 
-	public ToDoGame(long id, String title, Status status, Date buydate, String desc, String image){
+	public Games(long id, String title, Status status, Date buydate, String desc, String image){
 		this.id =id;
 		this.title =title;
 		this.status =status;
@@ -154,11 +154,11 @@ public class ToDoGame {
 	public static void packageIntent(Intent intent, String title,
 									 Status status, String buydate, String desc, String image) {
 
-		intent.putExtra(ToDoGame.TITLE, title);
-		intent.putExtra(ToDoGame.STATUS, status.toString());
-		intent.putExtra(ToDoGame.BUYDATE, buydate);
-		intent.putExtra(ToDoGame.DESC, buydate);
-		intent.putExtra(ToDoGame.IMAGE, buydate);
+		intent.putExtra(Games.TITLE, title);
+		intent.putExtra(Games.STATUS, status.toString());
+		intent.putExtra(Games.BUYDATE, buydate);
+		intent.putExtra(Games.DESC, buydate);
+		intent.putExtra(Games.IMAGE, buydate);
 	}
 
 	public String toString() {

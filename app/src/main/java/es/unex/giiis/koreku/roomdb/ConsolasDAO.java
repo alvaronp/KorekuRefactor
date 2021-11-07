@@ -10,12 +10,12 @@ import java.util.List;
 import es.unex.giiis.koreku.Consolas;
 
 @Dao
-public interface ConsolasDao {
-    @Query("SELECT * FROM todo")
+public interface ConsolasDAO {
+    @Query("SELECT * FROM consola")
     public List<Consolas> getAll();
     @Insert
     public long insert(Consolas item);
-    @Query("DELETE FROM todo")
+    @Query("DELETE FROM consola")
     public void deleteAll();
     @Update
     public int update(Consolas item);

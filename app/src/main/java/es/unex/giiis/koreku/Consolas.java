@@ -20,6 +20,7 @@ public class Consolas {
 	@Ignore
 	public static final String ITEM_SEP = System.getProperty("line.separator");
 
+
 	@Ignore
 	public final static String ID = "ID";
 	@Ignore
@@ -40,10 +41,12 @@ public class Consolas {
 	private String title = new String();
 	@TypeConverters(DateConverter.class)
 	private Date date = new Date();
-	@ColumnInfo(name="title")
+	@ColumnInfo(name="company")
 	private String company = new String();
-	@ColumnInfo(name="title")
+	@ColumnInfo(name="image")
 	private String image = new String();
+
+
 	@Ignore
     Consolas(String title, Date date, String company, String image) {
 		this.title = title;
@@ -64,10 +67,9 @@ public class Consolas {
 		this.image=image;
     }
 
-	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
     Consolas(Intent intent) {
-		id = intent.getLongExtra(Consolas.ID,0); //TODO think best default value for ID
+		id = intent.getLongExtra(Consolas.ID,0);
 		title = intent.getStringExtra(Consolas.TITLE);
 		try {
 			date = Consolas.FORMAT.parse(intent.getStringExtra(Consolas.DATE));

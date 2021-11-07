@@ -7,19 +7,19 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.unex.giiis.koreku.ToDoGame;
+import es.unex.giiis.koreku.Games;
 
 @Dao //Esta interfaz es un Dao, así, Room sabrá que lo tiene que implementar como eso
-public interface ToDoGameDAO {
+public interface GamesDAO {
     @Query("SELECT * FROM game") //Antes definimos que nuestra tabla se llamaría así
-    public List<ToDoGame> getAll();
+    public List<Games> getAll();
 
     @Insert
-    public long insert(ToDoGame game);
+    public long insert(Games game);
 
     @Query("DELETE FROM game")
     public void deleteAll();
 
     @Update
-    public int update(ToDoGame game);
+    public int update(Games game);
 }
