@@ -56,12 +56,14 @@ public class KorekuDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_GAME);
         db.execSQL(SQL_CREATE_CONSOLA);
+        db.execSQL(SQL_CREATE_PERFIL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_GAME);
         db.execSQL(SQL_DELETE_CONSOLA);
+        db.execSQL(SQL_DELETE_PERFIL);
         onCreate(db);
     }
 }
