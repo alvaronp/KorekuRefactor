@@ -15,7 +15,7 @@ import java.util.Locale;
 
 import es.unex.giiis.koreku.roomdb.DateConverter;
 
-@Entity(tableName="consola")
+@Entity(tableName="perfil")
 public class Perfil {
 	@Ignore
 	public static final String ITEM_SEP = System.getProperty("line.separator");
@@ -73,7 +73,7 @@ public class Perfil {
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
     Perfil(Intent intent) {
-		id = intent.getLongExtra(Perfil.ID,0); //TODO think best default value for ID
+		id = intent.getLongExtra(Perfil.ID,0);
 		title = intent.getStringExtra(Perfil.TITLE);
 		try {
 			date = Perfil.FORMAT.parse(intent.getStringExtra(Perfil.DATE));

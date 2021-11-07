@@ -11,18 +11,18 @@ import java.util.List;
 
 import es.unex.giiis.koreku.Perfil;
 
-public final class PerfilItemCRUD {
+public final class PerfilCRUD {
 
-    private ToDoManagerDbHelper mDbHelper;
-    private static PerfilItemCRUD mInstance;
+    private KorekuDbHelper mDbHelper;
+    private static PerfilCRUD mInstance;
 
-    private PerfilItemCRUD(Context context) {
-        mDbHelper = new ToDoManagerDbHelper(context);
+    private PerfilCRUD(Context context) {
+        mDbHelper = new KorekuDbHelper(context);
     }
 
-    public static PerfilItemCRUD getInstance(Context context){
+    public static PerfilCRUD getInstance(Context context){
         if (mInstance == null)
-            mInstance = new PerfilItemCRUD(context);
+            mInstance = new PerfilCRUD(context);
 
         return mInstance;
     }

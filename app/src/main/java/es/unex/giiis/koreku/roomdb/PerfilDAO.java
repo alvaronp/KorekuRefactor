@@ -10,12 +10,12 @@ import java.util.List;
 import es.unex.giiis.koreku.Perfil;
 
 @Dao
-public interface PerfilDao {
-    @Query("SELECT * FROM todo")
+public interface PerfilDAO {
+    @Query("SELECT * FROM perfil")
     public List<Perfil> getAll();
     @Insert
     public long insert(Perfil item);
-    @Query("DELETE FROM todo")
+    @Query("DELETE FROM perfil")
     public void deleteAll();
     @Update
     public int update(Perfil item);
