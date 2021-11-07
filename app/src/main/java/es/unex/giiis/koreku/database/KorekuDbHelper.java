@@ -30,11 +30,22 @@ public class KorekuDbHelper extends SQLiteOpenHelper {
                     DBContract.Consolas.COLUMN_NAME_COMPANY + TEXT_TYPE + COMMA_SEP +
                     DBContract.Consolas.COLUMN_NAME_IMAGE + TEXT_TYPE +
                     " )";
+    private static final String SQL_CREATE_PERFIL =
+            "CREATE TABLE " + DBContract.Consolas.TABLE_NAME + " (" +
+                    DBContract.Perfil._ID + " INTEGER PRIMARY KEY," +
+                    DBContract.Perfil.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
+                    DBContract.Perfil.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
+                    DBContract.Perfil.COLUMN_NAME_PHONE+ TEXT_TYPE + COMMA_SEP +
+                    DBContract.Perfil.COLUMN_NAME_MAIL+ TEXT_TYPE + COMMA_SEP +
+                    DBContract.Perfil.COLUMN_NAME_IMAGE + TEXT_TYPE +
+                    " )";
 
     private static final String SQL_DELETE_GAME =
             "DROP TABLE IF EXISTS " + DBContract.Games.TABLE_NAME;
 
     private static final String SQL_DELETE_CONSOLA =
+            "DROP TABLE IF EXISTS " + DBContract.Consolas.TABLE_NAME;
+    private static final String SQL_DELETE_PERFIL =
             "DROP TABLE IF EXISTS " + DBContract.Consolas.TABLE_NAME;
 
     public KorekuDbHelper(Context context) {
