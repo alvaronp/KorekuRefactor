@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import es.unex.giiis.asee.todomanager_db.roomdb.DateConverter;
+import es.unex.giiis.koreku.roomdb.DateConverter;
 
 @Entity(tableName="consola")
 public class Consolas {

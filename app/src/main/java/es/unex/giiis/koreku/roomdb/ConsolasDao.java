@@ -7,7 +7,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.unex.giiis.asee.todomanager_db.Consolas;
+import es.unex.giiis.koreku.Consolas;
 
 @Dao
 public interface ConsolasDao {

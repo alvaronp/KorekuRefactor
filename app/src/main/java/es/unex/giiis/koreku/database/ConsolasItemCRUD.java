@@ -9,7 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.unex.giiis.asee.todomanager_db.Consolas;
+import es.unex.giiis.koreku.Consolas;
 
 public final class ConsolasItemCRUD {
 
@@ -44,7 +44,7 @@ public final class ConsolasItemCRUD {
         String sortOrder = null;
 
         Cursor cursor = db.query(
-                DBContract.TodoItem.TABLE_NAME,           // The table to query
+                DBContract.Consolas.TABLE_NAME,           // The table to query
                 projection,                               // The columns to return
                 selection,                                // The columns for the WHERE clause
                 selectionArgs,                            // The values for the WHERE clause
@@ -78,7 +78,7 @@ public final class ConsolasItemCRUD {
 
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(DBContract.TodoItem.TABLE_NAME, null, values);
+        long newRowId = db.insert(DBContract.Consolas.TABLE_NAME, null, values);
 
         return newRowId;
     }
