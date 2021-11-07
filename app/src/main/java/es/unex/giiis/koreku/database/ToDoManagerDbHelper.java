@@ -22,8 +22,20 @@ public class ToDoManagerDbHelper extends SQLiteOpenHelper {
                     DBContract.TodoGame.COLUMN_NAME_IMAGE + TEXT_TYPE +
                      " )";
 
+    private static final String SQL_CREATE_CONSOLA =
+            "CREATE TABLE " + DBContract.Consolas.TABLE_NAME + " (" +
+                    DBContract.Consolas._ID + " INTEGER PRIMARY KEY," +
+                    DBContract.Consolas.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
+                    DBContract.Consolas.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
+                    DBContract.Consolas.COLUMN_NAME_COMPANY + TEXT_TYPE + COMMA_SEP +
+                    DBContract.Consolas.COLUMN_NAME_IMAGE + TEXT_TYPE +
+                    " )";
+
     private static final String SQL_DELETE_GAME =
             "DROP TABLE IF EXISTS " + DBContract.TodoGame.TABLE_NAME;
+
+    private static final String SQL_DELETE_CONSOLA =
+            "DROP TABLE IF EXISTS " + DBContract.Consolas.TABLE_NAME;
 
     public ToDoManagerDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,11 +44,13 @@ public class ToDoManagerDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_GAME);
+        db.execSQL(SQL_CREATE_CONSOLA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_GAME);
+        db.execSQL(SQL_DELETE_CONSOLA);
         onCreate(db);
     }
 }

@@ -19,7 +19,5 @@ public final class DBContract {
         public static final String COLUMN_NAME_DATE = "date";
         public static final String COLUMN_NAME_COMPANY = "company";
         public static final String COLUMN_NAME_IMAGE = "image";
-
-
     }
 }
