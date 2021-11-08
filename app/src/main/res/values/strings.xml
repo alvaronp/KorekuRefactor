@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Koreku</string>
-    <string name="title_games">Juegos</string>
-    <string name="title_consoles">Consolas</string>
-    <string name="title_profile">Perfil</string>
-    <string name="title_services">Plataformas</string>
+    <string name="title_games">Games</string>
+    <string name="title_consoles">Consoles</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_services">Services</string>
+    <string name="delete_games">Delete Games</string>
+    <string name="delete_consoles">Delete Consoles</string>
+    <string name="delete_services">Delete Services</string>
+    <string name="delete_profile">Delete Profile</string>
 
 </resources>
