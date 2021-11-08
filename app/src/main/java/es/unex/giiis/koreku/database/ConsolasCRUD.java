@@ -65,16 +65,17 @@ public final class ConsolasCRUD {
         return items;
     }
 
-    public long insert(Consolas item){
+    public long insert(Consolas cons){
         // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(DBContract.Consolas.COLUMN_NAME_TITLE, item.getTitle());
-        values.put(DBContract.Consolas.COLUMN_NAME_COMPANY, item.getCompany());
-        values.put(DBContract.Consolas.COLUMN_NAME_IMAGE, item.getImage());
-        values.put(DBContract.Consolas.COLUMN_NAME_DATE, Consolas.FORMAT.format(item.getDate()));
+        values.put(DBContract.Consolas._ID, cons.getId());
+        values.put(DBContract.Consolas.COLUMN_NAME_TITLE, cons.getTitle());
+        values.put(DBContract.Consolas.COLUMN_NAME_COMPANY, cons.getCompany());
+        values.put(DBContract.Consolas.COLUMN_NAME_IMAGE, cons.getImage());
+        values.put(DBContract.Consolas.COLUMN_NAME_DATE, Consolas.FORMAT.format(cons.getDate()));
 
 
         // Insert the new row, returning the primary key value of the new row
@@ -129,8 +130,9 @@ public final class ConsolasCRUD {
         String date = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_DATE));
         String company = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_COMPANY));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_IMAGE));
+        long profileid = cursor.getInt(cursor.getColumnIndex(DBContract.Consolas.PROFILEID));
 
-        Consolas item = new Consolas(ID,title,date,company,image);
+        Consolas item = new Consolas(ID,title,date,company,image,profileid);
 
         Log.d("ConsolasCRUD",item.toLog());
 

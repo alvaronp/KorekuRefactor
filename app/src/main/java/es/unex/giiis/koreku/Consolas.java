@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -15,12 +16,12 @@ import java.util.Locale;
 
 import es.unex.giiis.koreku.roomdb.DateConverter;
 
-@Entity(tableName="consola")
+@Entity(tableName="consola", foreignKeys = @ForeignKey(entity = Perfil.class,
+											parentColumns = "profile_id",
+											childColumns = "profile_id"))
 public class Consolas {
 	@Ignore
 	public static final String ITEM_SEP = System.getProperty("line.separator");
-
-
 	@Ignore
 	public final static String ID = "ID";
 	@Ignore
@@ -35,6 +36,10 @@ public class Consolas {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss", Locale.US);
+	@Ignore
+	public final static String PROFILEID = "PROFILEID";
+
+	@ColumnInfo(name = "console_id")
 	@PrimaryKey(autoGenerate = true)
 	private long id;
 	@ColumnInfo(name="title")
@@ -45,17 +50,19 @@ public class Consolas {
 	private String company = new String();
 	@ColumnInfo(name="image")
 	private String image = new String();
-
+	@ColumnInfo(name= "profile_id", index = true)
+	private long profileid;
 
 	@Ignore
-    Consolas(String title, Date date, String company, String image) {
+    Consolas(String title, Date date, String company, String image, long profileid) {
 		this.title = title;
 		this.date = date;
 		this.company=company;
 		this.image=image;
+		this.profileid=profileid;
 	}
 	@Ignore
-    public Consolas(long ID, String title, String date, String company, String image) {
+    public Consolas(long ID, String title, String date, String company, String image, long profileid) {
         this.id = ID;
         this.title = title;
         try {
@@ -65,6 +72,7 @@ public class Consolas {
         }
 		this.company=company;
 		this.image=image;
+		this.profileid=profileid;
     }
 
 	@Ignore
@@ -78,16 +86,17 @@ public class Consolas {
 		}
 		company = intent.getStringExtra(Consolas.COMPANY);
 		image = intent.getStringExtra(Consolas.IMAGE);
+		profileid = intent.getLongExtra(Consolas.PROFILEID, 0);
 	}
 
 
-	public Consolas(long id, String title, Date date, String company, String image){
+	public Consolas(long id, String title, Date date, String company, String image, long profileid){
 		this.id =id;
 		this.date =date;
 		this.title =title;
 		this.company=company;
 		this.image=image;
-
+		this.profileid=profileid;
 	}
     public long getId() { return id; }
 
@@ -125,28 +134,37 @@ public class Consolas {
 		this.date = date;
 	}
 
+	public long getProfileid(){
+		return profileid;
+	}
+
+	public void setProfileid(long profileid){
+		this.profileid = profileid;
+	}
+
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
-	public static void packageIntent(Intent intent, String title,
-									 String company, String image, String date) {
-
+	public static void packageIntent(Intent intent, long id, String title,
+									 String company, String image, String date, long profileid) {
+		intent.putExtra(Consolas.ID, id);
 		intent.putExtra(Consolas.TITLE, title);
 		intent.putExtra(Consolas.COMPANY, company.toString());
 		intent.putExtra(Consolas.IMAGE, image.toString());
 		intent.putExtra(Consolas.DATE, date);
+		intent.putExtra(Consolas.PROFILEID, profileid);
 	
 	}
 
 	public String toString() {
 		return id + ITEM_SEP + title + ITEM_SEP
-				+ FORMAT.format(date)+ITEM_SEP+ company +ITEM_SEP+ image ;
+				+ FORMAT.format(date)+ITEM_SEP+ company +ITEM_SEP+ image + ITEM_SEP + profileid;
 	}
 
 	public String toLog() {
 		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + ITEM_SEP + "Date:"
 				+ FORMAT.format(date)+ "Company:" + company
-				+ ITEM_SEP + "Image:" + image ;
+				+ ITEM_SEP + "Image:" + image + "Profile ID: " + profileid;
 	}
 
 }

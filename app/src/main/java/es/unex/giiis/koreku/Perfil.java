@@ -19,7 +19,6 @@ import es.unex.giiis.koreku.roomdb.DateConverter;
 public class Perfil {
 	@Ignore
 	public static final String ITEM_SEP = System.getProperty("line.separator");
-
 	@Ignore
 	public final static String ID = "ID";
 	@Ignore
@@ -36,6 +35,8 @@ public class Perfil {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss", Locale.US);
+
+	@ColumnInfo(name="profile_id")
 	@PrimaryKey(autoGenerate = true)
 	private long id;
 	@ColumnInfo(name="title")

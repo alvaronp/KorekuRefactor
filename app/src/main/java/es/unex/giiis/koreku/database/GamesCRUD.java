@@ -70,6 +70,7 @@ public final class GamesCRUD {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+        values.put(DBContract.Games._ID, game.getId());
         values.put(DBContract.Games.COLUMN_NAME_TITLE, game.getTitle());
         values.put(DBContract.Games.COLUMN_NAME_STATUS, game.getStatus().name());
         values.put(DBContract.Games.COLUMN_NAME_BUYDATE, es.unex.giiis.koreku.Games.FORMAT.format(game.getBuydate()));
@@ -130,8 +131,9 @@ public final class GamesCRUD {
         String buydate = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_BUYDATE));
         String desc = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_DESC));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_IMAGE));
+        long profileid = cursor.getInt(cursor.getColumnIndex(DBContract.Games.PROFILEID));
 
-        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image);
+        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image,profileid);
 
         Log.d("ToDoGameCRUD",game.toLog());
 

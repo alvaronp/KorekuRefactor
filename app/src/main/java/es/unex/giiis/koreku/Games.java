@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -16,7 +17,9 @@ import java.util.Locale;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.StatusConverter;
 
-@Entity(tableName = "game")
+@Entity(tableName = "game", foreignKeys = @ForeignKey(entity = Perfil.class,
+													parentColumns = "profile_id",
+													childColumns = "profile_id"))
 public class Games {
 
 	@Ignore
@@ -42,8 +45,11 @@ public class Games {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss", Locale.US);
+	@Ignore
+	public final static String PROFILEID = "PROFILEID";
 
 	//Atributos de la clase
+	@ColumnInfo(name = "game_id")
 	@PrimaryKey (autoGenerate = true) //Clave primaria autogenerada para la bd
 	private long id;
 	@ColumnInfo(name = "title") //Nombre que tendrá el atributo en nuestra bd
@@ -56,18 +62,21 @@ public class Games {
 	private String desc = new String();
 	@ColumnInfo(name = "image") //URI de la portada del juego
 	private String image = new String();
+	@ColumnInfo(name = "profile_id", index = true)
+	private long profileid;
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	Games(String title, Status status, Date buydate, String desc, String image) {
+	Games(String title, Status status, Date buydate, String desc, String image, long profileid) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.profileid = profileid;
 	}
 
 	@Ignore
-	public Games(long ID, String title, String status, String buydate, String desc, String image) {
+	public Games(long ID, String title, String status, String buydate, String desc, String image, long profileid) {
         this.id = ID;
         this.title = title;
         this.status = Status.valueOf(status);
@@ -78,6 +87,7 @@ public class Games {
         }
         this.desc = desc;
         this.image = image;
+        this.profileid = profileid;
     }
 
 	// Create a new ToDoItem from data packaged in an Intent
@@ -93,15 +103,17 @@ public class Games {
 		}
 		desc = intent.getStringExtra(Games.DESC);
 		image = intent.getStringExtra(Games.IMAGE);
+		profileid = intent.getLongExtra(Games.PROFILEID, 0);
 	}
 
-	public Games(long id, String title, Status status, Date buydate, String desc, String image){
+	public Games(long id, String title, Status status, Date buydate, String desc, String image, long profileid){
 		this.id =id;
 		this.title =title;
 		this.status =status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.profileid = profileid;
 	}
 
     public long getId() { return id; }
@@ -148,28 +160,38 @@ public class Games {
 		this.image = image;
 	}
 
+	public long getProfileid(){
+		return profileid;
+	}
+
+	public void setProfileid(long profileid){
+		this.profileid = profileid;
+	}
+
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
-	public static void packageIntent(Intent intent, String title,
-									 Status status, String buydate, String desc, String image) {
+	public static void packageIntent(Intent intent, long id, String title,
+									 Status status, String buydate, String desc, String image, long profileid) {
 
+		intent.putExtra(Games.ID, id);
 		intent.putExtra(Games.TITLE, title);
 		intent.putExtra(Games.STATUS, status.toString());
 		intent.putExtra(Games.BUYDATE, buydate);
-		intent.putExtra(Games.DESC, buydate);
-		intent.putExtra(Games.IMAGE, buydate);
+		intent.putExtra(Games.DESC, desc);
+		intent.putExtra(Games.IMAGE, image);
+		intent.putExtra(Games.PROFILEID, profileid);
 	}
 
 	public String toString() {
 		return id + ITEM_SEP + title + ITEM_SEP +  status + ITEM_SEP +
-				FORMAT.format(buydate) + desc + ITEM_SEP + image;
+				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + profileid;
 	}
 
 	public String toLog() {
 		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Status:" + status +
 				ITEM_SEP + "Buy Date:" + FORMAT.format(buydate) + ITEM_SEP + "Description:" +
-				desc + ITEM_SEP + "Image URI:" + image;
+				desc + ITEM_SEP + "Image URI:" + image + "Profile ID: " + profileid;
 	}
 
 }

@@ -66,17 +66,18 @@ public final class PerfilCRUD {
         return items;
     }
 
-    public long insert(Perfil item){
+    public long insert(Perfil perfil){
         // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(DBContract.Perfil.COLUMN_NAME_TITLE, item.getTitle());
-        values.put(DBContract.Perfil.COLUMN_NAME_PHONE, item.getPhone());
-        values.put(DBContract.Perfil.COLUMN_NAME_MAIL, item.getMail());
-        values.put(DBContract.Perfil.COLUMN_NAME_IMAGE, item.getImage());
-        values.put(DBContract.Perfil.COLUMN_NAME_DATE, Perfil.FORMAT.format(item.getDate()));
+        values.put(DBContract.Perfil._ID, perfil.getId());
+        values.put(DBContract.Perfil.COLUMN_NAME_TITLE, perfil.getTitle());
+        values.put(DBContract.Perfil.COLUMN_NAME_PHONE, perfil.getPhone());
+        values.put(DBContract.Perfil.COLUMN_NAME_MAIL, perfil.getMail());
+        values.put(DBContract.Perfil.COLUMN_NAME_IMAGE, perfil.getImage());
+        values.put(DBContract.Perfil.COLUMN_NAME_DATE, Perfil.FORMAT.format(perfil.getDate()));
 
 
         // Insert the new row, returning the primary key value of the new row
