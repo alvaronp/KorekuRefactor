@@ -28,7 +28,7 @@
         android:layout_marginBottom="80dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/koreku"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.901"
