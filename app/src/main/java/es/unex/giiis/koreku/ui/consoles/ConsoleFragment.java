@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class ConsoleFragment extends Fragment {
             public void onClick(View view) {
                 // - Attach Listener to FloatingActionButton. Implement onClick()
                 Intent intent = new Intent(getActivity(), AddConsoles.class);
-                startActivityForResult(intent,ADD_CONSOLES_REQUEST);
+                startActivityForResult(intent, ADD_CONSOLES_REQUEST);
             }
         });
 
@@ -65,8 +66,9 @@ public class ConsoleFragment extends Fragment {
 
         // - Create a new Adapter for the RecyclerView
         mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
-            @Override public void onItemClick(Consolas c) {
-                Snackbar.make(getActivity().getCurrentFocus(), "Console "+c.getTitle()+" clicked", Snackbar.LENGTH_LONG).show();
+            @Override
+            public void onItemClick(Consolas c) {
+                Snackbar.make(getActivity().getCurrentFocus(), "Console " + c.getTitle() + " clicked", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -79,14 +81,14 @@ public class ConsoleFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         //  - Check result code and request code.
         // If user submitted a new ToDoItem
         // Create a new ToDoItem from the data Intent
         // and then add it to the adapter
-        if (requestCode == ADD_CONSOLES_REQUEST){
-            if (resultCode == getActivity().RESULT_OK){
+        if (requestCode == ADD_CONSOLES_REQUEST) {
+            if (resultCode == getActivity().RESULT_OK) {
                 Consolas c = new Consolas(data);
 
                 //insert into DB
@@ -100,7 +102,7 @@ public class ConsoleFragment extends Fragment {
                         c.setId(id);
 
                         //insert into adapter list
-                        getActivity().runOnUiThread(()-> mAdapter.add(c));
+                        getActivity().runOnUiThread(() -> mAdapter.add(c));
                     }
                 });
             }
@@ -108,7 +110,18 @@ public class ConsoleFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        // Load saved ToDoItems, if necessary
+
+        if (mAdapter.getItemCount() == 0)
+            loadItems();
+    }
+
+    @Override
     public void onDestroyView() {
+        KorekuDatabase.getInstance(getActivity()).close();
         super.onDestroyView();
         binding = null;
     }
@@ -118,4 +131,36 @@ public class ConsoleFragment extends Fragment {
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_consoles);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_DELETE:
+                //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
+                //crud.deleteAll();
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao2().deleteAll();
+                        getActivity().runOnUiThread(() -> mAdapter.clear());
+                    }
+                });
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Load stored ToDoItems
+    private void loadItems() {
+        //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
+        //List<ToDoItem> items = crud.getAll();
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                List <Consolas> cons = KorekuDatabase.getInstance(getActivity()).getDao2().getAll();
+                getActivity().runOnUiThread(()->mAdapter.load(cons));
+            }
+        });
+    }
 }
