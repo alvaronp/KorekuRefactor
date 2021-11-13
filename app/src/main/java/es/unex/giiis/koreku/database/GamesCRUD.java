@@ -131,9 +131,8 @@ public final class GamesCRUD {
         String buydate = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_BUYDATE));
         String desc = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_DESC));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_IMAGE));
-        long profileid = cursor.getInt(cursor.getColumnIndex(DBContract.Games.PROFILEID));
 
-        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image,profileid);
+        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image);
 
         Log.d("ToDoGameCRUD",game.toLog());
 

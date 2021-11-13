@@ -11,6 +11,8 @@
     <string name="name_console">Console Name</string>
     <string name="buydate_console">Buy Date</string>
     <string name="company_console">Company</string>
+    <string name="buydate_console_points">Buy Date: </string>
+    <string name="company_console_points">Company: </string>
     <string name="image_console">Image</string>
     <string name="enter_title">Enter name or title...</string>
     <string name="enter_company">Enter company name</string>

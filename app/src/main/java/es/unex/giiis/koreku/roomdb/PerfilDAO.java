@@ -19,5 +19,4 @@ public interface PerfilDAO {
     public void deleteAll();
     @Update
     public int update(Perfil item);
-
 }

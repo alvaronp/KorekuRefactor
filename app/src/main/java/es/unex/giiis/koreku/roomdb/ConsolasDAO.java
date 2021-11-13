@@ -11,11 +11,11 @@ import es.unex.giiis.koreku.Consolas;
 
 @Dao
 public interface ConsolasDAO {
-    @Query("SELECT * FROM consola")
+    @Query("SELECT * FROM consolas")
     public List<Consolas> getAll();
     @Insert
     public long insert(Consolas item);
-    @Query("DELETE FROM consola")
+    @Query("DELETE FROM consolas")
     public void deleteAll();
     @Update
     public int update(Consolas item);

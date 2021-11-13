@@ -20,9 +20,6 @@ import es.unex.giiis.koreku.R;
 
 public class AddConsoles extends AppCompatActivity {
 
-	// 7 days in milliseconds - 7 * 24 * 60 * 60 * 1000
-	private static final int SEVEN_DAYS = 604800000;
-
 	private static String dateString;
 	private static TextView dateView;
 	
@@ -100,23 +97,23 @@ public class AddConsoles extends AppCompatActivity {
 				log("Entered submitButton.OnClickListener.onClick()");
 
 				// Gather Console data
-
 				// -  Title
 				String titleString = mTitle.getText().toString();
 
 				// Date
 				String buyDate = dateString;
 
+				String company = mCompany.getText().toString();
+
+				String image = mImageSelect.toString();
+
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Consolas.packageIntent(data, titleString, mCompany.toString(), mImageSelect.toString(), dateString);
+				Consolas.packageIntent(data, titleString, company, mImageSelect.toString(), dateString);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				
 				finish();
-
-				
-				
 			}
 		});
 	}
@@ -129,10 +126,8 @@ public class AddConsoles extends AppCompatActivity {
 
 		// Default is current time + 7 days
 		mBuydate = new Date();
-		mBuydate = new Date(mBuydate.getTime() + SEVEN_DAYS);
 
 		Calendar c = Calendar.getInstance();
-		c.setTime(mBuydate);
 
 		setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
 				c.get(Calendar.DAY_OF_MONTH));
