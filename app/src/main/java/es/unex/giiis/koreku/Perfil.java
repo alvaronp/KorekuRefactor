@@ -1,6 +1,7 @@
 package es.unex.giiis.koreku;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -50,7 +51,8 @@ public class Perfil {
 	@ColumnInfo(name="image")
 	private String image = new String();
 	@Ignore
-    Perfil(String title, Date date, String phone, String mail, String image) {
+    Perfil(String title, Date date, String phone, String mail, String image,Long id) {
+		this.id=id;
 		this.title = title;
 		this.date = date;
 		this.phone=phone;
@@ -96,7 +98,9 @@ public class Perfil {
 		this.image=image;
 
 	}
-    public long getId() { return id; }
+
+
+	public long getId() { return id; }
 
     public void setId(long ID) { this.id = ID; }
 
@@ -163,5 +167,6 @@ public class Perfil {
 				+ FORMAT.format(date)+ "Phone:" + phone+ ITEM_SEP+"Mail:"+mail
 				+ ITEM_SEP + "Image:" + image ;
 	}
+
 
 }

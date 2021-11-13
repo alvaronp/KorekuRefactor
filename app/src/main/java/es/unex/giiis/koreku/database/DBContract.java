@@ -30,7 +30,6 @@ public final class DBContract {
         public static final String _ID="profile_id";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_DATE = "date";
-        public static final String COLUMN_NAME_COMPANY = "company";
         public static final String COLUMN_NAME_PHONE = "phone";
         public static final String COLUMN_NAME_MAIL = "mail";
         public static final String COLUMN_NAME_IMAGE = "image";
