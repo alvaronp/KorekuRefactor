@@ -19,5 +19,6 @@ public interface ConsolasDAO {
     public void deleteAll();
     @Update
     public int update(Consolas item);
-
+    @Query("SELECT * FROM consolas WHERE console_id=:id")
+    public Consolas get(Long id);
 }

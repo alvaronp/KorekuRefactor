@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 
 public class ConsoleDetailFragment extends Fragment {
@@ -26,10 +27,7 @@ public class ConsoleDetailFragment extends Fragment {
     public static ConsoleDetailFragment newInstance(Consolas c) {
         ConsoleDetailFragment fragment = new ConsoleDetailFragment();
         Bundle args = new Bundle();
-        args.putString("title",c.getTitle());
-        args.putString("company", c.getCompany());
-        args.putLong("date", DateConverter.toTimestamp(c.getDate()));
-        args.putString("image",c.getImage());
+        args.putLong("id",c.getId());
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,10 +37,7 @@ public class ConsoleDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mCon.setTitle(getArguments().getString("title"));
-            mCon.setCompany(getArguments().getString("company"));
-            mCon.setDate(DateConverter.toDate(getArguments().getLong("date")));
-            mCon.setImage(getArguments().getString("image"));
+            mCon.setId(getArguments().getLong("id"));
         }
     }
 
@@ -51,8 +46,8 @@ public class ConsoleDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.console_detail, container, false);
-
         // Show item content
+        mCon = KorekuDatabase.getInstance(getActivity()).getDao2().get(mCon.getId());
         TextView tvDetail = v.findViewById(R.id.item_detail);
         tvDetail.setText(mCon.getTitle());
 
