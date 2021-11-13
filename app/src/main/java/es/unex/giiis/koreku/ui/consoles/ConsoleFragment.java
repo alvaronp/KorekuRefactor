@@ -68,7 +68,11 @@ public class ConsoleFragment extends Fragment {
         mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Consolas c) {
-                Snackbar.make(getActivity().getCurrentFocus(), "Console " + c.getTitle() + " clicked", Snackbar.LENGTH_LONG).show();
+   /*             ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout, fragment)
+                        .addToBackStack(null)  //permite mantener la navegacion del boton back
+                        .commit();*/
             }
         });
 
