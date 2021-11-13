@@ -76,7 +76,7 @@ public class Consolas {
     }
 
 	@Ignore
-    Consolas(Intent intent) {
+	public Consolas(Intent intent) {
 		id = intent.getLongExtra(Consolas.ID,0);
 		title = intent.getStringExtra(Consolas.TITLE);
 		try {

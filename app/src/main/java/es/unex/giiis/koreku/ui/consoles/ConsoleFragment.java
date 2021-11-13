@@ -14,17 +14,32 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.List;
+
+import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.MainActivity;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentConsoleBinding;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ConsoleFragment extends Fragment {
 
     private FragmentConsoleBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int ADD_CONSOLES_REQUEST = 0;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ConsoleAdapter mAdapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,9 +57,53 @@ public class ConsoleFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textConsole;
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new GridLayoutManager(getActivity(),3);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // - Create a new Adapter for the RecyclerView
+        mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
+            @Override public void onItemClick(Consolas c) {
+                Snackbar.make(getActivity().getCurrentFocus(), "Console "+c.getTitle()+" clicked", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        KorekuDatabase.getInstance(getActivity());
         setHasOptionsMenu(true);
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        //  - Check result code and request code.
+        // If user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+        if (requestCode == ADD_CONSOLES_REQUEST){
+            if (resultCode == getActivity().RESULT_OK){
+                Consolas c = new Consolas(data);
+
+                //insert into DB
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        long id = db.getDao2().insert(c);
+
+                        //update item ID
+                        c.setId(id);
+
+                        //insert into adapter list
+                        getActivity().runOnUiThread(()-> mAdapter.add(c));
+                    }
+                });
+            }
+        }
     }
 
     @Override
@@ -57,4 +116,5 @@ public class ConsoleFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_consoles);
     }
+
 }
