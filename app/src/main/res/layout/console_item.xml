@@ -54,7 +54,6 @@
         android:id="@+id/imageView"
         android:layout_width="119dp"
         android:layout_height="77dp"
-        android:layout_align="@id/titleView"
         android:layout_alignParentEnd="true"
         app:srcCompat="@drawable/ic_consoles" />
 
