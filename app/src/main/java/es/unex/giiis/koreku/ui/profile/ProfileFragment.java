@@ -19,25 +19,16 @@ import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
 
-    private es.unex.giiis.koreku.ui.profile.ProfileViewModel serviceViewModel;
     private FragmentProfileBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        serviceViewModel =
-                new ViewModelProvider(this).get(es.unex.giiis.koreku.ui.profile.ProfileViewModel.class);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textProfile;
-        serviceViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         setHasOptionsMenu(true);
         return root;
     }

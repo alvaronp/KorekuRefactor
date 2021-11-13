@@ -8,5 +8,18 @@
     <string name="delete_consoles">Delete Consoles</string>
     <string name="delete_services">Delete Services</string>
     <string name="delete_profile">Delete Profile</string>
+    <string name="name_console">Console Name</string>
+    <string name="buydate_console">Buy Date</string>
+    <string name="company_console">Company</string>
+    <string name="image_console">Image</string>
+    <string name="enter_title">Enter name or title...</string>
+    <string name="enter_company">Enter company name</string>
+    <string name="date_picker">Pick the date</string>
+    <string name="default_date">0000-00-00</string>
+    <string name="image">Image</string>
+    <string name="image_picker">Search for image</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset">Reset</string>
+    <string name="submit">Submit</string>
 
 </resources>

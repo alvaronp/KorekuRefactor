@@ -19,26 +19,17 @@ import es.unex.giiis.koreku.databinding.FragmentGameBinding;
 
 public class GameFragment extends Fragment {
 
-    private GameViewModel gameViewModel;
     private FragmentGameBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        gameViewModel =
-                new ViewModelProvider(this).get(GameViewModel.class);
 
         binding = FragmentGameBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGames;
-        gameViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         setHasOptionsMenu(true);
         return root;
     }

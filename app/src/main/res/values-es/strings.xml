@@ -8,5 +8,17 @@
     <string name="delete_consoles">Borrar Consolas</string>
     <string name="delete_services">Borrar Plataformas</string>
     <string name="delete_profile">Borrar Cuenta</string>
-
+    <string name="name_console">Nombre de la consola</string>
+    <string name="buydate_console">Fecha de compra</string>
+    <string name="company_console">Fabricante</string>
+    <string name="image_console">Imagen</string>
+    <string name="enter_title">Introduce nombre o título...</string>
+    <string name="enter_company">Introduce nombre del fabricante</string>
+    <string name="date_picker">Escoge la fecha</string>
+    <string name="default_date">00-00-0000</string>
+    <string name="image">Imagen</string>
+    <string name="image_picker">Buscar imagen de portada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="reset">Resetear</string>
+    <string name="submit">Publicar</string>
 </resources>

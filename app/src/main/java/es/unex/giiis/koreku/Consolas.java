@@ -145,15 +145,12 @@ public class Consolas {
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
-	public static void packageIntent(Intent intent, long id, String title,
-									 String company, String image, String date, long profileid) {
-		intent.putExtra(Consolas.ID, id);
+	public static void packageIntent(Intent intent, String title,
+									 String company, String image, String date) {
 		intent.putExtra(Consolas.TITLE, title);
 		intent.putExtra(Consolas.COMPANY, company.toString());
 		intent.putExtra(Consolas.IMAGE, image.toString());
 		intent.putExtra(Consolas.DATE, date);
-		intent.putExtra(Consolas.PROFILEID, profileid);
-	
 	}
 
 	public String toString() {
