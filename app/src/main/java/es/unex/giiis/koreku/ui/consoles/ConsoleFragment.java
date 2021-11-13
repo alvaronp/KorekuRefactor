@@ -68,9 +68,9 @@ public class ConsoleFragment extends Fragment {
         mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Consolas c) {
-                ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_container, fragment)
+                ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c.getId());
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .addToBackStack(null)  //permite mantener la navegacion del boton back
                         .commit();
             }

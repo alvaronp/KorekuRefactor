@@ -32,7 +32,7 @@ import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class BuscarPerfiles extends AppCompatActivity {
-    private static    List<Perfil> perfiles= null;
+  private static    List<Perfil> perfiles= null;
     EditText edtCodigo,edtTelefono,edtCorreo,edtTitle;
     ImageFilterView Imagen;
     private FragmentProfileBinding binding;
@@ -62,8 +62,8 @@ public class BuscarPerfiles extends AppCompatActivity {
         // OnClickListener for the Cancel Button,
 
 
-        Button buscar = (Button) findViewById(R.id.btnBuscar);
-        buscar.setOnClickListener(new View.OnClickListener() {
+         Button buscar = (Button) findViewById(R.id.btnBuscar);
+         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int i =0;
@@ -87,4 +87,5 @@ public class BuscarPerfiles extends AppCompatActivity {
         });
 
 
-    }}
+}}
+

@@ -89,6 +89,14 @@ public class Consolas {
 		this.company=company;
 		this.image=image;
 	}
+
+	public Consolas(){
+		this.id =0;
+		this.date = null;
+		this.title ="";
+		this.company="";
+		this.image="";
+	}
     public long getId() { return id; }
 
     public void setId(long ID) { this.id = ID; }
