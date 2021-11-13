@@ -26,6 +26,10 @@
             android:name=".ui.consoles.AddConsoles"
             android:exported="true"
             android:label="@string/app_name"/>
+        <activity
+            android:name=".ui.profile.BuscarPerfiles"
+            android:exported="true"
+            android:label="Koreku"/>
     </application>
 
 </manifest>

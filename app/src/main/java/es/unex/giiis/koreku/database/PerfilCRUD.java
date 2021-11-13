@@ -27,6 +27,7 @@ public final class PerfilCRUD {
         return mInstance;
     }
 
+
     public List<Perfil> getAll(){
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -140,4 +141,5 @@ public final class PerfilCRUD {
 
         return item;
     }
+
 }
