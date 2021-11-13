@@ -101,9 +101,9 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
 
             // - Get the references to every widget of the Item View
             title =  itemView.findViewById(R.id.titleView);
-            company =  itemView.findViewById(R.id.company);
+            company =  itemView.findViewById(R.id.companyView);
             dateView =  itemView.findViewById(R.id.dateView);
-            imageView = itemView.findViewById(R.id.imageView);
+            //imageView = itemView.findViewById(R.id.imageView);
         }
 
         public void bind(final Consolas c, final OnItemClickListener listener) {
@@ -115,9 +115,9 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
             company.setText(c.getCompany());
 
             //  - Display Date.
-            dateView.setText(Consolas.FORMAT.format(c.getDate()));
+            dateView.setText(Consolas.FORMAT.format(c.getDate()).subSequence(0,10));
 
-            imageView.setImageURI(Uri.parse(c.getImage()));
+            //imageView.setImageURI(Uri.parse(c.getImage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
 

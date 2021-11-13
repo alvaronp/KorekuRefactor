@@ -13,7 +13,6 @@ public final class DBContract {
         public static final String COLUMN_NAME_BUYDATE = "buydate";
         public static final String COLUMN_NAME_DESC = "desc";
         public static final String COLUMN_NAME_IMAGE = "image";
-        public static final String PROFILEID = "profile_id";
     }
     public static class Consolas implements BaseColumns {
         public static final String TABLE_NAME = "consolas";
@@ -22,7 +21,6 @@ public final class DBContract {
         public static final String COLUMN_NAME_DATE = "date";
         public static final String COLUMN_NAME_COMPANY = "company";
         public static final String COLUMN_NAME_IMAGE = "image";
-        public static final String PROFILEID = "profile_id";
 
     }
     public static class Perfil implements BaseColumns {

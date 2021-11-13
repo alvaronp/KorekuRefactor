@@ -130,9 +130,8 @@ public final class ConsolasCRUD {
         String date = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_DATE));
         String company = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_COMPANY));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Consolas.COLUMN_NAME_IMAGE));
-        long profileid = cursor.getInt(cursor.getColumnIndex(DBContract.Consolas.PROFILEID));
 
-        Consolas item = new Consolas(ID,title,date,company,image,profileid);
+        Consolas item = new Consolas(ID,title,date,company,image);
 
         Log.d("ConsolasCRUD",item.toLog());
 

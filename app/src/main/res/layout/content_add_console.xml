@@ -32,7 +32,7 @@
         android:textAllCaps="true"
         android:textColorLink="@color/koreku">
 
-        <requestFocus/>
+        <requestFocus />
     </EditText>
 
     <TextView

@@ -11,6 +11,8 @@
     <string name="name_console">Nombre de la consola</string>
     <string name="buydate_console">Fecha de compra</string>
     <string name="company_console">Fabricante</string>
+    <string name="buydate_console_points">Fecha de compra: </string>
+    <string name="company_console_points">Fabricante: </string>
     <string name="image_console">Imagen</string>
     <string name="enter_title">Introduce nombre o título...</string>
     <string name="enter_company">Introduce nombre del fabricante</string>
