@@ -34,10 +34,11 @@ public class KorekuDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + DBContract.Consolas.TABLE_NAME + " (" +
                     DBContract.Perfil._ID + " INTEGER PRIMARY KEY," +
                     DBContract.Perfil.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
-                    DBContract.Perfil.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
                     DBContract.Perfil.COLUMN_NAME_PHONE+ TEXT_TYPE + COMMA_SEP +
                     DBContract.Perfil.COLUMN_NAME_MAIL+ TEXT_TYPE + COMMA_SEP +
                     DBContract.Perfil.COLUMN_NAME_IMAGE + TEXT_TYPE +
+                    DBContract.Perfil.COLUMN_NAME_COMMENTS + TEXT_TYPE +
+
                     " )";
 
     private static final String SQL_DELETE_GAME =

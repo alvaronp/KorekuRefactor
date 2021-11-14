@@ -94,7 +94,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             mContext = context;
 
             // - Get the references to every widget of the Item View
-            title =  itemView.findViewById(R.id.titleView);
+            title =  itemView.findViewById(R.id.nombreprofileitem);
             imageView = itemView.findViewById(R.id.imagenprofileitem);
         }
 

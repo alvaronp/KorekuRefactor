@@ -84,7 +84,7 @@ public class ProfileFragment extends Fragment {
             public void onItemClick(Perfil x) {
                 PerfilDetailFragment fragment = PerfilDetailFragment.newInstance(x);
                 getFragmentManager().beginTransaction()
-                        .add(R.id.nav_host_fragment_activity_main, fragment)
+                        .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .addToBackStack(null)  //permite mantener la navegacion del boton back
                         .commit();
             }

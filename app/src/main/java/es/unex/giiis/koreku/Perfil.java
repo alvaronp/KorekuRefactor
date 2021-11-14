@@ -25,8 +25,6 @@ public class Perfil {
 	@Ignore
 	public final static String TITLE = "title";
 	@Ignore
-	public final static String DATE = "date";
-	@Ignore
 	public final static String PHONE = "phone";
 	@Ignore
 	public final static String MAIL = "mail";
@@ -45,8 +43,6 @@ public class Perfil {
 	private long id;
 	@ColumnInfo(name="title")
 	private String title = new String();
-	@TypeConverters(DateConverter.class)
-	private Date date = new Date();
 	@ColumnInfo(name="phone")
 	private String phone = new String();
 	@ColumnInfo(name="mail")
@@ -56,24 +52,18 @@ public class Perfil {
 	@ColumnInfo(name="comments")
 	private String comments = new String();
 	@Ignore
-    Perfil(String title, Date date, String phone, String mail, String image,Long id, String comments) {
-		this.id=id;
+    Perfil(String title, Date date, String phone, String mail, String image, String comments) {
+
 		this.title = title;
-		this.date = date;
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
 		this.comments=comments;
 	}
 	@Ignore
-    public Perfil(long ID, String title, String date, String phone, String mail, String image, String comments) {
-        this.id = ID;
+    public Perfil(long id, String title, String phone, String mail, String image, String comments) {
+        this.id = id;
         this.title = title;
-        try {
-            this.date = Perfil.FORMAT.parse(date);
-        } catch (ParseException e) {
-            this.date = new Date();
-        }
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
@@ -85,11 +75,7 @@ public class Perfil {
     public Perfil(Intent intent) {
 		id = intent.getLongExtra(Perfil.ID,0);
 		title = intent.getStringExtra(Perfil.TITLE);
-		try {
-			date = Perfil.FORMAT.parse(intent.getStringExtra(Perfil.DATE));
-		} catch (ParseException e) {
-			date = new Date();
-		}
+
 		phone = intent.getStringExtra(Perfil.PHONE);
 		mail = intent.getStringExtra(Perfil.MAIL);
 		image = intent.getStringExtra(Perfil.IMAGE);
@@ -97,9 +83,8 @@ public class Perfil {
 	}
 
 
-	public Perfil(long id, String title, Date date, String phone, String mail, String image){
+	public Perfil(long id, String title, String phone, String mail, String image){
 		this.id =id;
-		this.date =date;
 		this.title =title;
 		this.phone=phone;
 		this.mail=mail;
@@ -144,13 +129,6 @@ public class Perfil {
 		this.image = image;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
 	public String getComments() { return this.comments; }
 
@@ -160,13 +138,13 @@ public class Perfil {
 	// package them for transport in an Intent
 
 	public static void packageIntent(Intent intent, String title,String phone,
-									 String mail, String image, String date) {
+									 String mail, String image) {
 
 		intent.putExtra(Perfil.TITLE, title);
 		intent.putExtra(Perfil.MAIL, mail.toString());
 		intent.putExtra(Perfil.PHONE, phone.toString());
 		intent.putExtra(Perfil.IMAGE, image.toString());
-		intent.putExtra(Perfil.DATE, date);
+
 	
 	}
 
@@ -175,13 +153,11 @@ public class Perfil {
 	}
 
 	public String toString() {
-		return id + ITEM_SEP + title + ITEM_SEP
-				+ FORMAT.format(date)+ITEM_SEP+ phone +ITEM_SEP+mail +ITEM_SEP+ image ;
+		return id + ITEM_SEP + title +ITEM_SEP+ phone +ITEM_SEP+mail +ITEM_SEP+ image ;
 	}
 
 	public String toLog() {
-		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + ITEM_SEP + "Date:"
-				+ FORMAT.format(date)+ "Phone:" + phone+ ITEM_SEP+"Mail:"+mail
+		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + ITEM_SEP + "Phone:" + phone+ ITEM_SEP+"Mail:"+mail
 				+ ITEM_SEP + "Image:" + image ;
 	}
 

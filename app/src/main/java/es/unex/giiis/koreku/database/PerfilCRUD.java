@@ -80,7 +80,6 @@ public final class PerfilCRUD {
         values.put(DBContract.Perfil.COLUMN_NAME_MAIL, perfil.getMail());
         values.put(DBContract.Perfil.COLUMN_NAME_IMAGE, perfil.getImage());
         values.put(DBContract.Perfil.COLUMN_NAME_COMMENTS, perfil.getComments());
-        values.put(DBContract.Perfil.COLUMN_NAME_DATE, Perfil.FORMAT.format(perfil.getDate()));
 
 
         // Insert the new row, returning the primary key value of the new row
@@ -130,15 +129,15 @@ public final class PerfilCRUD {
 
     public static Perfil getPerfilFromCursor(Cursor cursor) {
 
-        long ID = cursor.getInt(cursor.getColumnIndex(DBContract.Perfil._ID));
+        long id = cursor.getInt(cursor.getColumnIndex(DBContract.Perfil._ID));
         String title = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_TITLE));
-        String date = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_DATE));
         String phone = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_PHONE));
         String mail = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_MAIL));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_IMAGE));
         String comments = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_COMMENTS));
 
-        Perfil item = new Perfil(ID,title,date,phone,mail,image,comments);
+
+        Perfil item = new Perfil(id,title,phone,mail,image,comments);
 
         Log.d("PerfilCRUD",item.toLog());
 

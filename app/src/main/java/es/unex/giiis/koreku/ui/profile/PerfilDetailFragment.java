@@ -32,7 +32,6 @@ public class PerfilDetailFragment extends Fragment {
         args.putString("title",c.getTitle());
         args.putString("phone",c.getPhone());
         args.putString("correo",c.getMail());
-        args.putLong("dateLong",DateConverter.toTimestamp(c.getDate()));
         args.putString("image",c.getImage());
         fragment.setArguments(args);
         return fragment;
@@ -43,7 +42,7 @@ public class PerfilDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = this.getArguments();
         if (args != null) {
-            mCon = new Perfil(args.getLong("id"), args.getString("title"), DateConverter.toDate(args.getLong("dateLong")), args.getString("phone"), args.getString("correo"), args.getString("image"));
+            mCon = new Perfil(args.getLong("id"), args.getString("title"), args.getString("phone"), args.getString("correo"), args.getString("image"));
         }
     }
 
@@ -56,11 +55,11 @@ public class PerfilDetailFragment extends Fragment {
         TextView mTitle = v.findViewById(R.id.nombredetaiprofile);
         TextView mTelefono = v.findViewById(R.id.telefonodetailprofile);
         TextView mCorreo = v.findViewById(R.id.correodetailprofile);
-        ImageView image = v.findViewById(R.id.imagenprofileitem);
+        //TextView image = v.findViewById(R.id.imagendetailprofile);
         mTitle.setText(mCon.getTitle());
-        mCorreo.setText(mCon.getMail());
         mTelefono.setText(mCon.getTitle());
-        image.setImageURI(Uri.parse(mCon.getImage()));
+        mCorreo.setText(mCon.getMail());
+       // image.setText("holahola");
         return v;
     }
 

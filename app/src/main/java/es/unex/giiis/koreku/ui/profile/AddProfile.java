@@ -76,11 +76,11 @@ public class AddProfile extends AppCompatActivity {
                 String telefono = mTelefono.getText().toString();
                 String correo = mTelefono.getText().toString();
 
-                String image = mImageSelect.toString();
+                String image = "asdfasdfasd";
 
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-               Perfil.packageIntent(data, titleString, telefono, correo,mImageSelect.toString(), null);
+               Perfil.packageIntent(data, titleString, telefono, correo,image);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);
