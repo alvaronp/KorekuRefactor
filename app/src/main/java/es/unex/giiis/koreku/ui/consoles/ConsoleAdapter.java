@@ -103,7 +103,7 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
             title =  itemView.findViewById(R.id.titleView);
             company =  itemView.findViewById(R.id.companyView);
             dateView =  itemView.findViewById(R.id.dateView);
-            //imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imageView3);
         }
 
         public void bind(final Consolas c, final OnItemClickListener listener) {
@@ -117,7 +117,7 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(c.getDate()).subSequence(0,10));
 
-            //imageView.setImageURI(Uri.parse(c.getImage()));
+            imageView.setImageURI(Uri.parse(c.getImage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
 

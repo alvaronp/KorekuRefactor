@@ -110,6 +110,7 @@ public class AddConsoles extends AppCompatActivity {
 				// - Reset data fields to default values
 				mTitle.setText("");
 				mCompany.setText("");
+				foto.setImageURI(Uri.parse(""));
 				setDefaultDateTime();
 			}
 		});
@@ -132,11 +133,11 @@ public class AddConsoles extends AppCompatActivity {
 
 				String company = mCompany.getText().toString();
 
-				String image = mImageSelect.toString();
+				String image = foto.toString();
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Consolas.packageIntent(data, titleString, company, mImageSelect.toString(), dateString);
+				Consolas.packageIntent(data, titleString, company, image, dateString);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				
