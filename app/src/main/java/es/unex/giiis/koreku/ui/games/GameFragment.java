@@ -156,8 +156,8 @@ public class GameFragment extends Fragment {
                     @Override
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao1().getAllByGender();
-                        getActivity().runOnUiThread(() -> mAdapter.clear());
+                       List<Games>juegos =db.getDao1().getAllByGender();
+                        getActivity().runOnUiThread(() -> mAdapter.load( juegos));
                     }
                 });
             default:
