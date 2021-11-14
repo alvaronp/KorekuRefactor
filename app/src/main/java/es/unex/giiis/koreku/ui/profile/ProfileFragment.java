@@ -26,6 +26,7 @@ import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ProfileFragment extends Fragment {
     Button busqueda,anadirPerfil;
+    Button newcomment;
     private static final int ADD_Profile_REQUEST = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,6 +34,8 @@ public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int ADD_PROFILE_REQUEST = 0;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -47,6 +50,16 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), BuscarPerfiles.class);
                 startActivity(intent);
 
+            }
+        });
+
+
+        newcomment = (Button) root.findViewById(R.id.comment_button);
+        newcomment.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), NuevoComentario.class);
+                startActivity(intent);
             }
         });
 
@@ -78,6 +91,7 @@ public class ProfileFragment extends Fragment {
         });
 
         mRecyclerView.setAdapter(mAdapter);
+
         KorekuDatabase.getInstance(getActivity());
         setHasOptionsMenu(true);
         return root;

@@ -31,6 +31,7 @@ public final class DBContract {
         public static final String COLUMN_NAME_PHONE = "phone";
         public static final String COLUMN_NAME_MAIL = "mail";
         public static final String COLUMN_NAME_IMAGE = "image";
+        public static final String COLUMN_NAME_COMMENTS = "comments";
 
 
     }

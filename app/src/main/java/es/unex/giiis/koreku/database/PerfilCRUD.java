@@ -37,7 +37,8 @@ public final class PerfilCRUD {
                 DBContract.Perfil.COLUMN_NAME_DATE,
                 DBContract.Perfil.COLUMN_NAME_PHONE,
                 DBContract.Perfil.COLUMN_NAME_MAIL,
-                DBContract.Perfil.COLUMN_NAME_IMAGE
+                DBContract.Perfil.COLUMN_NAME_IMAGE,
+                DBContract.Perfil.COLUMN_NAME_COMMENTS
         };
 
         String selection = null;
@@ -78,6 +79,7 @@ public final class PerfilCRUD {
         values.put(DBContract.Perfil.COLUMN_NAME_PHONE, perfil.getPhone());
         values.put(DBContract.Perfil.COLUMN_NAME_MAIL, perfil.getMail());
         values.put(DBContract.Perfil.COLUMN_NAME_IMAGE, perfil.getImage());
+        values.put(DBContract.Perfil.COLUMN_NAME_COMMENTS, perfil.getComments());
         values.put(DBContract.Perfil.COLUMN_NAME_DATE, Perfil.FORMAT.format(perfil.getDate()));
 
 
@@ -134,8 +136,9 @@ public final class PerfilCRUD {
         String phone = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_PHONE));
         String mail = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_MAIL));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_IMAGE));
+        String comments = cursor.getString(cursor.getColumnIndex(DBContract.Perfil.COLUMN_NAME_COMMENTS));
 
-        Perfil item = new Perfil(ID,title,date,phone,mail,image);
+        Perfil item = new Perfil(ID,title,date,phone,mail,image,comments);
 
         Log.d("PerfilCRUD",item.toLog());
 

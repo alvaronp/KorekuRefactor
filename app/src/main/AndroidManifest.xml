@@ -38,6 +38,10 @@
             android:name=".ui.games.AddGames"
             android:exported="true"
             android:label="Koreku"/>
+        <activity
+            android:name=".ui.profile.NuevoComentario"
+            android:exported="true"
+            android:label="Koreku"/>
     </application>
 
 </manifest>

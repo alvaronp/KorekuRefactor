@@ -32,6 +32,9 @@ public class Perfil {
 	public final static String MAIL = "mail";
 	@Ignore
 	public final static String IMAGE = "image";
+	@Ignore
+	public final static String COMMENTS = "image";
+
 
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
@@ -50,17 +53,20 @@ public class Perfil {
 	private String mail = new String();
 	@ColumnInfo(name="image")
 	private String image = new String();
+	@ColumnInfo(name="comments")
+	private String comments = new String();
 	@Ignore
-    Perfil(String title, Date date, String phone, String mail, String image,Long id) {
+    Perfil(String title, Date date, String phone, String mail, String image,Long id, String comments) {
 		this.id=id;
 		this.title = title;
 		this.date = date;
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
+		this.comments=comments;
 	}
 	@Ignore
-    public Perfil(long ID, String title, String date, String phone, String mail, String image) {
+    public Perfil(long ID, String title, String date, String phone, String mail, String image, String comments) {
         this.id = ID;
         this.title = title;
         try {
@@ -71,6 +77,7 @@ public class Perfil {
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
+		this.comments=comments;
     }
 
 	// Create a new ToDoItem from data packaged in an Intent
@@ -86,6 +93,7 @@ public class Perfil {
 		phone = intent.getStringExtra(Perfil.PHONE);
 		mail = intent.getStringExtra(Perfil.MAIL);
 		image = intent.getStringExtra(Perfil.IMAGE);
+		comments = intent.getStringExtra(Perfil.COMMENTS);
 	}
 
 
@@ -96,6 +104,7 @@ public class Perfil {
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
+		this.comments=comments;
 
 	}
 
@@ -143,6 +152,10 @@ public class Perfil {
 		this.date = date;
 	}
 
+	public String getComments() { return this.comments; }
+
+	public void setComments(String comments) {this.comments = comments;}
+
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
@@ -155,6 +168,10 @@ public class Perfil {
 		intent.putExtra(Perfil.IMAGE, image.toString());
 		intent.putExtra(Perfil.DATE, date);
 	
+	}
+
+	public static void newComment(Intent intent, String comments){
+		intent.putExtra(Perfil.COMMENTS, comments.toString());
 	}
 
 	public String toString() {
