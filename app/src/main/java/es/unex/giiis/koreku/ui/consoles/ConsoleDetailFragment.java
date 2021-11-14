@@ -58,9 +58,8 @@ public class ConsoleDetailFragment extends Fragment {
             }
         });
         // Show item content
-        TextView mTitle = v.findViewById(R.id.item_detail);
+        TextView mTitle = v.findViewById(R.id.titleConsoleDetail);
         mTitle.setText(mCon.getTitle());
-
         return v;
     }
 
