@@ -117,7 +117,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(g.getBuydate()).subSequence(0,10));
 
-            imageView.setImageURI(Uri.parse(g.getImage()));
+            //imageView.setImageURI(Uri.parse(g.getImage()));
 
             //  - Set up Status CheckBox
             statusView.setChecked(g.getStatus() == Games.Status.FINISHED);

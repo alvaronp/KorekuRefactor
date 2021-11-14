@@ -31,5 +31,6 @@
     <string name="enter_desc">Resumenos </string>
     <string name="finished_string">Completado</string>
     <string name="not_finished_string">No completado</string>
-
+    <string name="title_game_detail">Nombre Juego: </string>
+    <string name="desc_game_detail">Descripcion: </string>
 </resources>

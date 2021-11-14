@@ -52,8 +52,8 @@ public class ConsoleDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.console_detail, container, false);
         // Show item content
-        TextView mTitle = v.findViewById(R.id.titleCompanyDetail);
-        TextView mCompany = v.findViewById(R.id.compConsoleDetail);
+        TextView mTitle = v.findViewById(R.id.titleGameDetail);
+        TextView mCompany = v.findViewById(R.id.descGameDetail);
         EditText mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageView);
         mTitle.setText(mCon.getTitle());

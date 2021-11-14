@@ -58,7 +58,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view_game);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

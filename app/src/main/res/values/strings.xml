@@ -31,5 +31,6 @@
     <string name="enter_desc">Resume us the game plot...</string>
     <string name="finished_string">Finished</string>
     <string name="not_finished_string">Not Finished</string>
-
+    <string name="title_game_detail">Game Title: </string>
+    <string name="desc_game_detail">Description: </string>
 </resources>

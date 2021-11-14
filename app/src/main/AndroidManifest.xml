@@ -34,6 +34,10 @@
             android:name=".ui.profile.AddProfile"
             android:exported="true"
             android:label="Koreku"/>
+        <activity
+            android:name=".ui.games.AddGames"
+            android:exported="true"
+            android:label="Koreku"/>
     </application>
 
 </manifest>
