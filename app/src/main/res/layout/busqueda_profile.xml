@@ -50,7 +50,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="Código" />
+            android:text="Nombre del perfil" />
 
         <Button
             android:id="@+id/btnBuscar"

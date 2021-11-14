@@ -1,4 +1,4 @@
-package es.unex.giiis.koreku.ui.consoles;
+package es.unex.giiis.koreku.ui.games;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,32 +10,43 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Calendar;
 import java.util.Date;
 
-import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.Games;
+import es.unex.giiis.koreku.Games.Status;
 import es.unex.giiis.koreku.R;
 
-public class AddConsoles extends AppCompatActivity {
+public class AddGames extends AppCompatActivity {
 
 	private static String dateString;
 	private static TextView dateView;
+	
 	private EditText mTitle;
 	private Date mBuydate;
-	private EditText mCompany;
+	private EditText mDesc;
 	private Button mImageSelect;
+	private RadioGroup mStatusRadioGroup;
+	private RadioButton mDefaultStatusButton;
+	private String pid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.content_add_console);
+		setContentView(R.layout.content_add_game);
 
         mTitle = findViewById(R.id.title);
         dateView = findViewById(R.id.date);
-        mCompany = findViewById(R.id.desc);
+        mDesc = findViewById(R.id.desc);
         mImageSelect = findViewById(R.id.image_picker_button);
+		mDefaultStatusButton =  findViewById(R.id.statusNotFinished);
+		mStatusRadioGroup =  findViewById(R.id.statusGroup);
 
 		// Set the default date and time
 
@@ -80,7 +91,8 @@ public class AddConsoles extends AppCompatActivity {
 
 				// - Reset data fields to default values
 				mTitle.setText("");
-				mCompany.setText("");
+				mDesc.setText("");
+				mStatusRadioGroup.check(mDefaultStatusButton.getId());
 				setDefaultDateTime();
 			}
 		});
@@ -94,20 +106,22 @@ public class AddConsoles extends AppCompatActivity {
 			public void onClick(View v) {
 				log("Entered submitButton.OnClickListener.onClick()");
 
-				// Gather Console data
+				// Gather Game data
 				// -  Title
 				String titleString = mTitle.getText().toString();
 
 				// Date
 				String buyDate = dateString;
 
-				String company = mCompany.getText().toString();
+				String desc = mDesc.getText().toString();
+
+				Status status = getStatus();
 
 				String image = mImageSelect.toString();
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Consolas.packageIntent(data, titleString, company, mImageSelect.toString(), dateString);
+				Games.packageIntent(data, titleString, status, desc, mImageSelect.toString(), dateString);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				
@@ -146,6 +160,18 @@ public class AddConsoles extends AppCompatActivity {
 			day = "0" + dayOfMonth;
 
 		dateString = year + "-" + mon + "-" + day;
+	}
+
+	private Status getStatus() {
+
+		switch (mStatusRadioGroup.getCheckedRadioButtonId()) {
+			case R.id.statusFinished: {
+				return Status.FINISHED;
+			}
+			default: {
+				return Status.NOTFINISHED;
+			}
+		}
 	}
 
 	// DialogFragment used to pick a Console deadline date

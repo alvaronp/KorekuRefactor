@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <!-- Title -->
+
+    <!-- Company -->
+
+    <!-- Buy Date -->
+
+    <!-- Image Search -->
+
+    <!-- Buttons -->
+
+    <EditText
+        android:id="@+id/nombretxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="596dp"
+        android:ems="10"
+        android:hint="Enter your profile name"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/nombreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="Nombre"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+
+    <TextView
+        android:id="@+id/TelefonoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:text="Telefono"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+
+    <EditText
+        android:id="@+id/telefonotxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="493dp"
+        android:ems="10"
+        android:hint="Enter your phone"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/Correolabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="423dp"
+        android:text="Correo"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+
+    <EditText
+        android:id="@+id/correotxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginBottom="365dp"
+        android:ems="10"
+        android:hint="Enter your mail"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/image_picker"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="61dp"
+        android:layout_marginBottom="304dp"
+        android:text="@string/image"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/cancelProfile"
+        android:layout_width="123dp"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="649dp"
+        android:layout_marginBottom="1dp"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/resetProfile"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="1dp"
+        android:text="Resset" />
+
+    <Button
+        android:id="@+id/submitProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="276dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="0dp"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/imageProfile"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="206dp"
+        android:text="Search for image" />
+
+</RelativeLayout>

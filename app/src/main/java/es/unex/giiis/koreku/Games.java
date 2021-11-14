@@ -61,7 +61,7 @@ public class Games {
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	Games(String title, Status status, Date buydate, String desc, String image) {
+	public Games(String title, Status status, Date buydate, String desc, String image) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
@@ -85,7 +85,7 @@ public class Games {
 
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
-	Games(Intent intent) {
+    public Games(Intent intent) {
 		id = intent.getLongExtra(Games.ID,0);
 		title = intent.getStringExtra(Games.TITLE);
 		status = Status.valueOf(intent.getStringExtra(Games.STATUS));
@@ -155,10 +155,9 @@ public class Games {
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
-	public static void packageIntent(Intent intent, long id, String title,
+	public static void packageIntent(Intent intent, String title,
 									 Status status, String buydate, String desc, String image) {
 
-		intent.putExtra(Games.ID, id);
 		intent.putExtra(Games.TITLE, title);
 		intent.putExtra(Games.STATUS, status.toString());
 		intent.putExtra(Games.BUYDATE, buydate);

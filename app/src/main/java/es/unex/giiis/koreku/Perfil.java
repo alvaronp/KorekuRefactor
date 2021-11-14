@@ -75,7 +75,7 @@ public class Perfil {
 
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
-    Perfil(Intent intent) {
+    public Perfil(Intent intent) {
 		id = intent.getLongExtra(Perfil.ID,0);
 		title = intent.getStringExtra(Perfil.TITLE);
 		try {

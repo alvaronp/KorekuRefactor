@@ -24,5 +24,12 @@
     <string name="cancel">Cancel</string>
     <string name="reset">Reset</string>
     <string name="submit">Submit</string>
+    <string name="game_status_points">Finished: </string>
+    <string name="name_game">Game Name</string>
+    <string name="desc_game">Description</string>
+    <string name="status_game">Game Status: </string>
+    <string name="enter_desc">Resume us the game plot...</string>
+    <string name="finished_string">Finished</string>
+    <string name="not_finished_string">Not Finished</string>
 
 </resources>

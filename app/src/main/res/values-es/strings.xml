@@ -24,4 +24,12 @@
     <string name="cancel">Cancelar</string>
     <string name="reset">Resetear</string>
     <string name="submit">Publicar</string>
+    <string name="game_status_points">Completado: </string>
+    <string name="name_game">Nombre Juego</string>
+    <string name="desc_game">Descripcion</string>
+    <string name="status_game">Estado de juego: </string>
+    <string name="enter_desc">Resumenos </string>
+    <string name="finished_string">Completado</string>
+    <string name="not_finished_string">No completado</string>
+
 </resources>

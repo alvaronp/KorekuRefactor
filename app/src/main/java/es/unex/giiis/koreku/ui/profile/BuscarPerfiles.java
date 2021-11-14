@@ -1,35 +1,22 @@
 package es.unex.giiis.koreku.ui.profile;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.utils.widget.ImageFilterView;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
-import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class BuscarPerfiles extends AppCompatActivity {
   private static    List<Perfil> perfiles= null;
@@ -69,7 +56,7 @@ public class BuscarPerfiles extends AppCompatActivity {
                 int i =0;
                 boolean bandera = false;
                 while(i<perfiles.size()){
-                    if(Long.toString(perfiles.get(i).getId()) == edtCodigo.getText().toString()){
+                    if(perfiles.get(i).getTitle() == edtCodigo.getText().toString()){
                         Imagen.setImageURI(Uri.parse(perfiles.get(i).getImage()));
                         edtTelefono.setText(perfiles.get(i).getPhone());
                         edtTitle.setText(perfiles.get(i).getTitle());

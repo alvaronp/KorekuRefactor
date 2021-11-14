@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="411dp"
+        android:layout_height="120dp"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/nombreprofileitem"
+            android:layout_width="184dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="220dp"
+            android:layout_marginBottom="39dp"
+            android:text="Nombre" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imagenprofileitem"
+            android:layout_width="105dp"
+            android:layout_height="91dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="14dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
