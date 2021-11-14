@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import org.w3c.dom.Text;
+
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
@@ -61,11 +63,16 @@ public class GameDetailFragment extends Fragment {
         TextView mDesc = v.findViewById(R.id.descGameDetail);
         EditText mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageView);
+        TextView mStatus = v.findViewById(R.id.statusDetail);
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
         mBuyDate.setText(mGa.getBuydate().toString());
+        if(mGa.getStatus().toString().equals("FINISHED"))
+            mStatus.setText("OK");
+        else
+            mStatus.setText("NO");
         image.setImageURI(Uri.parse(mGa.getImage()));
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_consoles));
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_games));
         return v;
     }
 

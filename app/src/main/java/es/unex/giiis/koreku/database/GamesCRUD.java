@@ -102,7 +102,7 @@ public final class GamesCRUD {
     public int updateStatus(long ID, es.unex.giiis.koreku.Games.Status status) {
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        Log.d("ToDoGameCRUD","GAME ID: "+ID);
+        Log.d("GameCRUD","GAME ID: "+ID);
 
         // New value for one column
         ContentValues values = new ContentValues();

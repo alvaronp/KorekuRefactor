@@ -75,7 +75,6 @@ public class GameFragment extends Fragment {
                         .commit();
             }
         });
-
         mRecyclerView.setAdapter(mAdapter);
 
         KorekuDatabase.getInstance(getActivity());

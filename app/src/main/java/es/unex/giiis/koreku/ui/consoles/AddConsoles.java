@@ -1,17 +1,27 @@
 package es.unex.giiis.koreku.ui.consoles;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,7 +35,11 @@ public class AddConsoles extends AppCompatActivity {
 	private EditText mTitle;
 	private Date mBuydate;
 	private EditText mCompany;
+	private static final int LOAD_IMAGE_REQUEST = 0;
+	private static final int PERMISSION_CODE = 1;
 	private Button mImageSelect;
+	private Uri imageUri;
+	ImageView foto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +66,23 @@ public class AddConsoles extends AppCompatActivity {
 				showDatePickerDialog();
 			}
 		});
+		foto = (ImageView) findViewById(R.id.imageView2);
 
+		mImageSelect = findViewById(R.id.image_picker_button);
+		mImageSelect.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				getImageFromAlbum();
+			}
+		});
+		if (ContextCompat.checkSelfPermission(AddConsoles.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+			mImageSelect.setEnabled(false);
+			ActivityCompat.requestPermissions(
+					AddConsoles.this,
+					new String[]{READ_EXTERNAL_STORAGE},
+					PERMISSION_CODE
+			);
+		}
 
 		// OnClickListener for the Cancel Button, 
 
@@ -65,8 +95,7 @@ public class AddConsoles extends AppCompatActivity {
 				// - Implement onClick().
 				Intent data = new Intent();
 				setResult(RESULT_CANCELED, data);				
-				finish();		
-
+				finish();
 			}
 		});
 
@@ -114,6 +143,35 @@ public class AddConsoles extends AppCompatActivity {
 				finish();
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode,resultCode,data);
+		if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
+			imageUri = data.getData();
+			foto.setImageURI(imageUri);
+		}
+	}
+
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions,
+										   int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+		switch (requestCode) {
+			case PERMISSION_CODE:
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0 &&
+						grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					// Permission is granted. Continue the action or workflow
+					// in your app.
+					mImageSelect.setEnabled(true);
+				}  else {
+					mImageSelect.setEnabled(false);
+				}
+				return;
+		}
 	}
 
 	// Do not modify below here
@@ -175,6 +233,16 @@ public class AddConsoles extends AppCompatActivity {
 			dateView.setText(dateString);
 		}
 
+	}
+
+	private void getImageFromAlbum(){
+		try{
+			Intent i = new Intent(Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			startActivityForResult(i, LOAD_IMAGE_REQUEST);
+		}catch(Exception exp){
+			Log.i("Error",exp.toString());
+		}
 	}
 
 

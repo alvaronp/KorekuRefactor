@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import es.unex.giiis.koreku.databinding.ActivityMainBinding;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,5 +39,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         return true;
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        KorekuDatabase.getInstance(this);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        KorekuDatabase.getInstance(this).close();
     }
 }
