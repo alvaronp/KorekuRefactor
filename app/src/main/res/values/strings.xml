@@ -16,6 +16,7 @@
     <string name="image_console">Image</string>
     <string name="enter_title">Enter name or title...</string>
     <string name="enter_company">Enter company name</string>
+    <string name="title_console_detail">Console Name: </string>
     <string name="date_picker">Pick the date</string>
     <string name="default_date">0000-00-00</string>
     <string name="image">Image</string>

@@ -49,7 +49,7 @@ public class Consolas {
 	private String image = new String();
 
 	@Ignore
-    Consolas(String title, Date date, String company, String image) {
+    public Consolas(String title, Date date, String company, String image) {
 		this.title = title;
 		this.date = date;
 		this.company=company;

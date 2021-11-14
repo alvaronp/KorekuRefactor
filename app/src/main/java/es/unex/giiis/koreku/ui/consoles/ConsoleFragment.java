@@ -8,27 +8,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.MainActivity;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentConsoleBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -68,7 +59,7 @@ public class ConsoleFragment extends Fragment {
         mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Consolas c) {
-                ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c.getId());
+                ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .addToBackStack(null)  //permite mantener la navegacion del boton back

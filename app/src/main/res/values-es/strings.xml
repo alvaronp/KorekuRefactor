@@ -15,6 +15,7 @@
     <string name="company_console_points">Fabricante: </string>
     <string name="image_console">Imagen</string>
     <string name="enter_title">Introduce nombre o título...</string>
+    <string name="title_console_detail">Nombre Consola: </string>
     <string name="enter_company">Introduce nombre del fabricante</string>
     <string name="date_picker">Escoge la fecha</string>
     <string name="default_date">00-00-0000</string>

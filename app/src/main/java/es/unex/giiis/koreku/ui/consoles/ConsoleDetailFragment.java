@@ -1,38 +1,38 @@
 package es.unex.giiis.koreku.ui.consoles;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import java.util.Date;
-import java.util.List;
-
-import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 
 public class ConsoleDetailFragment extends Fragment {
 
     private Consolas mCon;
-    private String idCon = "id";
-
 
     public ConsoleDetailFragment() {
         // Required empty public constructor
     }
 
-    public static ConsoleDetailFragment newInstance(Long id) {
+    public static ConsoleDetailFragment newInstance(Consolas c) {
         ConsoleDetailFragment fragment = new ConsoleDetailFragment();
         Bundle args = new Bundle();
-        args.putLong(fragment.idCon, id);
+        args.putLong("id", c.getId());
+        args.putString("title",c.getTitle());
+        args.putString("comp",c.getCompany());
+        args.putLong("dateLong",DateConverter.toTimestamp(c.getDate()));
+        args.putString("image",c.getImage());
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +42,7 @@ public class ConsoleDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = this.getArguments();
         if (args != null) {
-            mCon = new Consolas(args.getLong(idCon), "", new Date(), "","");
+            mCon = new Consolas(args.getString("title"), DateConverter.toDate(args.getLong("dateLong")),args.getString("comp"),args.getString("image"));
         }
     }
 
@@ -51,15 +51,16 @@ public class ConsoleDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.console_detail, container, false);
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                mCon = KorekuDatabase.getInstance(getActivity()).getDao2().get(mCon.getId());
-            }
-        });
         // Show item content
-        TextView mTitle = v.findViewById(R.id.titleConsoleDetail);
+        TextView mTitle = v.findViewById(R.id.titleCompanyDetail);
+        TextView mCompany = v.findViewById(R.id.compConsoleDetail);
+        EditText mBuyDate = v.findViewById(R.id.editTextDate);
+        ImageView image = v.findViewById(R.id.imageView);
         mTitle.setText(mCon.getTitle());
+        mCompany.setText(mCon.getCompany());
+        mBuyDate.setText(mCon.getDate().toString());
+        image.setImageURI(Uri.parse(mCon.getImage()));
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_consoles));
         return v;
     }
 
