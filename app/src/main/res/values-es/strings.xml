@@ -5,6 +5,7 @@
     <string name="title_profile">Perfil</string>
     <string name="title_services">Plataformas</string>
     <string name="delete_games">Borrar Juegos</string>
+    <string name="list_by_gender">Listar por genero</string>
     <string name="delete_consoles">Borrar Consolas</string>
     <string name="delete_services">Borrar Plataformas</string>
     <string name="delete_profile">Borrar Cuenta</string>

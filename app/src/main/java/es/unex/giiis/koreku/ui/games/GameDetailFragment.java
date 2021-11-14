@@ -44,9 +44,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"));
+                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),null);
             else
-                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"));
+                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),null);
 
         }
     }

@@ -5,6 +5,7 @@
     <string name="title_profile">Profile</string>
     <string name="title_services">Services</string>
     <string name="delete_games">Delete Games</string>
+    <string name="list_by_gender">List by gender</string>
     <string name="delete_consoles">Delete Consoles</string>
     <string name="delete_services">Delete Services</string>
     <string name="delete_profile">Delete Profile</string>

@@ -13,6 +13,7 @@ public final class DBContract {
         public static final String COLUMN_NAME_BUYDATE = "buydate";
         public static final String COLUMN_NAME_DESC = "desc";
         public static final String COLUMN_NAME_IMAGE = "image";
+        public static final String COLUMN_NAME_GENERO = "genero";
     }
     public static class Consolas implements BaseColumns {
         public static final String TABLE_NAME = "consolas";

@@ -43,7 +43,8 @@ public class Games {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss", Locale.US);
-
+	@Ignore
+	public final static String GENERO = "genero";
 	//Atributos de la clase
 	@ColumnInfo(name = "game_id")
 	@PrimaryKey (autoGenerate = true) //Clave primaria autogenerada para la bd
@@ -58,19 +59,22 @@ public class Games {
 	private String desc = new String();
 	@ColumnInfo(name = "image") //URI de la portada del juego
 	private String image = new String();
+	@ColumnInfo(name = "genero") //URI de la portada del juego
+	private String genero = new String();
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	public Games(String title, Status status, Date buydate, String desc, String image) {
+	public Games(String title, Status status, Date buydate, String desc, String image, String genero) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.genero = genero;
 	}
 
 	@Ignore
-	public Games(long ID, String title, String status, String buydate, String desc, String image) {
+	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero) {
         this.id = ID;
         this.title = title;
         this.status = Status.valueOf(status);
@@ -81,6 +85,7 @@ public class Games {
         }
         this.desc = desc;
         this.image = image;
+		this.genero = genero;
     }
 
 	// Create a new ToDoItem from data packaged in an Intent
@@ -96,15 +101,17 @@ public class Games {
 		}
 		desc = intent.getStringExtra(Games.DESC);
 		image = intent.getStringExtra(Games.IMAGE);
+		genero = intent.getStringExtra(Games.GENERO);;
 	}
 
-	public Games(long id, String title, Status status, Date buydate, String desc, String image){
+	public Games(long id, String title, Status status, Date buydate, String desc, String image,String genero){
 		this.id =id;
 		this.title =title;
 		this.status =status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.genero = genero;
 	}
 
     public long getId() { return id; }
@@ -151,29 +158,38 @@ public class Games {
 		this.image = image;
 	}
 
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
 
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
 	public static void packageIntent(Intent intent, String title,
-									 Status status, String buydate, String desc, String image) {
+									 Status status, String buydate, String desc, String image, String genero) {
 
 		intent.putExtra(Games.TITLE, title);
 		intent.putExtra(Games.STATUS, status.toString());
 		intent.putExtra(Games.BUYDATE, buydate);
 		intent.putExtra(Games.DESC, desc);
 		intent.putExtra(Games.IMAGE, image);
+		intent.putExtra(Games.GENERO, genero);
 	}
 
 	public String toString() {
 		return id + ITEM_SEP + title + ITEM_SEP +  status + ITEM_SEP +
-				FORMAT.format(buydate) + desc + ITEM_SEP + image;
+				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + genero;
 	}
 
 	public String toLog() {
 		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Status:" + status +
 				ITEM_SEP + "Buy Date:" + FORMAT.format(buydate) + ITEM_SEP + "Description:" +
-				desc + ITEM_SEP + "Image URI:" + image;
+				desc + ITEM_SEP + "Image URI:" + image+ ITEM_SEP + "Genero:" + genero;
 	}
 
 }

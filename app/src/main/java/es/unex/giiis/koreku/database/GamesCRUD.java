@@ -34,7 +34,8 @@ public final class GamesCRUD {
                 DBContract.Games.COLUMN_NAME_STATUS,
                 DBContract.Games.COLUMN_NAME_BUYDATE,
                 DBContract.Games.COLUMN_NAME_DESC,
-                DBContract.Games.COLUMN_NAME_IMAGE
+                DBContract.Games.COLUMN_NAME_IMAGE,
+                DBContract.Games.COLUMN_NAME_GENERO
         };
 
         String selection = null;
@@ -76,6 +77,7 @@ public final class GamesCRUD {
         values.put(DBContract.Games.COLUMN_NAME_BUYDATE, es.unex.giiis.koreku.Games.FORMAT.format(game.getBuydate()));
         values.put(DBContract.Games.COLUMN_NAME_DESC, game.getDesc());
         values.put(DBContract.Games.COLUMN_NAME_IMAGE, game.getImage());
+        values.put(DBContract.Games.COLUMN_NAME_GENERO, game.getImage());
 
 
         // Insert the new row, returning the primary key value of the new row
@@ -131,8 +133,9 @@ public final class GamesCRUD {
         String buydate = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_BUYDATE));
         String desc = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_DESC));
         String image = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_IMAGE));
+        String genero = cursor.getString(cursor.getColumnIndex(DBContract.Games.COLUMN_NAME_GENERO));
 
-        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image);
+        es.unex.giiis.koreku.Games game = new es.unex.giiis.koreku.Games(ID,title,status,buydate,desc,image,genero);
 
         Log.d("ToDoGameCRUD",game.toLog());
 
