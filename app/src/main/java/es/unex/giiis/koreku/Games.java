@@ -111,7 +111,7 @@ public class Games {
 		desc = intent.getStringExtra(Games.DESC);
 		image = intent.getStringExtra(Games.IMAGE);
 		bugs = intent.getStringExtra(Games.BUGS);
-		genero = intent.getStringExtra(Games.GENERO);;
+		genero = intent.getStringExtra(Games.GENERO);
 	}
 
 	public Games(long id, String title, Status status, Date buydate, String desc, String image, String bugs, String genero){

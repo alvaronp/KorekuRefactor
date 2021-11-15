@@ -34,6 +34,7 @@ public class AddGames extends AppCompatActivity {
 	private Button mImageSelect;
 	private RadioGroup mStatusRadioGroup;
 	private RadioButton mDefaultStatusButton;
+	private EditText mGenre;
 	private String pid;
 
 	@Override
@@ -47,6 +48,7 @@ public class AddGames extends AppCompatActivity {
         mImageSelect = findViewById(R.id.image_picker_button);
 		mDefaultStatusButton =  findViewById(R.id.statusNotFinished);
 		mStatusRadioGroup =  findViewById(R.id.statusGroup);
+		mGenre = findViewById(R.id.genero_edit);
 
 		// Set the default date and time
 
@@ -92,6 +94,7 @@ public class AddGames extends AppCompatActivity {
 				// - Reset data fields to default values
 				mTitle.setText("");
 				mDesc.setText("");
+				mGenre.setText("");
 				mStatusRadioGroup.check(mDefaultStatusButton.getId());
 				setDefaultDateTime();
 			}
@@ -120,9 +123,11 @@ public class AddGames extends AppCompatActivity {
 				String image ="";
 				//String image = mImageSelect.toString();
 
+				String genre = mGenre.getText().toString();
+
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, image ,null, null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, image, genre, null);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				

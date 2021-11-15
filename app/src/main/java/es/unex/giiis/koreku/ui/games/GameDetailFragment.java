@@ -39,6 +39,7 @@ public class GameDetailFragment extends Fragment {
         args.putString("status",g.getStatus().toString());
         args.putLong("dateLong",DateConverter.toTimestamp(g.getBuydate()));
         args.putString("image",g.getImage());
+        args.putString("genre", g.getGenero());
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,9 +51,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),null);
+                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genero"));
             else
-                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),null);
+                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genero"));
 
         }
     }
@@ -65,10 +66,12 @@ public class GameDetailFragment extends Fragment {
         // Show item content
         TextView mTitle = v.findViewById(R.id.titleGameDetail);
         TextView mDesc = v.findViewById(R.id.descGameDetail);
-        EditText mBuyDate = v.findViewById(R.id.editTextDate);
+        TextView mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageViewGame);
         TextView bug_details = v.findViewById(R.id.bug_detail);
         TextView mStatus = v.findViewById(R.id.statusDetail);
+        TextView mGenre = v.findViewById(R.id.genreDetail);
+
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
         mBuyDate.setText(mGa.getBuydate().toString());
@@ -77,7 +80,7 @@ public class GameDetailFragment extends Fragment {
         else
             mStatus.setText("NO");
         image.setImageURI(Uri.parse(mGa.getImage()));
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_games));
+        mGenre.setText(mGa.getGenero());
         image.setImageDrawable(getResources().getDrawable(R.drawable.ic_consoles));
         bug_details.setText(mGa.getBugs());
 
