@@ -81,7 +81,7 @@ public class PerfilDetailFragment extends Fragment {
         });
         return v;
     }
-
+//a
     @Override public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mCon.getTitle());
