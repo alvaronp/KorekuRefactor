@@ -157,7 +157,7 @@ public class GameFragment extends Fragment {
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
                         List<Games>juegos =db.getDao1().getAllByGender();
-                        getActivity().runOnUiThread(() -> mAdapter.load( juegos));
+                        getActivity().runOnUiThread(() -> mAdapter.load(juegos));
                     }
                 });
 
@@ -167,7 +167,7 @@ public class GameFragment extends Fragment {
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
                         List<Games>juegos =db.getDao1().getAllByDate();
-                        getActivity().runOnUiThread(() -> mAdapter.load( juegos));
+                        getActivity().runOnUiThread(() -> mAdapter.load(juegos));
                     }
                 });
             default:

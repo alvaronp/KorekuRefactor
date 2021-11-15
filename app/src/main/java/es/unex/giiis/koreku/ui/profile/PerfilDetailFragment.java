@@ -74,8 +74,7 @@ public class PerfilDetailFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 String text="Koreku dice ->Nombre del perfil: "+mCon.getTitle()+" Plataforma: "+mCon.getPhone()+ " Correo: "+mCon.getMail();
-                intent.setPackage("com.whatsapp");
-                intent.setPackage("com.telegram");
+                intent.setPackage("org.telegram.messenger");
                 intent.putExtra(Intent.EXTRA_TEXT,text);
                 startActivity(Intent.createChooser(intent,text));
             }
