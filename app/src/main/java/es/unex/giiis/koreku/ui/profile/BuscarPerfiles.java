@@ -54,10 +54,13 @@ public class BuscarPerfiles extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int i =0;
+                String codigo=edtCodigo.getText().toString();
                 boolean bandera = false;
-                while(i<perfiles.size()){
-                    if(perfiles.get(i).getTitle() == edtCodigo.getText().toString()){
-                        Imagen.setImageURI(Uri.parse(perfiles.get(i).getImage()));
+                while(i<perfiles.size() && bandera ==false){
+                    String titulo=perfiles.get(i).getTitle();
+
+                    if(codigo.equals(titulo)){
+                        //Imagen.setImageURI(Uri.parse(perfiles.get(i).getImage()));
                         edtTelefono.setText(perfiles.get(i).getPhone());
                         edtTitle.setText(perfiles.get(i).getTitle());
                         edtCorreo.setText(perfiles.get(i).getMail());

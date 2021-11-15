@@ -1,12 +1,9 @@
 package es.unex.giiis.koreku.ui.profile;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.roomdb.DateConverter;
 
 
 public class PerfilDetailFragment extends Fragment {
@@ -52,12 +48,12 @@ public class PerfilDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.profile_detail, container, false);
         // Show item content
-        TextView mTitle = v.findViewById(R.id.nombredetaiprofile);
+        TextView mTitle = v.findViewById(R.id.nombredetailprofile);
         TextView mTelefono = v.findViewById(R.id.telefonodetailprofile);
         TextView mCorreo = v.findViewById(R.id.correodetailprofile);
         //TextView image = v.findViewById(R.id.imagendetailprofile);
         mTitle.setText(mCon.getTitle());
-        mTelefono.setText(mCon.getTitle());
+        mTelefono.setText(mCon.getPhone());
         mCorreo.setText(mCon.getMail());
        // image.setText("holahola");
         return v;

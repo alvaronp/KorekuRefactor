@@ -70,11 +70,8 @@ public class AddProfile extends AppCompatActivity {
                 // -  Title
                 String titleString = mTitle.getText().toString();
 
-                // Date
-
-
                 String telefono = mTelefono.getText().toString();
-                String correo = mTelefono.getText().toString();
+                String correo = mCorreo.getText().toString();
 
                 String image = "asdfasdfasd";
 

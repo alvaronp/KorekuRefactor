@@ -35,7 +35,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent,
+    public ProfileAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                         int viewType) {
         // - Inflate the View for every element
         View v = LayoutInflater.from(parent.getContext())

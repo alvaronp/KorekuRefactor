@@ -13,7 +13,7 @@
         android:layout_marginBottom="80dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Correo"
+        android:text="Plataforma"
         app:layout_constraintBottom_toTopOf="@+id/imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -26,7 +26,7 @@
         android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Telefono"
+        android:text="Correo"
         app:layout_constraintBottom_toTopOf="@+id/Telefono"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -49,8 +49,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="Nombre del perfil" />
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/btnBuscar"
@@ -81,4 +80,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="116dp"
+        android:text="Introduce el nombre del perfil"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
