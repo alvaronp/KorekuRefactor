@@ -73,7 +73,7 @@ public class PerfilDetailFragment extends Fragment {
             public void onClick(View view){
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String text="Mensaje de texto rechulon";
+                String text="Koreku dice ->Nombre del perfil: "+mCon.getTitle()+" Plataforma: "+mCon.getPhone()+ " Correo: "+mCon.getMail();
                 intent.setPackage("com.whatsapp");
                 intent.putExtra(Intent.EXTRA_TEXT,text);
                 startActivity(Intent.createChooser(intent,text));
