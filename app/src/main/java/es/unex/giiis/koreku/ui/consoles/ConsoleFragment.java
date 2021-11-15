@@ -20,6 +20,7 @@ import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentConsoleBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -28,6 +29,8 @@ public class ConsoleFragment extends Fragment {
 
     private FragmentConsoleBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
+    private static final int MENU_Listar = 4;
+    private static final int MENU_ListarFecha = 5;
     private static final int ADD_CONSOLES_REQUEST = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -123,6 +126,8 @@ public class ConsoleFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_consoles);
+        menu.add(Menu.NONE, MENU_Listar, Menu.NONE, R.string.list_by_gender);
+        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, "List by date");
     }
 
     @Override
@@ -140,6 +145,17 @@ public class ConsoleFragment extends Fragment {
                     }
                 });
                 return true;
+
+            case MENU_ListarFecha:
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        List<Consolas>consolas =db.getDao2().getAllByDate();
+                        getActivity().runOnUiThread(() -> mAdapter.load( consolas));
+                    }
+                });
+
             default:
                 return super.onOptionsItemSelected(item);
         }

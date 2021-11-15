@@ -1,6 +1,7 @@
 package es.unex.giiis.koreku.roomdb;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -29,6 +30,7 @@ public interface GamesDAO {
     @Query("SELECT * FROM game ORDER BY TITLE ") //Antes definimos que nuestra tabla se llamaría así
     public List<Games> getAllByGender();
 
-    @Query("SELECT * FROM game ORDER BY DATE ") //Antes definimos que nuestra tabla se llamaría así
+    @Query("SELECT * FROM game ORDER BY DATE ")
     public List<Games> getAllByDate();
+
 }
