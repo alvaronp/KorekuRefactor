@@ -35,4 +35,7 @@
     <string name="title_game_detail">Game Title: </string>
     <string name="desc_game_detail">Description: </string>
     <string name="genre_game">Genre </string>
+    <string name="enter_genre">Kind of your game...</string>
+    <string name="genre_game_points">Genre: </string>
+
 </resources>

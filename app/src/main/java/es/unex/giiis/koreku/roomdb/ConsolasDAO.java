@@ -8,6 +8,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.Games;
 
 @Dao
 public interface ConsolasDAO {
@@ -21,4 +22,7 @@ public interface ConsolasDAO {
     public int update(Consolas item);
     @Query("SELECT * FROM consolas WHERE console_id=:id")
     public Consolas get(Long id);
+
+    @Query("SELECT * FROM consolas ORDER BY DATE ")
+    public List<Consolas> getAllByDate();
 }

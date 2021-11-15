@@ -33,7 +33,7 @@ public class Consolas {
 
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss", Locale.US);
+			"yyyy-MM-dd", Locale.US);
 
 
 	@ColumnInfo(name = "console_id")
