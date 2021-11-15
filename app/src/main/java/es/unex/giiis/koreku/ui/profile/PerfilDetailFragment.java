@@ -67,14 +67,13 @@ public class PerfilDetailFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         Button share = (Button) v.findViewById(R.id.shareButton);
         share.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String text="Koreku dice ->Nombre del perfil: "+mCon.getTitle()+" Plataforma: "+mCon.getPhone()+ " Correo: "+mCon.getMail();
+                String text="Koreku dice ->Nombre del perfil: "+mCon.getTitle()+" .Plataforma: "+mCon.getPhone()+ " .Correo: "+mCon.getMail();
                 intent.setPackage("org.telegram.messenger");
                 intent.putExtra(Intent.EXTRA_TEXT,text);
                 startActivity(Intent.createChooser(intent,text));
