@@ -111,17 +111,18 @@ public class AddGames extends AppCompatActivity {
 				String titleString = mTitle.getText().toString();
 
 				// Date
-				String buyDate = dateString;
+				String buyDate = dateView.getText().toString();
 
 				String desc = mDesc.getText().toString();
 
 				Status status = getStatus();
 
-				String image = mImageSelect.toString();
+				String image ="";
+				//String image = mImageSelect.toString();
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, desc, mImageSelect.toString(), dateString,null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, image, null);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				

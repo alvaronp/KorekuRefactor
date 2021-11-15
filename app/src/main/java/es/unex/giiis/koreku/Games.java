@@ -42,7 +42,7 @@ public class Games {
 	public final static String IMAGE = "image";
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss", Locale.US);
+			"yyyy-MM-dd", Locale.US);
 	@Ignore
 	public final static String GENERO = "genero";
 	//Atributos de la clase

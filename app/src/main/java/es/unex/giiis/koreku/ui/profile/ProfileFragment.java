@@ -138,7 +138,6 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        KorekuDatabase.getInstance(getActivity()).close();
         super.onDestroyView();
         binding = null;
     }

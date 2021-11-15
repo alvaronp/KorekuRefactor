@@ -81,7 +81,6 @@ public class Consolas {
 		image = intent.getStringExtra(Consolas.IMAGE);
 	}
 
-
 	public Consolas(long id, String title, Date date, String company, String image){
 		this.id =id;
 		this.date =date;
@@ -90,6 +89,7 @@ public class Consolas {
 		this.image=image;
 	}
 
+	@Ignore
 	public Consolas(){
 		this.id =0;
 		this.date = null;

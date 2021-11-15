@@ -14,7 +14,7 @@ import es.unex.giiis.koreku.Perfil;
 public abstract class KorekuDatabase extends RoomDatabase {
     private static KorekuDatabase instance; //SINGLETON
 
-    public static KorekuDatabase getInstance(Context context){
+    public static synchronized KorekuDatabase getInstance(Context context){
         if (instance == null)
             instance = Room.databaseBuilder(context, KorekuDatabase.class, "koreku.db").build();
         return instance;

@@ -40,16 +40,4 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
         return true;
     }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        KorekuDatabase.getInstance(this);
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        KorekuDatabase.getInstance(this).close();
-    }
 }

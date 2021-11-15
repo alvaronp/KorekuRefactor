@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titleGameDetail" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewGame"
         android:layout_width="221dp"
         android:layout_height="155dp"
         android:layout_marginTop="28dp"

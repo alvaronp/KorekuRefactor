@@ -49,13 +49,13 @@
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewGame"
         app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/titleGameDetail" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewGame"
         android:layout_width="143dp"
         android:layout_height="173dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextDate"

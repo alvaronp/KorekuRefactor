@@ -108,7 +108,7 @@ public class ConsoleFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        // Load saved ToDoItems, if necessary
+        // Load saved consoles, if necessary
 
         if (mAdapter.getItemCount() == 0)
             loadItems();
@@ -116,7 +116,6 @@ public class ConsoleFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        KorekuDatabase.getInstance(getActivity()).close();
         super.onDestroyView();
         binding = null;
     }

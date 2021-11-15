@@ -1,6 +1,10 @@
 package es.unex.giiis.koreku.ui.consoles;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -11,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -116,6 +121,7 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
 
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(c.getDate()).subSequence(0,10));
+
 
             imageView.setImageURI(Uri.parse(c.getImage()));
 

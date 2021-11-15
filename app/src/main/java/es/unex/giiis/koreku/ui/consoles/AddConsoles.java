@@ -5,6 +5,9 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ContentProvider;
+import android.content.ContentProviderResult;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
@@ -133,11 +136,13 @@ public class AddConsoles extends AppCompatActivity {
 
 				String company = mCompany.getText().toString();
 
-				String image = foto.toString();
+				String image = "";
+				if (imageUri != null)
+					image = imageUri.toString();
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Consolas.packageIntent(data, titleString, company, image, dateString);
+				Consolas.packageIntent(data, titleString, company, image, buyDate);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				

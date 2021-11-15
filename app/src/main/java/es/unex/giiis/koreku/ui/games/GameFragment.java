@@ -124,7 +124,6 @@ public class GameFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        KorekuDatabase.getInstance(getActivity()).close();
         super.onDestroyView();
         binding = null;
     }
@@ -155,7 +154,7 @@ public class GameFragment extends Fragment {
                     @Override
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                       List<Games>juegos =db.getDao1().getAllByGender();
+                        List<Games>juegos =db.getDao1().getAllByGender();
                         getActivity().runOnUiThread(() -> mAdapter.load( juegos));
                     }
                 });

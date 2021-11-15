@@ -34,4 +34,5 @@
     <string name="not_finished_string">No completado</string>
     <string name="title_game_detail">Nombre Juego: </string>
     <string name="desc_game_detail">Descripcion: </string>
+    <string name="genre_game">Género </string>
 </resources>

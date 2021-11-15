@@ -2,7 +2,6 @@ package es.unex.giiis.koreku.ui.games;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,21 +97,18 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
-
             mContext = context;
-
             // - Get the references to every widget of the Item View
             title =  itemView.findViewById(R.id.titleView);
             statusView = itemView.findViewById(R.id.statusCheckBox);
             dateView =  itemView.findViewById(R.id.dateView);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imageViewGame);
         }
 
         public void bind(final Games g, final OnItemClickListener listener) {
 
             // - Display Title in TextView
             title.setText(g.getTitle());
-
 
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(g.getBuydate()).subSequence(0,10));
@@ -121,30 +117,19 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
             //  - Set up Status CheckBox
             statusView.setChecked(g.getStatus() == Games.Status.FINISHED);
-            if (g.getStatus() == Games.Status.FINISHED)
-                title.setBackgroundColor(Color.GREEN);
 
             statusView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,
                                              boolean isChecked) {
-
-                    //  Set up and implement an OnCheckedChangeListener
-                    // is called when the user toggles the status checkbox
-                    if (isChecked) {
+                    if(isChecked)
                         g.setStatus(Games.Status.FINISHED);
-
-                        title.setBackgroundColor(Color.GREEN);
-                    } else {
+                    else
                         g.setStatus(Games.Status.NOTFINISHED);
-                        title.setBackgroundColor(Color.WHITE);
-                    }
-
                     AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(mContext).getDao1().update(g));
                 }});
 
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(g);

@@ -55,12 +55,11 @@ public class ConsoleDetailFragment extends Fragment {
         TextView mTitle = v.findViewById(R.id.titleGameDetail);
         TextView mCompany = v.findViewById(R.id.descGameDetail);
         EditText mBuyDate = v.findViewById(R.id.editTextDate);
-        ImageView image = v.findViewById(R.id.imageView);
+        ImageView image = v.findViewById(R.id.imageViewGame);
         mTitle.setText(mCon.getTitle());
         mCompany.setText(mCon.getCompany());
         mBuyDate.setText(mCon.getDate().toString());
         image.setImageURI(Uri.parse(mCon.getImage()));
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_consoles));
         return v;
     }
 
