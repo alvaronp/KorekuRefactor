@@ -67,7 +67,15 @@ public class PerfilDetailFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        Button share = (Button) v.findViewById(R.id.shareButton);
+        share.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String uri= "whatsapp://send?phone="+"34"+"608362426"+"&text"+"Este es el mensaje";
+                startActivity(intent);
+            }
+        });
         return v;
     }
 
