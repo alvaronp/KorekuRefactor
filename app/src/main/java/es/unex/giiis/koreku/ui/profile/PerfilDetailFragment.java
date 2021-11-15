@@ -71,9 +71,12 @@ public class PerfilDetailFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                String uri= "whatsapp://send?phone="+"34"+"608362426"+"&text"+"Este es el mensaje";
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String text="Mensaje de texto rechulon";
+                intent.setPackage("com.whatsapp");
+                intent.putExtra(Intent.EXTRA_TEXT,text);
+                startActivity(Intent.createChooser(intent,text));
             }
         });
         return v;
