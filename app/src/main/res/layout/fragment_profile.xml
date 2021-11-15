@@ -12,10 +12,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705">
+        app:layout_constraintVertical_bias="0.872">
 
         <Button
             android:id="@+id/Busqueda"
@@ -29,16 +29,16 @@
         android:id="@+id/anadirPerilbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="16dp"
         android:text="Nuevo Perfil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewprofile"
-        android:layout_width="347dp"
-        android:layout_height="307dp"
+        android:layout_width="401dp"
+        android:layout_height="473dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -53,9 +53,9 @@
         android:text="ADD COMMENT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.768" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
