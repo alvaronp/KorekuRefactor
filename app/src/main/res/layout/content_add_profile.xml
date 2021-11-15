@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="51dp"
+        android:layout_marginLeft="63dp"
         android:layout_marginBottom="566dp"
         android:ems="10"
         android:hint="Enter your profile name"
@@ -38,11 +38,11 @@
 
     <TextView
         android:id="@+id/nombreLabel"
-        android:layout_width="96dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="618dp"
-        android:text="Nombre"
+        android:layout_marginBottom="623dp"
+        android:text="Nombre de la cuenta"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_height="43dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="483dp"
-        android:text="Telefono"
+        android:text="Plataforma"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <EditText
@@ -63,7 +63,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="419dp"
         android:ems="10"
-        android:hint="Enter your phone"
+        android:hint="Enter the platform name"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
         android:textAllCaps="true"
