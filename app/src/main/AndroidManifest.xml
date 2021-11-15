@@ -43,6 +43,10 @@
             android:exported="true"
             android:label="Koreku"/>
         <activity
+            android:name=".ui.games.GameAddBug"
+            android:exported="true"
+            android:label="Koreku"/>
+        <activity
             android:name=".ui.profile.NuevoComentario"
             android:exported="true"
             android:label="Koreku"/>

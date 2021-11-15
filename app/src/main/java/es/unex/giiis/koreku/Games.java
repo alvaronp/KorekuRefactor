@@ -43,6 +43,9 @@ public class Games {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd", Locale.US);
+
+	@Ignore
+	public final static String BUGS = "bugs";
 	@Ignore
 	public final static String GENERO = "genero";
 	//Atributos de la clase
@@ -51,14 +54,18 @@ public class Games {
 	private long id;
 	@ColumnInfo(name = "title") //Nombre que tendrá el atributo en nuestra bd
 	private String title = new String();
+	@ColumnInfo(name = "status")
 	@TypeConverters(StatusConverter.class)
 	private Status status = Status.NOTFINISHED;
+	@ColumnInfo(name = "date")
 	@TypeConverters(DateConverter.class) //Le indica a Room que para convertir a timestamp debe usar esa clase
 	private Date buydate = new Date();
 	@ColumnInfo(name = "desc") //Descripcion del juego
 	private String desc = new String();
 	@ColumnInfo(name = "image") //URI de la portada del juego
 	private String image = new String();
+	@ColumnInfo(name = "bugs") //Errores del juego
+	private String bugs = new String();
 	@ColumnInfo(name = "genero") //URI de la portada del juego
 	private String genero = new String();
 
@@ -70,6 +77,7 @@ public class Games {
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.bugs = "";
 		this.genero = genero;
 	}
 
@@ -85,6 +93,7 @@ public class Games {
         }
         this.desc = desc;
         this.image = image;
+        this.bugs = "";
 		this.genero = genero;
     }
 
@@ -101,16 +110,18 @@ public class Games {
 		}
 		desc = intent.getStringExtra(Games.DESC);
 		image = intent.getStringExtra(Games.IMAGE);
+		bugs = intent.getStringExtra(Games.BUGS);
 		genero = intent.getStringExtra(Games.GENERO);;
 	}
 
-	public Games(long id, String title, Status status, Date buydate, String desc, String image,String genero){
+	public Games(long id, String title, Status status, Date buydate, String desc, String image, String bugs, String genero){
 		this.id =id;
 		this.title =title;
 		this.status =status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
+		this.bugs = bugs;
 		this.genero = genero;
 	}
 
@@ -158,6 +169,14 @@ public class Games {
 		this.image = image;
 	}
 
+	public String getBugs() {
+		return bugs;
+	}
+
+	public void setBugs(String bugs) {
+		this.bugs = bugs;
+	}
+
 	public String getGenero() {
 		return genero;
 	}
@@ -171,7 +190,7 @@ public class Games {
 	// package them for transport in an Intent
 
 	public static void packageIntent(Intent intent, String title,
-									 Status status, String buydate, String desc, String image, String genero) {
+									 Status status, String buydate, String desc, String image, String genero, String bugs) {
 
 		intent.putExtra(Games.TITLE, title);
 		intent.putExtra(Games.STATUS, status.toString());
@@ -179,17 +198,18 @@ public class Games {
 		intent.putExtra(Games.DESC, desc);
 		intent.putExtra(Games.IMAGE, image);
 		intent.putExtra(Games.GENERO, genero);
+		intent.putExtra(Games.BUGS, bugs);
 	}
 
 	public String toString() {
 		return id + ITEM_SEP + title + ITEM_SEP +  status + ITEM_SEP +
-				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + genero;
+				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + genero + ITEM_SEP + bugs;
 	}
 
 	public String toLog() {
 		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Status:" + status +
 				ITEM_SEP + "Buy Date:" + FORMAT.format(buydate) + ITEM_SEP + "Description:" +
-				desc + ITEM_SEP + "Image URI:" + image+ ITEM_SEP + "Genero:" + genero;
+				desc + ITEM_SEP + "Image URI:" + image+ ITEM_SEP + "Genero:" + genero + ITEM_SEP + "Bugs:" + bugs;
 	}
 
 }

@@ -37,6 +37,7 @@ public class GameFragment extends Fragment {
     private FragmentGameBinding binding;
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_Listar = 4;
+    private static final int MENU_ListarFecha = 5;
     private static final int ADD_GAMES_REQUEST = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -132,6 +133,7 @@ public class GameFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_games);
         menu.add(Menu.NONE, MENU_Listar, Menu.NONE, R.string.list_by_gender);
+        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, "List by date");
     }
 
     @Override
@@ -155,6 +157,16 @@ public class GameFragment extends Fragment {
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
                         List<Games>juegos =db.getDao1().getAllByGender();
+                        getActivity().runOnUiThread(() -> mAdapter.load( juegos));
+                    }
+                });
+
+            case MENU_ListarFecha:
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        List<Games>juegos =db.getDao1().getAllByDate();
                         getActivity().runOnUiThread(() -> mAdapter.load( juegos));
                     }
                 });

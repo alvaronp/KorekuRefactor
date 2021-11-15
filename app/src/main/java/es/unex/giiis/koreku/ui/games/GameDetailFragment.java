@@ -1,10 +1,12 @@
 package es.unex.giiis.koreku.ui.games;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,14 +14,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import org.w3c.dom.Text;
+
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
+import es.unex.giiis.koreku.ui.profile.BuscarPerfiles;
 
 
 public class GameDetailFragment extends Fragment {
-
+    Button addbugs;
     private Games mGa;
+    private GameAdapter mAdapter;
 
     public GameDetailFragment() {
         // Required empty public constructor
@@ -61,6 +67,7 @@ public class GameDetailFragment extends Fragment {
         TextView mDesc = v.findViewById(R.id.descGameDetail);
         EditText mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageViewGame);
+        TextView bug_details = v.findViewById(R.id.bug_detail);
         TextView mStatus = v.findViewById(R.id.statusDetail);
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
@@ -71,6 +78,20 @@ public class GameDetailFragment extends Fragment {
             mStatus.setText("NO");
         image.setImageURI(Uri.parse(mGa.getImage()));
         image.setImageDrawable(getResources().getDrawable(R.drawable.ic_games));
+        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_consoles));
+        bug_details.setText(mGa.getBugs());
+
+        addbugs = (Button) v.findViewById(R.id.error_button);
+        addbugs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // - Attach Listener to FloatingActionButton. Implement onClick()
+                Intent intent = new Intent(getActivity(), GameAddBug.class);
+                startActivity(intent);
+
+            }
+        });
+
         return v;
     }
 

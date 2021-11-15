@@ -122,7 +122,7 @@ public class AddGames extends AppCompatActivity {
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, image, null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, image ,null, null);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				

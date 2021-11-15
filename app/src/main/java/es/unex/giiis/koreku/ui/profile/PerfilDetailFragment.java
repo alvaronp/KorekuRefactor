@@ -1,9 +1,11 @@
 package es.unex.giiis.koreku.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +58,16 @@ public class PerfilDetailFragment extends Fragment {
         mTelefono.setText(mCon.getPhone());
         mCorreo.setText(mCon.getMail());
        // image.setText("holahola");
+
+        Button newcomment = (Button) v.findViewById(R.id.comment_button);
+        newcomment.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), NuevoComentario.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 

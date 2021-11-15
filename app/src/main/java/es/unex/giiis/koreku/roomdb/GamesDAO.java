@@ -23,6 +23,12 @@ public interface GamesDAO {
     @Update
     public int update(Games game);
 
+    @Update
+    public int updateBugs(Games game);
+
     @Query("SELECT * FROM game ORDER BY TITLE ") //Antes definimos que nuestra tabla se llamaría así
     public List<Games> getAllByGender();
+
+    @Query("SELECT * FROM game ORDER BY DATE ") //Antes definimos que nuestra tabla se llamaría así
+    public List<Games> getAllByDate();
 }

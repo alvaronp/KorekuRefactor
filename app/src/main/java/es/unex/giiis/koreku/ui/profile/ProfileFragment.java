@@ -26,7 +26,6 @@ import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ProfileFragment extends Fragment {
     Button busqueda,anadirPerfil;
-    Button newcomment;
     private static final int ADD_Profile_REQUEST = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -54,14 +53,7 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        newcomment = (Button) root.findViewById(R.id.comment_button);
-        newcomment.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(getActivity(), NuevoComentario.class);
-                startActivity(intent);
-            }
-        });
+
 
         anadirPerfil = (Button) root.findViewById(R.id.anadirPerilbtn);
         anadirPerfil.setOnClickListener(new View.OnClickListener() {
