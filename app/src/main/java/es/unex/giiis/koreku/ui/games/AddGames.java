@@ -1,20 +1,30 @@
 package es.unex.giiis.koreku.ui.games;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,12 +32,15 @@ import java.util.Date;
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Games.Status;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class AddGames extends AppCompatActivity {
 
 	private static String dateString;
 	private static TextView dateView;
-	
+	private static final int LOAD_IMAGE_REQUEST = 0;
+	private static final int PERMISSION_CODE = 0;
+
 	private EditText mTitle;
 	private Date mBuydate;
 	private EditText mDesc;
@@ -35,7 +48,8 @@ public class AddGames extends AppCompatActivity {
 	private RadioGroup mStatusRadioGroup;
 	private RadioButton mDefaultStatusButton;
 	private EditText mGenre;
-	private String pid;
+	private String imagen;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +80,22 @@ public class AddGames extends AppCompatActivity {
 			}
 		});
 
+
+		mImageSelect = findViewById(R.id.image_picker_button);
+		mImageSelect.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				getImageFromAlbum();
+			}
+		});
+		if (ContextCompat.checkSelfPermission(AddGames.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+			mImageSelect.setEnabled(false);
+			ActivityCompat.requestPermissions(
+					AddGames.this,
+					new String[]{READ_EXTERNAL_STORAGE},
+					PERMISSION_CODE
+			);
+		}
 
 		// OnClickListener for the Cancel Button, 
 
@@ -120,20 +150,27 @@ public class AddGames extends AppCompatActivity {
 
 				Status status = getStatus();
 
-				String image ="";
-				//String image = mImageSelect.toString();
-
 				String genre = mGenre.getText().toString();
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, image, genre, null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				
 				finish();
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode,resultCode,data);
+		if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
+			imagen = getRealPathFromURI(data.getData());
+			ImageView check = findViewById(R.id.checkImage);
+			check.setVisibility(View.VISIBLE);
+		}
 	}
 
 	// Do not modify below here
@@ -208,6 +245,32 @@ public class AddGames extends AppCompatActivity {
 		}
 
 	}
+
+	private void getImageFromAlbum(){
+		try{
+			Intent i = new Intent(Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			i.setType("image/*");
+			startActivityForResult(i, LOAD_IMAGE_REQUEST);
+		}catch(Exception exp){
+			Log.i("Error",exp.toString());
+		}
+	}
+
+	private String getRealPathFromURI(Uri contentURI) {
+		String result;
+		Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+		if (cursor == null) {
+			result = contentURI.getPath();
+		} else {
+			cursor.moveToFirst();
+			int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+			result = cursor.getString(idx);
+			cursor.close();
+		}
+		return result;
+	}
+
 
 
 	private void showDatePickerDialog() {

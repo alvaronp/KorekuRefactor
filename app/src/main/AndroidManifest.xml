@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Koreku">
+        android:theme="@style/Theme.Koreku"
+        android:requestLegacyExternalStorage="true">
 
         <activity
             android:name=".AnimationActivity"

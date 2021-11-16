@@ -1,6 +1,6 @@
 package es.unex.giiis.koreku.ui.consoles;
 
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
@@ -54,12 +63,16 @@ public class ConsoleDetailFragment extends Fragment {
         // Show item content
         TextView mTitle = v.findViewById(R.id.titleGameDetail);
         TextView mCompany = v.findViewById(R.id.descGameDetail);
-        EditText mBuyDate = v.findViewById(R.id.editTextDate);
+        TextView mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageViewGame);
         mTitle.setText(mCon.getTitle());
         mCompany.setText(mCon.getCompany());
-        mBuyDate.setText(mCon.getDate().toString());
-        image.setImageURI(Uri.parse(mCon.getImage()));
+        Instant buyDate = mCon.getDate().toInstant();
+        Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
+        mBuyDate.setText(correct.toString().subSequence(0,10));
+        String imagePath = mCon.getImage();
+        if (imagePath.length()>0)
+            image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
         return v;
     }
 

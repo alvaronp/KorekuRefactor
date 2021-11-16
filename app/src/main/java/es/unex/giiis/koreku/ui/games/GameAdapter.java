@@ -102,7 +102,6 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
             title =  itemView.findViewById(R.id.titleView);
             statusView = itemView.findViewById(R.id.statusCheckBox);
             dateView =  itemView.findViewById(R.id.dateView);
-            imageView = itemView.findViewById(R.id.imageViewGame);
         }
 
         public void bind(final Games g, final OnItemClickListener listener) {
@@ -112,8 +111,6 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(g.getBuydate()).subSequence(0,10));
-
-            //imageView.setImageURI(Uri.parse(g.getImage()));
 
             //  - Set up Status CheckBox
             statusView.setChecked(g.getStatus() == Games.Status.FINISHED);

@@ -44,5 +44,6 @@
     <string name="add_comment">Add Comment</string>
     <string name="comentario">Comment</string>
     <string name="share">Share</string>
+    <string name="new_bug">Add Known Bug</string>
 
 </resources>

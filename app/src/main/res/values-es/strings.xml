@@ -44,6 +44,8 @@
     <string name="add_comment">Añadir Comentario</string>
     <string name="comentario">Comentario</string>
     <string name="share">Compartir</string>
+    <string name="new_bug">Añadir Bug</string>
+
 
 
 </resources>

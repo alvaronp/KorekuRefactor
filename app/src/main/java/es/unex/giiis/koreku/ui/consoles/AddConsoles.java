@@ -5,14 +5,12 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.ContentProvider;
-import android.content.ContentProviderResult;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Image;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +41,7 @@ public class AddConsoles extends AppCompatActivity {
 	private Button mImageSelect;
 	private Uri imageUri;
 	ImageView foto;
+	String imagen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +137,7 @@ public class AddConsoles extends AppCompatActivity {
 
 				String image = "";
 				if (imageUri != null)
-					image = imageUri.toString();
+					image = imagen;
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
@@ -156,6 +155,7 @@ public class AddConsoles extends AppCompatActivity {
 		super.onActivityResult(requestCode,resultCode,data);
 		if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
 			imageUri = data.getData();
+			imagen = getRealPathFromURI(imageUri);
 			foto.setImageURI(imageUri);
 		}
 	}
@@ -245,10 +245,25 @@ public class AddConsoles extends AppCompatActivity {
 		try{
 			Intent i = new Intent(Intent.ACTION_PICK,
 					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			i.setType("image/*");
 			startActivityForResult(i, LOAD_IMAGE_REQUEST);
 		}catch(Exception exp){
 			Log.i("Error",exp.toString());
 		}
+	}
+
+	private String getRealPathFromURI(Uri contentURI) {
+		String result;
+		Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+		if (cursor == null) {
+			result = contentURI.getPath();
+		} else {
+			cursor.moveToFirst();
+			int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+			result = cursor.getString(idx);
+			cursor.close();
+		}
+		return result;
 	}
 
 

@@ -1,27 +1,18 @@
 package es.unex.giiis.koreku.ui.consoles;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 
@@ -97,7 +88,6 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
         private TextView title;
         private TextView company;
         private TextView dateView;
-        private ImageView imageView;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -108,7 +98,6 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
             title =  itemView.findViewById(R.id.titleView);
             company =  itemView.findViewById(R.id.companyView);
             dateView =  itemView.findViewById(R.id.dateView);
-            imageView = itemView.findViewById(R.id.imageView3);
         }
 
         public void bind(final Consolas c, final OnItemClickListener listener) {
@@ -121,9 +110,6 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
 
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(c.getDate()).subSequence(0,10));
-
-
-            imageView.setImageURI(Uri.parse(c.getImage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
