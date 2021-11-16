@@ -2,7 +2,7 @@
     <string name="app_name">Koreku</string>
     <string name="title_games">Games</string>
     <string name="title_consoles">Consoles</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_profile">Profiles</string>
     <string name="title_services">Services</string>
     <string name="delete_games">Delete Games</string>
     <string name="list_by_gender">List by gender</string>
@@ -37,5 +37,12 @@
     <string name="genre_game">Genre </string>
     <string name="enter_genre">Kind of your game...</string>
     <string name="genre_game_points">Genre: </string>
+    <string name="name_profile">Profile Name</string>
+    <string name="phone_profile">Phone</string>
+    <string name="mail_profile">e-mail</string>
+    <string name="new_comment">New Comment</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="comentario">Comment</string>
+    <string name="share">Share</string>
 
 </resources>

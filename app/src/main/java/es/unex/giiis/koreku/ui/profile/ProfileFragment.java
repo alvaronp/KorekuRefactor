@@ -1,5 +1,6 @@
 package es.unex.giiis.koreku.ui.profile;
 
+import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -74,7 +76,7 @@ public class ProfileFragment extends Fragment {
         mAdapter = new ProfileAdapter(getActivity(), new ProfileAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Perfil x) {
-                PerfilDetailFragment fragment = PerfilDetailFragment.newInstance(x);
+                ProfileDetailFragment fragment = ProfileDetailFragment.newInstance(x);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, fragment)
                         .addToBackStack(null)  //permite mantener la navegacion del boton back

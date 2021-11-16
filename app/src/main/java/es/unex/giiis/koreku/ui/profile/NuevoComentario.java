@@ -44,23 +44,13 @@ public class NuevoComentario extends AppCompatActivity {
 
         comment_text = findViewById(R.id.comment_text);
 
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                comment =  comment_text.getText().toString();
-
-            }
-        });
-
-        // OnClickListener for the Cancel Button,
-
-
         Button submit_comment = (Button) findViewById(R.id.comment_submit);
         submit_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                comment =  comment_text.getText().toString();
                 Intent data = new Intent();
-                Perfil.newComment(data, comment_text.getText().toString()+";");
+                data.putExtra("comment", comment);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);

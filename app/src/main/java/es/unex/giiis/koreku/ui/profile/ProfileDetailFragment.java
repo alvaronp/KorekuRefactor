@@ -11,26 +11,32 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 
-public class PerfilDetailFragment extends Fragment {
+public class ProfileDetailFragment extends Fragment {
 
-    private Perfil mCon;
+    private Perfil mProf;
+    TextView mComment;
+    private static final int COMMENT_SET = 1;
 
-    public PerfilDetailFragment() {
+    public ProfileDetailFragment() {
         // Required empty public constructor
     }
 
-    public static PerfilDetailFragment newInstance(Perfil c) {
-        PerfilDetailFragment fragment = new PerfilDetailFragment();
+    public static ProfileDetailFragment newInstance(Perfil c) {
+        ProfileDetailFragment fragment = new ProfileDetailFragment();
         Bundle args = new Bundle();
         args.putLong("id", c.getId());
         args.putString("title",c.getTitle());
         args.putString("phone",c.getPhone());
         args.putString("correo",c.getMail());
         args.putString("image",c.getImage());
+        args.putString("comment",c.getComments());
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +46,7 @@ public class PerfilDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = this.getArguments();
         if (args != null) {
-            mCon = new Perfil(args.getLong("id"), args.getString("title"), args.getString("phone"), args.getString("correo"), args.getString("image"));
+            mProf = new Perfil(args.getLong("id"), args.getString("title"), args.getString("phone"), args.getString("correo"), args.getString("image"),args.getString("comment"));
         }
     }
 
@@ -53,10 +59,12 @@ public class PerfilDetailFragment extends Fragment {
         TextView mTitle = v.findViewById(R.id.nombredetailprofile);
         TextView mTelefono = v.findViewById(R.id.telefonodetailprofile);
         TextView mCorreo = v.findViewById(R.id.correodetailprofile);
+        mComment = v.findViewById(R.id.profile_comment);
         //TextView image = v.findViewById(R.id.imagendetailprofile);
-        mTitle.setText(mCon.getTitle());
-        mTelefono.setText(mCon.getPhone());
-        mCorreo.setText(mCon.getMail());
+        mTitle.setText(mProf.getTitle());
+        mTelefono.setText(mProf.getPhone());
+        mCorreo.setText(mProf.getMail());
+        mComment.setText(mProf.getComments());
        // image.setText("holahola");
 
         Button newcomment = (Button) v.findViewById(R.id.comment_button);
@@ -64,7 +72,7 @@ public class PerfilDetailFragment extends Fragment {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), NuevoComentario.class);
-                startActivity(intent);
+                startActivityForResult(intent, COMMENT_SET);
             }
         });
         Button share = (Button) v.findViewById(R.id.shareButton);
@@ -73,17 +81,39 @@ public class PerfilDetailFragment extends Fragment {
             public void onClick(View view){
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String text="Koreku dice...\nNombre del perfil: "+mCon.getTitle()+" \nPlataforma: "+mCon.getPhone()+ " \nCorreo: "+mCon.getMail();
+                String comment = mProf.getComments();
+                String text="";
+                if (comment.length()>0)
+                    text="Nombre del perfil: "+mProf.getTitle()+" \nPlataforma: "+mProf.getPhone()+ " \nCorreo: "+mProf.getMail() + "\nComentario: "+ comment +"\n\n Enviado desde KOREKU©";
+                else
+                    text="Nombre del perfil: "+mProf.getTitle()+" \nPlataforma: "+mProf.getPhone()+ " \nCorreo: "+mProf.getMail() + "\n\n Enviado desde KOREKU©";
                 intent.putExtra(Intent.EXTRA_TEXT,text);
                 startActivity(intent);
             }
         });
         return v;
     }
-//aa
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //  - Check result code and request code.
+        // If user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+        if (requestCode == COMMENT_SET) {
+            if (resultCode == getActivity().RESULT_OK) {
+                mProf.setComments(data.getStringExtra("comment"));
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
+                mComment.setText(mProf.getComments());
+            }
+        }
+    }
+
     @Override public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mCon.getTitle());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mProf.getTitle());
     }
 
     @Override public void onStop() {

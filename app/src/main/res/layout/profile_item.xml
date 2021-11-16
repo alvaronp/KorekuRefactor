@@ -9,9 +9,9 @@
         android:layout_width="414dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-2dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/nombreprofileitem"
@@ -19,8 +19,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="222dp"
-            android:layout_marginBottom="19dp" />
+            android:layout_marginEnd="216dp"
+            android:layout_marginBottom="13dp"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/imagenprofileitem"
@@ -29,7 +31,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="36dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="9dp"
             tools:srcCompat="@tools:sample/avatars" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

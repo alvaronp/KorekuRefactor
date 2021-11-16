@@ -89,8 +89,6 @@ public class Perfil {
 		this.phone=phone;
 		this.mail=mail;
 		this.image=image;
-		this.comments=comments;
-
 	}
 
 
@@ -148,9 +146,6 @@ public class Perfil {
 	
 	}
 
-	public static void newComment(Intent intent, String comments){
-		intent.putExtra(Perfil.COMMENTS, comments.toString());
-	}
 
 	public String toString() {
 		return id + ITEM_SEP + title +ITEM_SEP+ phone +ITEM_SEP+mail +ITEM_SEP+ image ;

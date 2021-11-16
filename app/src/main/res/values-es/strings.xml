@@ -2,7 +2,7 @@
     <string name="app_name">Koreku</string>
     <string name="title_games">Juegos</string>
     <string name="title_consoles">Consolas</string>
-    <string name="title_profile">Perfil</string>
+    <string name="title_profile">Perfiles</string>
     <string name="title_services">Plataformas</string>
     <string name="delete_games">Borrar Juegos</string>
     <string name="list_by_gender">Listar por genero</string>
@@ -37,5 +37,13 @@
     <string name="genre_game">Género </string>
     <string name="enter_genre">Tipo de juego...</string>
     <string name="genre_game_points">Género: </string>
+    <string name="name_profile">Nombre del perfil</string>
+    <string name="phone_profile">Teléfono</string>
+    <string name="mail_profile">e-mail</string>
+    <string name="new_comment">Nuevo comentario</string>
+    <string name="add_comment">Añadir Comentario</string>
+    <string name="comentario">Comentario</string>
+    <string name="share">Compartir</string>
+
 
 </resources>

@@ -12,30 +12,31 @@
         android:text="SUBMIT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_text"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.841" />
 
     <EditText
         android:id="@+id/comment_text"
-        android:layout_width="281dp"
-        android:layout_height="191dp"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201"
+        app:layout_constraintVertical_bias="0.456"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/comment_title"
         android:layout_width="214dp"
         android:layout_height="29dp"
-        android:text="NEW COMMENT"
+        android:text="@string/new_comment"
         app:layout_constraintBottom_toTopOf="@+id/comment_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.329"

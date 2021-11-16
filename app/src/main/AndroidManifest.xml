@@ -6,7 +6,6 @@
 
     <application
         android:allowBackup="true"
-        android:screenOrientation="portrait"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,7 +14,8 @@
 
         <activity
             android:name=".AnimationActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,31 +25,45 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.consoles.AddConsoles"
             android:exported="true"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.profile.BuscarPerfiles"
             android:exported="true"
-            android:label="Koreku"/>
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.profile.AddProfile"
             android:exported="true"
-            android:label="Koreku"/>
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.games.AddGames"
             android:exported="true"
-            android:label="Koreku"/>
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.games.GameAddBug"
             android:exported="true"
-            android:label="Koreku"/>
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.profile.NuevoComentario"
             android:exported="true"
-            android:label="Koreku"/>
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
