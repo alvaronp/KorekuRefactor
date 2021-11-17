@@ -33,7 +33,7 @@ public class BuscarPerfiles extends AppCompatActivity {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                //perfiles=  KorekuDatabase.getInstance(BuscarPerfiles.this).getDao3().getAll();
+                perfiles=  KorekuDatabase.getInstance(BuscarPerfiles.this).getDao3().getAll();
 
             }
         });

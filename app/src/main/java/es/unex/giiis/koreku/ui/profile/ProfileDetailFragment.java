@@ -22,7 +22,11 @@ public class ProfileDetailFragment extends Fragment {
 
     private Perfil mProf;
     TextView mComment;
+    TextView mTitle ;
+    TextView mTelefono ;
+    TextView mCorreo ;
     private static final int COMMENT_SET = 1;
+    private static final int EDIT_SET = 3;
 
     public ProfileDetailFragment() {
         // Required empty public constructor
@@ -56,9 +60,9 @@ public class ProfileDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.profile_detail, container, false);
         // Show item content
-        TextView mTitle = v.findViewById(R.id.nombredetailprofile);
-        TextView mTelefono = v.findViewById(R.id.telefonodetailprofile);
-        TextView mCorreo = v.findViewById(R.id.correodetailprofile);
+         mTitle = v.findViewById(R.id.nombredetailprofile);
+         mTelefono = v.findViewById(R.id.telefonodetailprofile);
+         mCorreo = v.findViewById(R.id.correodetailprofile);
         mComment = v.findViewById(R.id.profile_comment);
         //TextView image = v.findViewById(R.id.imagendetailprofile);
         mTitle.setText(mProf.getTitle());
@@ -73,6 +77,15 @@ public class ProfileDetailFragment extends Fragment {
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), NuevoComentario.class);
                 startActivityForResult(intent, COMMENT_SET);
+            }
+        });
+
+        Button editButton = (Button) v.findViewById(R.id.editarPerfil);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), AddProfile.class);
+                startActivityForResult(intent, EDIT_SET);
             }
         });
         Button share = (Button) v.findViewById(R.id.shareButton);
@@ -108,6 +121,23 @@ public class ProfileDetailFragment extends Fragment {
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
                 mComment.setText(mProf.getComments());
             }
+
+        }
+        if(requestCode == EDIT_SET){
+        if(resultCode == getActivity().RESULT_OK) {
+            Perfil c = new Perfil(data);
+            mProf.setPhone(c.getPhone());
+            mProf.setTitle(c.getTitle());
+            mProf.setMail(c.getMail());
+            mProf.setComments(c.getComments());
+            mProf.setImage(c.getImage());
+            AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
+            mComment.setText(mProf.getComments());
+             mTitle.setText(mProf.getTitle());
+             mTelefono.setText(mProf.getPhone());
+             mCorreo.setText(mProf.getMail());
+
+        }
         }
     }
 
