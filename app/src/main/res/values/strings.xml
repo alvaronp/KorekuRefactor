@@ -45,5 +45,11 @@
     <string name="comentario">Comment</string>
     <string name="share">Share</string>
     <string name="new_bug">Add Known Bug</string>
+    <string name="service_name">Service name:</string>
+    <string name="subscription_name">Subscription name:</string>
+    <string name="service_email">Email:</string>
+    <string name="service_price">Price:</string>
+    <string name="service_StartDate">Service start date:</string>
+    <string name="service_DueDate">Service due date:</string>
 
 </resources>

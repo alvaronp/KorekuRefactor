@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_services"
-        android:name="es.unex.giiis.koreku.ui.services.ServiceFragment"
+        android:name="es.unex.giiis.koreku.ui.service.ServiceFragment"
         android:label="@string/title_services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_service" />
 
     <fragment
         android:id="@+id/navigation_profile"

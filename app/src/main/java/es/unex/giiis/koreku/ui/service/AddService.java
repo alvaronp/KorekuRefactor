@@ -1,0 +1,234 @@
+package es.unex.giiis.koreku.ui.service;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.Service;
+
+public class AddService extends AppCompatActivity {
+
+    private static String startDateString;
+    private static TextView startDateView;
+    private static String dueDateString;
+    private static TextView dueDateView;
+
+    private EditText mSubscription;
+    private EditText mEmail;
+    private EditText mPrice;
+    private Date mStartDate;
+    private Date mDueDate;
+
+
+
+    // Funcionalidades de los botones y cuadros
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_add_service);
+
+        mSubscription = findViewById(R.id.serviceName);
+        mEmail = findViewById(R.id.serviceEmail);
+        mPrice = findViewById(R.id.servicePrice);
+
+        // Set the default date
+
+        setDefaultDate();
+
+        // OnClickListener for the Date buttons, calls showDatePickerDialog() to show the Date dialog
+
+        final Button startDatePickerButton =  findViewById(R.id.serviceStartDateButton);
+        startDatePickerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showDatePickerDialog();
+
+            }
+
+        });
+
+        final Button dueDatePickerButton =  findViewById(R.id.serviceDueDateButton);
+        dueDatePickerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showDatePickerDialog();
+
+            }
+
+        });
+
+        // OnClickListener for the Cancel Button
+
+        final Button cancelButton =  findViewById(R.id.serviceCancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                log("Entered cancelButton.OnClickListener.onClick()");
+
+                // - Implement onClick().
+
+                Intent data = new Intent();
+                setResult(RESULT_CANCELED, data);
+                finish();
+
+            }
+        });
+
+        //OnClickListener for the Reset Button
+
+        final Button resetButton =  findViewById(R.id.serviceResetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                log("Entered resetButton.OnClickListener.onClick()");
+
+                // - Reset data fields to default values
+
+                mSubscription.setText("");
+                mEmail.setText("");
+                mPrice.setText("");
+                setDefaultDate();
+
+            }
+        });
+
+        // OnClickListener for the Submit Button
+
+        final Button submitButton =  findViewById(R.id.serviceSubmitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                log("Entered submitButton.OnClickListener.onClick()");
+
+                // Gather Console data
+
+                String subscriptionString = mSubscription.getText().toString();
+                String emailString = mEmail.getText().toString();
+                String priceString = mPrice.getText().toString();
+                String startString = startDateString;
+                String dueString = dueDateString;
+
+                // Package ToDoItem data into an Intent
+
+                Intent data = new Intent();
+                Service.packageIntent(data, subscriptionString, emailString, priceString, startString, dueString);
+
+                // - return data Intent and finish
+
+                setResult(RESULT_OK, data);
+                finish();
+
+            }
+        });
+    }
+
+    private void setDefaultDate() {
+
+        // Default is current time + 7 days
+
+        mStartDate = new Date();
+        mDueDate = new Date();
+
+        Calendar c = Calendar.getInstance();
+        setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        startDateView.setText(startDateString);
+        dueDateView.setText(dueDateString);
+
+    }
+
+    private static void setDateString(int year, int monthOfYear, int dayOfMonth) {
+
+        // Increment monthOfYear for Calendar/Date -> Time Format setting
+
+        monthOfYear++;
+        String mon = "" + monthOfYear;
+        String day = "" + dayOfMonth;
+
+        if (monthOfYear < 10)
+            mon = "0" + monthOfYear;
+        if (dayOfMonth < 10)
+            day = "0" + dayOfMonth;
+
+        startDateString = year + "-" + mon + "-" + day;
+        dueDateString = year + "-" + mon + "-" + day;
+
+    }
+
+    // DialogFragment used to pick a Console deadline date
+
+    public static class DatePickerFragment extends DialogFragment implements
+            DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            // Use the current date as the default date in the picker
+
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+            setDateString(year, monthOfYear, dayOfMonth);
+
+            startDateView.setText(startDateString);
+            dueDateView.setText(dueDateString);
+
+        }
+
+    }
+
+    private void showDatePickerDialog() {
+
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
+
+    }
+
+    private void log(String msg) {
+
+        try {
+
+            Thread.sleep(500);
+
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+}

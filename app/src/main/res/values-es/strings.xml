@@ -45,7 +45,12 @@
     <string name="comentario">Comentario</string>
     <string name="share">Compartir</string>
     <string name="new_bug">Añadir Bug</string>
-
+    <string name="service_name">Nobre del servicio:</string>
+    <string name="subscription_name">Tipo de subscripción:</string>
+    <string name="service_email">Email:</string>
+    <string name="service_price">Precio:</string>
+    <string name="service_StartDate">Fecha de inicio:</string>
+    <string name="service_DueDate">Fecha de vencimiento:</string>
 
 
 </resources>
