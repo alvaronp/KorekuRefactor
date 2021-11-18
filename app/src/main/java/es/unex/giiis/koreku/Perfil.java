@@ -156,5 +156,4 @@ public class Perfil {
 				+ ITEM_SEP + "Image:" + image ;
 	}
 
-
 }
