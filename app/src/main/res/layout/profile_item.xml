@@ -6,6 +6,7 @@
     android:layout_height="75dp">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="414dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,23 +16,31 @@
 
         <TextView
             android:id="@+id/nombreprofileitem"
-            android:layout_width="182dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="216dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="191dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imagenprofileitem"
-            android:layout_width="105dp"
-            android:layout_height="91dp"
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="9dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginBottom="-3dp"
+            android:text="__________________________________________________________" />
+
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

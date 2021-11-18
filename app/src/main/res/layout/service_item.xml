@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="85dp"
-        android:text="@string/buydate_console_points"></TextView>
+        android:text="@string/price"></TextView>
 
     <TextView
         android:id="@+id/service_item_DueDateView"
@@ -47,7 +47,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="55dp"
-        android:text="@string/service_DueDate"></TextView>
+        android:text="@string/due_date"></TextView>
 
     <TextView
         android:id="@+id/service_item_titleView"

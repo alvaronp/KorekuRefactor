@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 
@@ -27,7 +29,7 @@ import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ProfileFragment extends Fragment {
-    Button busqueda,anadirPerfil;
+    FloatingActionButton busqueda, anadirPerfil;
     private static final int ADD_Profile_REQUEST = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -43,7 +45,7 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        busqueda = (Button) root.findViewById(R.id.Busqueda);
+        busqueda = (FloatingActionButton) root.findViewById(R.id.Busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +59,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-        anadirPerfil = (Button) root.findViewById(R.id.anadirPerilbtn);
+        anadirPerfil = (FloatingActionButton) root.findViewById(R.id.fab);
         anadirPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

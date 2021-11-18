@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <!-- Title -->
@@ -19,131 +21,148 @@
 
     <!-- Buttons -->
 
-    <EditText
-        android:id="@+id/nombretxt"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="63dp"
-        android:layout_marginBottom="566dp"
-        android:ems="10"
-        android:hint="Enter your profile name"
-        android:inputType="textShortMessage"
-        android:minHeight="48dp"
-        android:textAllCaps="true"
-        android:textColorLink="@color/koreku">
-
-    </EditText>
-
-    <TextView
-        android:id="@+id/nombreLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="623dp"
-        android:text="Nombre de la cuenta"
-        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
-    <TextView
-        android:id="@+id/TelefonoLabel"
-        android:layout_width="162dp"
-        android:layout_height="43dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="483dp"
-        android:text="Plataforma"
-        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
-    <EditText
-        android:id="@+id/telefonotxt"
-        android:layout_width="348dp"
-        android:layout_height="64dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="419dp"
-        android:ems="10"
-        android:hint="Enter the platform name"
-        android:inputType="textShortMessage"
-        android:minHeight="48dp"
-        android:textAllCaps="true"
-        android:textColorLink="@color/koreku">
-
-    </EditText>
-
-    <TextView
-        android:id="@+id/Correolabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="357dp"
-        android:text="Correo"
-        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
-    <EditText
-        android:id="@+id/correotxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="47dp"
-        android:layout_marginBottom="295dp"
-        android:ems="10"
-        android:hint="Enter your mail"
-        android:inputType="textShortMessage"
-        android:minHeight="48dp"
-        android:textAllCaps="true"
-        android:textColorLink="@color/koreku">
-
-    </EditText>
-
-    <TextView
-        android:id="@+id/image_picker"
-        android:layout_width="76dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginBottom="216dp"
-        android:text="@string/image"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <Button
         android:id="@+id/cancelProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="1dp"
-        android:text="Cancel" />
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/resetProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="1dp"
-        android:text="Resset" />
+        android:text="@string/reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/submitProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp"
-        android:text="Submit" />
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/nombreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="612dp"
+        android:text="@string/account_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/Correolabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="396dp"
+        android:text="@string/mail_profile"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/image_picker"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="292dp"
+        android:text="@string/image"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TelefonoLabel"
+        android:layout_width="162dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="496dp"
+        android:text="@string/phone_profile"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <EditText
+        android:id="@+id/correotxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="336dp"
+        android:ems="10"
+        android:hint="@string/email_txt"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </EditText>
 
     <Button
         android:id="@+id/imageProfile"
-        android:layout_width="196dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="143dp"
-        android:text="Search for image" />
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="276dp"
+        android:text="@string/image_picker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.298"
+        app:layout_constraintStart_toEndOf="@+id/image_picker" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/nombretxt"
+        android:layout_width="293dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="556dp"
+        android:ems="10"
+        android:hint="@string/account_name_txt"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/telefonotxt"
+        android:layout_width="349dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="432dp"
+        android:ems="10"
+        android:hint="@string/phone_txt"
+        android:inputType="textShortMessage"
+        android:minHeight="48dp"
+        android:textAllCaps="true"
+        android:textColorLink="@color/koreku"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </EditText>
+
+    <ImageView
+        android:id="@+id/imageViewProfileDetail"
+        android:layout_width="323dp"
+        android:layout_height="198dp"
+        app:layout_constraintBottom_toTopOf="@+id/resetProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

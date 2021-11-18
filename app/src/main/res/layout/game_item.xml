@@ -60,4 +60,12 @@
         android:layout_marginTop="39dp"
         android:layout_toEndOf="@+id/StatusLabel"></CheckBox>
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateView"
+        android:layout_marginTop="-8dp"
+        android:text="________________________________________________________" />
+
 </RelativeLayout>

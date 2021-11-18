@@ -28,6 +28,9 @@ public interface GamesDAO {
     @Update
     public int update(Games game);
 
+    @Query("UPDATE game SET bugs = :bugs WHERE title = :title")
+    public int update(String title, String bugs);
+
     @Query("SELECT * FROM game ORDER BY GENERO ") //Antes definimos que nuestra tabla se llamaría así
     public List<Games> getAllByGender();
 

@@ -31,7 +31,7 @@ public class Perfil {
 	@Ignore
 	public final static String IMAGE = "image";
 	@Ignore
-	public final static String COMMENTS = "image";
+	public final static String COMMENTS = "comments";
 
 
 	@Ignore
@@ -142,7 +142,6 @@ public class Perfil {
 		intent.putExtra(Perfil.MAIL, mail.toString());
 		intent.putExtra(Perfil.PHONE, phone.toString());
 		intent.putExtra(Perfil.IMAGE, image.toString());
-
 	
 	}
 

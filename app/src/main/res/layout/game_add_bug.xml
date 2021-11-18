@@ -38,7 +38,7 @@
         android:layout_width="214dp"
         android:layout_height="29dp"
         android:layout_marginTop="152dp"
-        android:text="@string/add_known_bug"
+        android:text="@string/knownbug"
         app:layout_constraintBottom_toTopOf="@+id/comment_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.284"

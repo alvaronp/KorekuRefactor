@@ -45,6 +45,8 @@ public class AddService extends AppCompatActivity {
         mSubscription = findViewById(R.id.serviceName);
         mEmail = findViewById(R.id.serviceEmail);
         mPrice = findViewById(R.id.servicePrice);
+        startDateView = findViewById(R.id.serviceStartDate);
+        dueDateView = findViewById(R.id.serviceDueDate);
 
         // Set the default date
 

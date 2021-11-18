@@ -11,7 +11,7 @@ import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.Service;
 
-@Database(entities = {Games.class, Consolas.class, Service.class, Perfil.class} , version = 1)
+@Database(entities = {Games.class, Consolas.class, Perfil.class, Service.class} , version = 1)
 public abstract class KorekuDatabase extends RoomDatabase {
     private static KorekuDatabase instance; //SINGLETON
 

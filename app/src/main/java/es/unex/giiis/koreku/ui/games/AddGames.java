@@ -49,6 +49,7 @@ public class AddGames extends AppCompatActivity {
 	private RadioButton mDefaultStatusButton;
 	private EditText mGenre;
 	private String imagen;
+	ImageView check;
 
 
 	@Override
@@ -125,6 +126,7 @@ public class AddGames extends AppCompatActivity {
 				mTitle.setText("");
 				mDesc.setText("");
 				mGenre.setText("");
+				imagen = "";
 				mStatusRadioGroup.check(mDefaultStatusButton.getId());
 				setDefaultDateTime();
 			}
@@ -142,7 +144,6 @@ public class AddGames extends AppCompatActivity {
 				// Gather Game data
 				// -  Title
 				String titleString = mTitle.getText().toString();
-
 				// Date
 				String buyDate = dateView.getText().toString();
 
@@ -168,7 +169,7 @@ public class AddGames extends AppCompatActivity {
 		super.onActivityResult(requestCode,resultCode,data);
 		if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
 			imagen = getRealPathFromURI(data.getData());
-			ImageView check = findViewById(R.id.checkImage);
+			check = findViewById(R.id.check_image);
 			check.setVisibility(View.VISIBLE);
 		}
 	}

@@ -22,11 +22,13 @@
 
     <Button
         android:id="@+id/serviceDueDateButton"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="150dp"
-        android:text="Pick sue date" />
+        android:layout_below="@+id/serviceDueDate"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/due_date" />
 
     <TextView
         android:id="@+id/serviceDueDate"
@@ -42,9 +44,11 @@
         android:id="@+id/serviceStartDateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="250dp"
-        android:text="Fecha de comienzo" />
+        android:layout_below="@+id/serviceStartDate"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/start_date" />
 
     <TextView
         android:id="@+id/serviceStartDate"
@@ -62,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ServiceTitle"
         android:layout_marginTop="240dp"
-        android:text="precio"
+        android:text="@string/price"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <TextView
@@ -70,8 +74,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ServiceTitle"
-        android:layout_marginTop="60dp"
-        android:text="Seleccione un servicio"
+        android:layout_marginTop="54dp"
+        android:text="@string/select_service"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <EditText
@@ -80,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="215dp"
         android:ems="10"
-        android:hint="ejemplo"
+        android:hint="@string/email_txt"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColorLink="@color/koreku">
@@ -88,20 +92,13 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/titleLabel2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_services"
-        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
     <EditText
         android:id="@+id/serviceName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:hint="@string/service_name"
+        android:hint="@string/service_txt"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
         android:textColorLink="@color/koreku">
@@ -115,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="305dp"
         android:ems="10"
-        android:hint="enter price"
+        android:hint="@string/price_txt"
         android:inputType="number"
         android:minHeight="48dp"
         android:textColorLink="@color/koreku">
@@ -125,9 +122,11 @@
 
     <TextView
         android:id="@+id/ServiceTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:text="@string/title_services"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="225dp"
+        android:text="@string/service_name"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <TextView
@@ -136,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ServiceTitle"
         android:layout_marginTop="150dp"
-        android:text="Direccion email"
+        android:text="@string/mail_profile"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <Button
@@ -169,6 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </RelativeLayout>

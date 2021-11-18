@@ -42,8 +42,18 @@
         android:layout_below="@+id/companyLabel"
         android:layout_alignParentStart="true"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="18dp"
         android:text="@string/buydate_console_points"></TextView>
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/companyLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="32dp"
+        android:text="______________________________________________________"></TextView>
 
     <TextView
         android:id="@+id/dateView"

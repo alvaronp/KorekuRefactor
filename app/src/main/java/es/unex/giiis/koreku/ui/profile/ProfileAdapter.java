@@ -1,6 +1,8 @@
 package es.unex.giiis.koreku.ui.profile;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,25 +88,19 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
          private Context mContext;
 
         private TextView title;
-        private ImageView imageView;
-
         public ViewHolder(Context context, View itemView) {
             super(itemView);
 
             mContext = context;
-
             // - Get the references to every widget of the Item View
             title =  itemView.findViewById(R.id.nombreprofileitem);
-            imageView = itemView.findViewById(R.id.imagenprofileitem);
         }
+
 
         public void bind(final Perfil c, final OnItemClickListener listener) {
 
             // - Display Title in TextView
             title.setText(c.getTitle());
-
-
-            imageView.setImageURI(Uri.parse(c.getImage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
 

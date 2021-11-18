@@ -133,7 +133,7 @@ public class GameFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_games);
         menu.add(Menu.NONE, MENU_Listar, Menu.NONE, R.string.list_by_gender);
-        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, "List by date");
+        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, R.string.list_by_date);
     }
 
     @Override

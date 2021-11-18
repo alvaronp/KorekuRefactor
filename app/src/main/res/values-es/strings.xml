@@ -5,10 +5,11 @@
     <string name="title_profile">Perfiles</string>
     <string name="title_services">Plataformas</string>
     <string name="delete_games">Borrar Juegos</string>
-    <string name="list_by_gender">Listar por genero</string>
+    <string name="list_by_gender">Listar por Género</string>
+    <string name="list_by_date">Listar por fecha de compra</string>
     <string name="delete_consoles">Borrar Consolas</string>
     <string name="delete_services">Borrar Plataformas</string>
-    <string name="delete_profile">Borrar Cuenta</string>
+    <string name="delete_profile">Borrar Perfiles</string>
     <string name="name_console">Nombre de la consola</string>
     <string name="buydate_console">Fecha de compra</string>
     <string name="company_console">Fabricante</string>
@@ -21,7 +22,7 @@
     <string name="date_picker">Escoge la fecha</string>
     <string name="default_date">00-00-0000</string>
     <string name="image">Imagen</string>
-    <string name="image_picker">Buscar imagen de portada</string>
+    <string name="image_picker">Buscar imagen</string>
     <string name="cancel">Cancelar</string>
     <string name="reset">Resetear</string>
     <string name="submit">Publicar</string>
@@ -48,4 +49,17 @@
     <string name="knownbug">Bug Conocido: </string>
     <string name="delete">Borrar</string>
     <string name="edit">Editar </string>
+    <string name="account_name">Nombre de Usuario</string>
+    <string name="account_name_txt">Introduce el usuario...</string>
+    <string name="phone_txt">Introduce el teléfono...</string>
+    <string name="email_txt">Introduce el email...</string>
+    <string name="service_name">Nombre del servicio</string>
+    <string name="service_txt">Introduce nombre del servicio...</string>
+    <string name="select_service">Selecciona servicio</string>
+    <string name="price">Precio</string>
+    <string name="price_txt">Precio de suscripcion</string>
+    <string name="start_date">Fecha de inicio</string>
+    <string name="due_date">Fecha de fin</string>
+    <string name="subs_name">Subscription Name</string>
+
 </resources>

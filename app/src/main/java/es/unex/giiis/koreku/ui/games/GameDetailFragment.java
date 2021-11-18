@@ -148,7 +148,7 @@ public class GameDetailFragment extends Fragment {
                     @Override
                     public void run() {
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao1().update(mGa);
+                        db.getDao1().update(mGa.getTitle(),mGa.getBugs());
                     }
                 });
                 mBugs.setVisibility(View.VISIBLE);

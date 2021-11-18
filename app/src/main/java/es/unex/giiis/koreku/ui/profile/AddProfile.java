@@ -1,20 +1,37 @@
 package es.unex.giiis.koreku.ui.profile;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.ui.consoles.AddConsoles;
+import es.unex.giiis.koreku.ui.games.AddGames;
 
 public class AddProfile extends AppCompatActivity {
 
     private EditText mTitle,mTelefono,mCorreo;
     private Button mImageSelect;
+    private Uri imageUri;
+    ImageView foto;
+    String imagen;
+    private static final int LOAD_IMAGE_REQUEST = 0;
+    private static final int PERMISSION_CODE = 0;
 
 
     @Override
@@ -26,12 +43,21 @@ public class AddProfile extends AppCompatActivity {
         mTelefono = findViewById(R.id.telefonotxt);
         mCorreo = findViewById(R.id.correotxt);
         mImageSelect = findViewById(R.id.imageProfile);
-
-        // Set the default date and time
-
-
-
-
+        foto = (ImageView) findViewById(R.id.imageViewProfileDetail);
+        mImageSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getImageFromAlbum();
+            }
+        });
+        if (ContextCompat.checkSelfPermission(AddProfile.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            mImageSelect.setEnabled(false);
+            ActivityCompat.requestPermissions(
+                    AddProfile.this,
+                    new String[]{READ_EXTERNAL_STORAGE},
+                    PERMISSION_CODE
+            );
+        }
 
 // OnClickListener for the Cancel Button,
 
@@ -40,7 +66,6 @@ public class AddProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 log("Entered cancelButton.OnClickListener.onClick()");
-
                 // - Implement onClick().
                 Intent data = new Intent();
                 setResult(RESULT_CANCELED, data);
@@ -53,12 +78,12 @@ public class AddProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 log("Entered resetButton.OnClickListener.onClick()");
-
                 // - Reset data fields to default values
                 mTitle.setText("");
                 mTelefono.setText("");
                 mCorreo.setText("");
-
+                foto.setImageURI(Uri.parse(""));
+                ;
             }
         });
         final Button submitButton =  findViewById(R.id.submitProfile);
@@ -66,18 +91,18 @@ public class AddProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 log("Entered submitButton.OnClickListener.onClick()");
-
                 // -  Title
                 String titleString = mTitle.getText().toString();
-
                 String telefono = mTelefono.getText().toString();
                 String correo = mCorreo.getText().toString();
 
-                String image = "asdfasdfasd";
+                String image = "";
+                if (imageUri != null)
+                    image = imagen;
 
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-               Perfil.packageIntent(data, titleString, telefono, correo,image);
+                Perfil.packageIntent(data, titleString, telefono, correo,image);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);
@@ -85,6 +110,61 @@ public class AddProfile extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        switch (requestCode) {
+            case PERMISSION_CODE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                    mImageSelect.setEnabled(true);
+                }  else {
+                    mImageSelect.setEnabled(false);
+                }
+                return;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
+            imageUri = data.getData();
+            imagen = getRealPathFromURI(imageUri);
+            foto.setImageURI(imageUri);
+        }
+    }
+
+    private void getImageFromAlbum(){
+        try{
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            i.setType("image/*");
+            startActivityForResult(i, LOAD_IMAGE_REQUEST);
+        }catch(Exception exp){
+            Log.i("Error",exp.toString());
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
 
     private void log(String msg) {
         try {
