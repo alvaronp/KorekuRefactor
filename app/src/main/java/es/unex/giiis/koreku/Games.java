@@ -71,18 +71,18 @@ public class Games {
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	public Games(String title, Status status, Date buydate, String desc, String image, String genero) {
+	public Games(String title, Status status, Date buydate, String desc, String image, String genero, String bugs) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
 		this.desc = desc;
 		this.image = image;
-		this.bugs = "";
+		this.bugs = bugs;
 		this.genero = genero;
 	}
 
 	@Ignore
-	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero) {
+	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero, String bugs) {
         this.id = ID;
         this.title = title;
         this.status = Status.valueOf(status);
@@ -93,7 +93,7 @@ public class Games {
         }
         this.desc = desc;
         this.image = image;
-        this.bugs = "";
+        this.bugs = bugs;
 		this.genero = genero;
     }
 

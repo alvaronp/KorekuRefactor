@@ -45,8 +45,7 @@
     <string name="comentario">Comentario</string>
     <string name="share">Compartir</string>
     <string name="new_bug">Añadir Bug</string>
-
-
-    <string name="add_known_bug">AÑADIR ERROR FRECUENTE</string>
-
+    <string name="knownbug">Bug Conocido: </string>
+    <string name="delete">Borrar</string>
+    <string name="edit">Editar </string>
 </resources>

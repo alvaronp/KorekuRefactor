@@ -34,6 +34,7 @@ import es.unex.giiis.koreku.ui.profile.NuevoComentario;
 public class GameDetailFragment extends Fragment {
     Button addbugs, deletegame;
     TextView mBugs;
+    TextView bugTitle;
     private Games mGa;
     private GameAdapter mAdapter;
 
@@ -50,6 +51,7 @@ public class GameDetailFragment extends Fragment {
         args.putLong("dateLong",DateConverter.toTimestamp(g.getBuydate()));
         args.putString("image",g.getImage());
         args.putString("genre", g.getGenero());
+        args.putString("bugs",g.getBugs());
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,9 +63,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"));
+                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
             else
-                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"));
+                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
 
         }
     }
@@ -82,7 +84,12 @@ public class GameDetailFragment extends Fragment {
         TextView bug_details = v.findViewById(R.id.bug_details);
         TextView mStatus = v.findViewById(R.id.statusDetail);
         TextView mGenre = v.findViewById(R.id.genreDetail);
-        bug_details.setText(mGa.getBugs());
+        bugTitle = v.findViewById(R.id.bugstitle);
+        if (mGa.getBugs()!=null){
+            bug_details.setText(mGa.getBugs());
+            bugTitle.setVisibility(View.VISIBLE);
+            bug_details.setVisibility(View.VISIBLE);
+        }
 
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
@@ -97,7 +104,6 @@ public class GameDetailFragment extends Fragment {
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
         mGenre.setText(mGa.getGenero());
-        bug_details.setText(mGa.getBugs());
 
 
         addbugs = (Button) v.findViewById(R.id.error_button);
@@ -113,7 +119,6 @@ public class GameDetailFragment extends Fragment {
         deletegame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // - Attach Listener to FloatingActionButton. Implement onClick()
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -122,7 +127,6 @@ public class GameDetailFragment extends Fragment {
                     }
                 });
                 getActivity().onBackPressed();
-
             }
         });
 
@@ -140,7 +144,15 @@ public class GameDetailFragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == getActivity().RESULT_OK) {
                 mGa.setBugs(data.getStringExtra("bugs"));
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao1().update(mGa));
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao1().update(mGa);
+                    }
+                });
+                mBugs.setVisibility(View.VISIBLE);
+                bugTitle.setVisibility(View.VISIBLE);
                 mBugs.setText(mGa.getBugs());
             }
         }

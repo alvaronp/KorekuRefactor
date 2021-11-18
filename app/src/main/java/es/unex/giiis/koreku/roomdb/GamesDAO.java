@@ -22,14 +22,11 @@ public interface GamesDAO {
     @Query("DELETE FROM game")
     public void deleteAll();
 
-    @Query("DELETE FROM game WHERE TITLE=:id")
-    public void deleteGame(String id);
+    @Query("DELETE FROM game WHERE TITLE=:title")
+    public void deleteGame(String title);
 
     @Update
     public int update(Games game);
-
-    @Query("UPDATE game SET BUGS = :bugs WHERE TITLE = :title")
-    public int updateBugs(String bugs, String title);
 
     @Query("SELECT * FROM game ORDER BY GENERO ") //Antes definimos que nuestra tabla se llamaría así
     public List<Games> getAllByGender();

@@ -10,7 +10,7 @@
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_marginBottom="376dp"
-        android:text="SUBMIT"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.427"
@@ -20,25 +20,25 @@
 
     <EditText
         android:id="@+id/bug_text"
-        android:layout_width="274dp"
-        android:layout_height="54dp"
+        android:layout_width="278dp"
+        android:layout_height="42dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintVertical_bias="0.313"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/bug_title"
         android:layout_width="214dp"
         android:layout_height="29dp"
-        android:layout_marginTop="140dp"
-        android:text="Add new bug"
+        android:layout_marginTop="152dp"
+        android:text="@string/add_known_bug"
         app:layout_constraintBottom_toTopOf="@+id/comment_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.284"

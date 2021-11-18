@@ -28,7 +28,6 @@ import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 

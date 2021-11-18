@@ -46,5 +46,8 @@
     <string name="comentario">Comment</string>
     <string name="share">Share</string>
     <string name="new_bug">Add Known Bug</string>
+    <string name="knownbug">Known Bug: </string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit </string>
 
 </resources>
