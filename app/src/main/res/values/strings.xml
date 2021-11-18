@@ -37,6 +37,7 @@
     <string name="genre_game">Genre </string>
     <string name="enter_genre">Kind of your game...</string>
     <string name="genre_game_points">Genre: </string>
+    <string name="add_known_bug">ADD KNOWN BUG</string>
     <string name="name_profile">Profile Name</string>
     <string name="phone_profile">Phone</string>
     <string name="mail_profile">e-mail</string>

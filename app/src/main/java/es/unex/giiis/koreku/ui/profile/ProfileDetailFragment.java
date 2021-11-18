@@ -88,6 +88,7 @@ public class ProfileDetailFragment extends Fragment {
                 startActivityForResult(intent, EDIT_SET);
             }
         });
+
         Button share = (Button) v.findViewById(R.id.shareButton);
         share.setOnClickListener(new View.OnClickListener(){
             @Override

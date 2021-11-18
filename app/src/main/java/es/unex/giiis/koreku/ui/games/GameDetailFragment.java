@@ -20,14 +20,20 @@ import org.w3c.dom.Text;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+import java.util.List;
+
+import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.profile.BuscarPerfiles;
+import es.unex.giiis.koreku.ui.profile.NuevoComentario;
 
 
 public class GameDetailFragment extends Fragment {
-    Button addbugs;
+    Button addbugs, deletegame;
+    TextView mBugs;
     private Games mGa;
     private GameAdapter mAdapter;
 
@@ -68,13 +74,15 @@ public class GameDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.game_detail, container, false);
         // Show item content
+        mBugs = v.findViewById(R.id.bug_details);
         TextView mTitle = v.findViewById(R.id.titleGameDetail);
         TextView mDesc = v.findViewById(R.id.descGameDetail);
         TextView mBuyDate = v.findViewById(R.id.editTextDate);
         ImageView image = v.findViewById(R.id.imageViewGame);
-        TextView bug_details = v.findViewById(R.id.bug_detail);
+        TextView bug_details = v.findViewById(R.id.bug_details);
         TextView mStatus = v.findViewById(R.id.statusDetail);
         TextView mGenre = v.findViewById(R.id.genreDetail);
+        bug_details.setText(mGa.getBugs());
 
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
@@ -91,18 +99,51 @@ public class GameDetailFragment extends Fragment {
         mGenre.setText(mGa.getGenero());
         bug_details.setText(mGa.getBugs());
 
+
         addbugs = (Button) v.findViewById(R.id.error_button);
-        addbugs.setOnClickListener(new View.OnClickListener() {
+        addbugs.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), GameAddBug.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        deletegame = (Button) v.findViewById(R.id.delete_game);
+        deletegame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // - Attach Listener to FloatingActionButton. Implement onClick()
-                Intent intent = new Intent(getActivity(), GameAddBug.class);
-                startActivity(intent);
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao1().deleteGame(mGa.getTitle());
+                    }
+                });
+                getActivity().onBackPressed();
 
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //  - Check result code and request code.
+        // If user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+        if (requestCode == 1) {
+            if (resultCode == getActivity().RESULT_OK) {
+                mGa.setBugs(data.getStringExtra("bugs"));
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao1().update(mGa));
+                mBugs.setText(mGa.getBugs());
+            }
+        }
     }
 
     @Override public void onResume() {

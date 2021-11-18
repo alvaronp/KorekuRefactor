@@ -93,4 +93,16 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextDate"
         tools:src="@tools:sample/avatars" />
 
+    <Button
+        android:id="@+id/delete_console"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewGame"
+        app:layout_constraintVertical_bias="0.322" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
