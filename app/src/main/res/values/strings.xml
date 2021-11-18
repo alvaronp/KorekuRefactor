@@ -37,6 +37,7 @@
     <string name="genre_game">Genre </string>
     <string name="enter_genre">Kind of your game...</string>
     <string name="genre_game_points">Genre: </string>
+    <string name="add_known_bug">ADD KNOWN BUG</string>
     <string name="name_profile">Profile Name</string>
     <string name="phone_profile">Phone</string>
     <string name="mail_profile">e-mail</string>
@@ -45,11 +46,8 @@
     <string name="comentario">Comment</string>
     <string name="share">Share</string>
     <string name="new_bug">Add Known Bug</string>
-    <string name="service_name">Service name:</string>
-    <string name="subscription_name">Subscription name:</string>
-    <string name="service_email">Email:</string>
-    <string name="service_price">Price:</string>
-    <string name="service_StartDate">Service start date:</string>
-    <string name="service_DueDate">Service due date:</string>
+    <string name="knownbug">Known Bug: </string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit </string>
 
 </resources>

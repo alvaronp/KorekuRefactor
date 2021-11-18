@@ -88,6 +88,7 @@ public class ProfileDetailFragment extends Fragment {
                 startActivityForResult(intent, EDIT_SET);
             }
         });
+
         Button share = (Button) v.findViewById(R.id.shareButton);
         share.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -124,20 +125,19 @@ public class ProfileDetailFragment extends Fragment {
 
         }
         if(requestCode == EDIT_SET){
-        if(resultCode == getActivity().RESULT_OK) {
-            Perfil c = new Perfil(data);
-            mProf.setPhone(c.getPhone());
-            mProf.setTitle(c.getTitle());
-            mProf.setMail(c.getMail());
-            mProf.setComments(c.getComments());
-            mProf.setImage(c.getImage());
-            AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
-            mComment.setText(mProf.getComments());
-             mTitle.setText(mProf.getTitle());
-             mTelefono.setText(mProf.getPhone());
-             mCorreo.setText(mProf.getMail());
-
-        }
+            if(resultCode == getActivity().RESULT_OK) {
+                Perfil c = new Perfil(data);
+                mProf.setPhone(c.getPhone());
+                mProf.setTitle(c.getTitle());
+                mProf.setMail(c.getMail());
+                mProf.setComments(c.getComments());
+                mProf.setImage(c.getImage());
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
+                mComment.setText(mProf.getComments());
+                mTitle.setText(mProf.getTitle());
+                mTelefono.setText(mProf.getPhone());
+                mCorreo.setText(mProf.getMail());
+            }
         }
     }
 

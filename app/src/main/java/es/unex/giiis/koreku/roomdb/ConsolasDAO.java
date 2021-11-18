@@ -18,6 +18,10 @@ public interface ConsolasDAO {
     public long insert(Consolas item);
     @Query("DELETE FROM consolas")
     public void deleteAll();
+
+    @Query("DELETE FROM consolas WHERE TITLE=:id")
+    public void deleteConsole(String id);
+
     @Update
     public int update(Consolas item);
     @Query("SELECT * FROM consolas WHERE console_id=:id")

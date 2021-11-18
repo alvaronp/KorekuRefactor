@@ -1,10 +1,13 @@
 package es.unex.giiis.koreku.ui.consoles;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import es.unex.giiis.koreku.AppExecutors;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,11 +28,14 @@ import java.util.Locale;
 import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.games.GameAddBug;
 
 
 public class ConsoleDetailFragment extends Fragment {
 
     private Consolas mCon;
+    Button deleteCon;
 
     public ConsoleDetailFragment() {
         // Required empty public constructor
@@ -73,6 +80,24 @@ public class ConsoleDetailFragment extends Fragment {
         String imagePath = mCon.getImage();
         if (imagePath.length()>0)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+
+        Button deleteconsole = (Button) v.findViewById(R.id.delete_console);
+        deleteconsole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // - Attach Listener to FloatingActionButton. Implement onClick()
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao2().deleteConsole(mCon.getTitle());
+                    }
+                });
+                getActivity().onBackPressed();
+
+            }
+        });
+
         return v;
     }
 

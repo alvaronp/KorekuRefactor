@@ -26,15 +26,13 @@ import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class GameAddBug extends AppCompatActivity {
-    String bugs;
+    String bug;
     EditText bug_text;
 
     @Override
@@ -45,27 +43,17 @@ public class GameAddBug extends AppCompatActivity {
 
         bug_text = findViewById(R.id.bug_text);
 
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                bugs =  bug_text.getText().toString();
-
-            }
-        });
-
-
-        Button submit_comment = (Button) findViewById(R.id.submit_bug_button);
-        submit_comment.setOnClickListener(new View.OnClickListener() {
+        Button submit_bug = (Button) findViewById(R.id.submit_bug_button);
+        submit_bug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(GameAddBug.this);
-                        //db.getDao1().updateBugs()
-                        finish();
-                    }
-                });
+                bug =  bug_text.getText().toString();
+                Intent data = new Intent();
+                data.putExtra("bugs", bug);
+
+                // - return data Intent and finish
+                setResult(RESULT_OK, data);
+                finish();
 
             }
         });
