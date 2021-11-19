@@ -78,6 +78,12 @@
             android:label="Koreku"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".ui.consoles.UpdataConsole"
+            android:exported="true"
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
