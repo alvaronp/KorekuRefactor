@@ -160,7 +160,7 @@ public class GameFragment extends Fragment {
                         getActivity().runOnUiThread(() -> mAdapter.load(juegos));
                     }
                 });
-
+                return true;
             case MENU_ListarFecha:
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
@@ -171,7 +171,7 @@ public class GameFragment extends Fragment {
                     }
                 });
             default:
-                return super.onOptionsItemSelected(item);
+                return true;
         }
     }
 
