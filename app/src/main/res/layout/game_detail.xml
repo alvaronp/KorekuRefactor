@@ -219,4 +219,27 @@
         app:layout_constraintTop_toBottomOf="@+id/error_button"
         app:layout_constraintVertical_bias="0.32" />
 
+    <TextView
+        android:id="@+id/console"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_console_api"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bug_details" />
+
+    <TextView
+        android:id="@+id/consoleApiDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toEndOf="@+id/console"
+        app:layout_constraintTop_toBottomOf="@+id/bug_details" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,7 +74,7 @@ public class Games {
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	public Games(String title, Status status, Date buydate, String desc, String image, String genero, String bugs) {
+	public Games(String title, Status status, Date buydate, String desc, String image, String genero, String bugs, String console) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
@@ -82,10 +82,11 @@ public class Games {
 		this.image = image;
 		this.bugs = bugs;
 		this.genero = genero;
+		this.console = console;
 	}
 
 	@Ignore
-	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero, String bugs) {
+	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero, String bugs, String console) {
         this.id = ID;
         this.title = title;
         this.status = Status.valueOf(status);
@@ -98,6 +99,7 @@ public class Games {
         this.image = image;
         this.bugs = bugs;
 		this.genero = genero;
+		this.console = console;
     }
 
 	// Create a new ToDoItem from data packaged in an Intent
@@ -115,9 +117,10 @@ public class Games {
 		image = intent.getStringExtra(Games.IMAGE);
 		bugs = intent.getStringExtra(Games.BUGS);
 		genero = intent.getStringExtra(Games.GENERO);
+		console = intent.getStringExtra(Games.CONSOLE);
 	}
 
-	public Games(long id, String title, Status status, Date buydate, String desc, String image, String bugs, String genero){
+	public Games(long id, String title, Status status, Date buydate, String desc, String image, String bugs, String genero, String console){
 		this.id =id;
 		this.title =title;
 		this.status =status;
@@ -126,6 +129,7 @@ public class Games {
 		this.image = image;
 		this.bugs = bugs;
 		this.genero = genero;
+		this.console = console;
 	}
 
     public long getId() { return id; }
@@ -215,13 +219,15 @@ public class Games {
 
 	public String toString() {
 		return id + ITEM_SEP + title + ITEM_SEP +  status + ITEM_SEP +
-				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + genero + ITEM_SEP + bugs;
+				FORMAT.format(buydate) + desc + ITEM_SEP + image + ITEM_SEP + genero + ITEM_SEP + bugs
+				+ ITEM_SEP + console;
 	}
 
 	public String toLog() {
 		return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Status:" + status +
 				ITEM_SEP + "Buy Date:" + FORMAT.format(buydate) + ITEM_SEP + "Description:" +
-				desc + ITEM_SEP + "Image URI:" + image+ ITEM_SEP + "Genero:" + genero + ITEM_SEP + "Bugs:" + bugs;
+				desc + ITEM_SEP + "Image URI:" + image+ ITEM_SEP + "Genero:" + genero + ITEM_SEP + "Bugs:" + bugs
+				+ ITEM_SEP + "Console" + console ;
 	}
 
 }

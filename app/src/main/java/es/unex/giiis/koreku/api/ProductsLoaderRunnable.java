@@ -24,20 +24,13 @@ public class ProductsLoaderRunnable implements Runnable{
         // Parse json file into JsonReader
         JsonReader reader = new JsonReader(new InputStreamReader(mInFile));
         // Parse JsonReader into list of Repo using Gson
-        List<Product> products = Arrays.asList(new Gson().fromJson(reader, Product[].class));
-        for (Product r : products){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        Product product = new Gson().fromJson(reader, Product.class);
 
         // Llamada al Listener con los datos obtenidos
         AppExecutors.getInstance().mainThread().execute(new Runnable() {
             @Override
             public void run() {
-                mOnProductsLoadedListener.onProductsLoaded(products);
+                mOnProductsLoadedListener.onProductsLoaded(product);
             }
         });
     }

@@ -1,7 +1,6 @@
 package es.unex.giiis.koreku.api;
 
 import java.io.IOException;
-import java.util.List;
 
 import es.unex.giiis.koreku.api.Product;
 import es.unex.giiis.koreku.AppExecutors;
@@ -11,10 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductsNetworkLoaderRunnable implements Runnable{
     private final OnProductsLoadedListener mOnProductsLoadedListener;
     private final String mTitle;
+    private static String key;
+    public static Product product;
 
     public ProductsNetworkLoaderRunnable(String gametitle, OnProductsLoadedListener onProductsLoadedListener) {
         mOnProductsLoadedListener = onProductsLoadedListener;
         mTitle = gametitle;
+        product = new Product();
     }
     @Override
     public void run() {
@@ -24,14 +26,18 @@ public class ProductsNetworkLoaderRunnable implements Runnable{
                 .build();
 
         PriceChartingService service = retrofit.create(PriceChartingService.class);
+        key = "c0b53bce27c1bdab90b1605249e600dc43dfd1d5";
 
         //FORMA ASINCRONA
         try {
-            List<Product> products = service.listProducts(mTitle).execute().body();
-            AppExecutors.getInstance().mainThread().execute(() -> mOnProductsLoadedListener.onProductsLoaded(products));
-        } catch (IOException e) {
+            product = service.getProduct(key, mTitle).execute().body();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
-        // Llamada al Listener con los datos obtenidos
+    }
+
+    public Product getFoundProduct(){
+        return product;
     }
 }

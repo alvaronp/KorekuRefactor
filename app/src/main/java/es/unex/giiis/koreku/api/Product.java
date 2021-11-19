@@ -6,11 +6,22 @@ import com.google.gson.annotations.SerializedName;
 public class Product {
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public int id;
     @SerializedName("console-name")
     @Expose
-    private String consolename;
+    public String consolename;
     @SerializedName("product-name")
     @Expose
-    private String productname;
+    public String productname;
+    @SerializedName("status")
+    @Expose
+    public String status;
+
+    Product(){
+        id=0;
+        consolename="";
+        productname="";
+        status="";
+    }
 }
+

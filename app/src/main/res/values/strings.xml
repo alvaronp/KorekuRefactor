@@ -61,5 +61,7 @@
     <string name="start_date">Start Date</string>
     <string name="due_date">Due Date</string>
     <string name="subs_name">Subscription Name</string>
+    <string name="title_console_api">Console (Loaded by API) </string>
+    <string name="console_not_found">PriceCharting API console not found :( </string>
 </resources>
 

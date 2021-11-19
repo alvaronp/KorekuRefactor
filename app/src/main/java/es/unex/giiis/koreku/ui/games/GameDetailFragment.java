@@ -61,6 +61,7 @@ public class GameDetailFragment extends Fragment {
         args.putString("image",g.getImage());
         args.putString("genre", g.getGenero());
         args.putString("bugs",g.getBugs());
+        args.putString("console", g.getConsole());
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,9 +73,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"),args.getString("console"));
             else
-                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"),args.getString("console"));
 
         }
     }
@@ -93,6 +94,7 @@ public class GameDetailFragment extends Fragment {
         bug_details = v.findViewById(R.id.bug_details);
         mStatus = v.findViewById(R.id.statusDetail);
         mGenre = v.findViewById(R.id.genreDetail);
+        TextView mConsoleAPI = v.findViewById(R.id.consoleApiDetail);
         bugTitle = v.findViewById(R.id.bugstitle);
         if (mGa.getBugs()!=null){
             bug_details.setText(mGa.getBugs());
@@ -113,6 +115,16 @@ public class GameDetailFragment extends Fragment {
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
         mGenre.setText(mGa.getGenero());
+        TextView mConsole = v.findViewById(R.id.console);
+        if(mGa.getConsole().length() > 0) {
+            mConsoleAPI.setVisibility(View.VISIBLE);
+            mConsole.setVisibility(View.VISIBLE);
+            mConsoleAPI.setText(mGa.getConsole());
+        }
+        else {
+            mConsole.setVisibility(View.INVISIBLE);
+            mConsoleAPI.setVisibility(View.INVISIBLE);
+        }
 
 
         addbugs = (Button) v.findViewById(R.id.error_button);
