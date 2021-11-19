@@ -1,6 +1,7 @@
 package es.unex.giiis.koreku.roomdb;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -14,7 +15,8 @@ public interface ServiceDAO {
 
     @Query("SELECT * FROM service")  //Antes definimos que nuestra tabla se llamaría así
     public List<Service> getAll();
-
+    @Query("DELETE FROM service WHERE subscription = :subscription")
+    public void deleteService(String subscription);
     @Insert
     public long insert(Service service);
 
