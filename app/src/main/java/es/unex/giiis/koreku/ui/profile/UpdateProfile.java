@@ -5,6 +5,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,10 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
-public class AddProfile extends AppCompatActivity {
+public class UpdateProfile extends AppCompatActivity {
 
     private EditText mTitle,mTelefono,mCorreo;
     private Button mImageSelect;
@@ -35,23 +38,36 @@ public class AddProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_add_profile);
+        setContentView(R.layout.content_update_profile);
 
         mTitle = findViewById(R.id.nombretxt);
         mTelefono = findViewById(R.id.telefonotxt);
         mCorreo = findViewById(R.id.correotxt);
         mImageSelect = findViewById(R.id.imageProfile);
         foto = (ImageView) findViewById(R.id.imageViewProfileDetail);
+
+        String titulo = getIntent().getExtras().getString("titulo");
+        String phone = getIntent().getExtras().getString("phone");
+        String mail = getIntent().getExtras().getString("mail");
+        String image = getIntent().getExtras().getString("image");
+
+
+
+        mTitle.setText(titulo);
+        mTelefono.setText(phone);
+        mCorreo.setText(mail);
+        foto.setImageBitmap(BitmapFactory.decodeFile(image));
+
         mImageSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getImageFromAlbum();
             }
         });
-        if (ContextCompat.checkSelfPermission(AddProfile.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(UpdateProfile.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             mImageSelect.setEnabled(false);
             ActivityCompat.requestPermissions(
-                    AddProfile.this,
+                    UpdateProfile.this,
                     new String[]{READ_EXTERNAL_STORAGE},
                     PERMISSION_CODE
             );
@@ -93,6 +109,7 @@ public class AddProfile extends AppCompatActivity {
                 String titleString = mTitle.getText().toString();
                 String telefono = mTelefono.getText().toString();
                 String correo = mCorreo.getText().toString();
+                String comment = getIntent().getExtras().getString("comment");
 
                 String image = "";
                 if (imageUri != null)
@@ -100,7 +117,7 @@ public class AddProfile extends AppCompatActivity {
 
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-                Perfil.packageIntent(data, titleString, telefono, correo,image,"");
+                Perfil.packageIntent(data, titleString, telefono, correo,image,comment);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);

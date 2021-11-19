@@ -19,6 +19,7 @@ import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.profile.UpdateProfile;
 
 
 public class ProfileDetailFragment extends Fragment {
@@ -90,7 +91,13 @@ public class ProfileDetailFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getActivity(), AddProfile.class);
+                Intent intent = new Intent(getActivity(), UpdateProfile.class);
+                intent.putExtra("titulo", mProf.getTitle());
+                intent.putExtra("phone", mProf.getPhone());
+                intent.putExtra("mail", mProf.getMail());
+                intent.putExtra("comment", mProf.getComments());
+                intent.putExtra("image", mProf.getImage());
+
                 startActivityForResult(intent, EDIT_SET);
             }
         });
@@ -109,6 +116,21 @@ public class ProfileDetailFragment extends Fragment {
                     text="Nombre del perfil: "+mProf.getTitle()+" \nTeléfono: "+mProf.getPhone()+ " \nCorreo: "+mProf.getMail() + "\n\n Enviado desde KOREKU©";
                 intent.putExtra(Intent.EXTRA_TEXT,text);
                 startActivity(intent);
+            }
+        });
+
+        Button deleteprofile = (Button) v.findViewById(R.id.delete_profile);
+        deleteprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao3().deleteProfile(mProf.getTitle());
+                    }
+                });
+                getActivity().onBackPressed();
             }
         });
         return v;

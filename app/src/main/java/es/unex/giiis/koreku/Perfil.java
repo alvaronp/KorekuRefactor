@@ -134,18 +134,19 @@ public class Perfil {
 	// package them for transport in an Intent
 
 	public static void packageIntent(Intent intent, String title,String phone,
-									 String mail, String image) {
+									 String mail, String image,String comment) {
 
 		intent.putExtra(Perfil.TITLE, title);
 		intent.putExtra(Perfil.MAIL, mail.toString());
 		intent.putExtra(Perfil.PHONE, phone.toString());
 		intent.putExtra(Perfil.IMAGE, image.toString());
+		intent.putExtra(Perfil.COMMENTS,comment.toString());
 	
 	}
 
 
 	public String toString() {
-		return id + ITEM_SEP + title +ITEM_SEP+ phone +ITEM_SEP+mail +ITEM_SEP+ image ;
+		return id + ITEM_SEP + title +ITEM_SEP+ phone +ITEM_SEP+mail +ITEM_SEP+ image +ITEM_SEP+ comments;
 	}
 
 	public String toLog() {

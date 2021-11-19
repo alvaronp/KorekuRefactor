@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +13,14 @@ import androidx.fragment.app.Fragment;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.Service;
 import es.unex.giiis.koreku.roomdb.DateConverter;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ServiceDetailFragment extends Fragment {
-
+    Button delete;
     private Service mSer;
 
     public ServiceDetailFragment() {
@@ -83,7 +86,20 @@ public class ServiceDetailFragment extends Fragment {
         Instant DuetDate = mSer.getDueDate().toInstant();
         Instant dueCorrect = StartDate.plus(1, ChronoUnit.DAYS);
         mDueDate.setText(dueCorrect.toString().subSequence(0,10));
-
+        delete = (Button) v.findViewById(R.id.deleteButtonService);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao4().deleteService(mSer.getSubscription());
+                    }
+                });
+                getActivity().onBackPressed();
+            }
+            });
         return v;
 
     }
