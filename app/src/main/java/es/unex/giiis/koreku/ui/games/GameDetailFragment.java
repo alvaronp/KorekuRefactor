@@ -23,10 +23,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.consoles.UpdataConsole;
 import es.unex.giiis.koreku.ui.profile.BuscarPerfiles;
 import es.unex.giiis.koreku.ui.profile.NuevoComentario;
 
@@ -35,6 +37,13 @@ public class GameDetailFragment extends Fragment {
     Button addbugs, deletegame;
     TextView mBugs;
     TextView bugTitle;
+    TextView mTitle;
+    TextView mDesc;
+    TextView mBuyDate;
+    ImageView image;
+    TextView bug_details;
+    TextView mStatus;
+    TextView mGenre;
     private Games mGa;
     private GameAdapter mAdapter;
 
@@ -63,9 +72,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
             else
-                mGa = new Games(args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"));
 
         }
     }
@@ -77,13 +86,13 @@ public class GameDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.game_detail, container, false);
         // Show item content
         mBugs = v.findViewById(R.id.bug_details);
-        TextView mTitle = v.findViewById(R.id.titleGameDetail);
-        TextView mDesc = v.findViewById(R.id.descGameDetail);
-        TextView mBuyDate = v.findViewById(R.id.editTextDate);
-        ImageView image = v.findViewById(R.id.imageViewGame);
-        TextView bug_details = v.findViewById(R.id.bug_details);
-        TextView mStatus = v.findViewById(R.id.statusDetail);
-        TextView mGenre = v.findViewById(R.id.genreDetail);
+        mTitle = v.findViewById(R.id.titleGameDetail);
+        mDesc = v.findViewById(R.id.descGameDetail);
+        mBuyDate = v.findViewById(R.id.editTextDate);
+        image = v.findViewById(R.id.imageViewGame);
+        bug_details = v.findViewById(R.id.bug_details);
+        mStatus = v.findViewById(R.id.statusDetail);
+        mGenre = v.findViewById(R.id.genreDetail);
         bugTitle = v.findViewById(R.id.bugstitle);
         if (mGa.getBugs()!=null){
             bug_details.setText(mGa.getBugs());
@@ -130,6 +139,22 @@ public class GameDetailFragment extends Fragment {
             }
         });
 
+        Button updategame = (Button) v.findViewById(R.id.update_game);
+        updategame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UpdateGame.class);
+
+                intent.putExtra("titulo", mGa.getTitle());
+                intent.putExtra("desc", mGa.getDesc());
+                intent.putExtra("date", mGa.getBuydate().toInstant());
+                intent.putExtra("image", mGa.getImage());
+                intent.putExtra("genre", mGa.getGenero());
+                intent.putExtra("bugs", mGa.getBugs());
+                startActivityForResult(intent, 0);
+            }
+        });
+
         return v;
     }
 
@@ -155,6 +180,33 @@ public class GameDetailFragment extends Fragment {
                 bugTitle.setVisibility(View.VISIBLE);
                 mBugs.setText(mGa.getBugs());
             }
+        }
+        if (requestCode == 0) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Games g = new Games(data);
+                mGa.setTitle(g.getTitle());
+                mGa.setDesc(g.getDesc());
+                mGa.setBuydate(g.getBuydate());
+                mGa.setImage(g.getImage());
+                mGa.setStatus(g.getStatus());
+                mGa.setGenero(g.getGenero());
+                mGa.setBugs(g.getBugs());
+
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao1().update(mGa));
+                mTitle.setText(mGa.getTitle());
+                mDesc.setText(mGa.getDesc());
+                //mBuyDate.setText(mGa.getBuydate());
+                //mStatus.setText(mGa.getStatus());
+                mGenre.setText(mGa.getGenero());
+                mBugs.setText(mGa.getBugs());
+
+                String imagePath = mGa.getImage();
+                if (imagePath!=null)
+                    image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+
+
+            }
+
         }
     }
 

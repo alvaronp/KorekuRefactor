@@ -1,4 +1,4 @@
-package es.unex.giiis.koreku.ui.consoles;
+package es.unex.giiis.koreku.ui.games;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
@@ -8,7 +8,6 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,7 +18,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -27,50 +29,79 @@ import androidx.core.content.ContextCompat;
 import java.util.Calendar;
 import java.util.Date;
 
-import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.Games;
+import es.unex.giiis.koreku.Games.Status;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
-public class UpdataConsole extends AppCompatActivity {
+public class UpdateGame extends AppCompatActivity {
 
     private static String dateString;
     private static TextView dateView;
-    boolean bandera;
+    private static final int LOAD_IMAGE_REQUEST = 0;
+    private static final int PERMISSION_CODE = 0;
+
     private EditText mTitle;
     private Date mBuydate;
-    private EditText mCompany;
-    private static final int LOAD_IMAGE_REQUEST = 0;
-    private static final int PERMISSION_CODE = 1;
+    private EditText mDesc;
     private Button mImageSelect;
-    private Uri imageUri;
+    private RadioGroup mStatusRadioGroup;
+    private RadioButton mDefaultStatusButton;
+    private EditText mGenre;
+    private String imagen;
+    private TextView mBugs;
+    private TextView mBuyDate;
+    private ImageView image;
+    private TextView bug_details;
+    private TextView mStatus;
+    ImageView check;
     ImageView foto;
-    String imagen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_update_console);
+        setContentView(R.layout.content_update_game);
 
         mTitle = findViewById(R.id.title);
         dateView = findViewById(R.id.date);
-        mCompany = findViewById(R.id.desc);
+        mDesc = findViewById(R.id.desc);
         mImageSelect = findViewById(R.id.image_picker_button);
-        foto = (ImageView) findViewById(R.id.imageView2);
+        mDefaultStatusButton = findViewById(R.id.statusNotFinished);
+        mStatusRadioGroup = findViewById(R.id.statusGroup);
+        mGenre = findViewById(R.id.genero_edit);
 
+        /*
+        intent.putExtra("titulo", mGa.getTitle());
+        intent.putExtra("desc", mGa.getDesc());
+        intent.putExtra("date", mGa.getBuydate().toInstant());
+        intent.putExtra("image", mGa.getImage());
+        intent.putExtra("genre", mGa.getGenero());
+        intent.putExtra("bugs", mGa.getBugs());*/
         String titulo = getIntent().getExtras().getString("titulo");
-        String company = getIntent().getExtras().getString("company");
+        String desc = getIntent().getExtras().getString("desc");
         String date = getIntent().getExtras().getString("date");
         String image = getIntent().getExtras().getString("image");
-        // Set the default date and time
-         bandera = true;
+        String genre = getIntent().getExtras().getString("genre");
+        String bugs = getIntent().getExtras().getString("bugs");
+
         mTitle.setText(titulo);
-        mCompany.setText(company);
+        mDesc.setText(desc);
         dateView.setText(date);
-        foto.setImageBitmap(BitmapFactory.decodeFile(image));
+        mGenre.setText(genre);
+        //if (bugs != null) mBugs.setText(bugs);
+
+
+
+        // Set the default date and time
+
+
+        setDefaultDateTime();
 
         // OnClickListener for the Date button, calls showDatePickerDialog() to show
         // the Date dialog
 
-        final Button datePickerButton =  findViewById(R.id.date_picker_button);
+        final Button datePickerButton = findViewById(R.id.date_picker_button);
         datePickerButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -81,29 +112,27 @@ public class UpdataConsole extends AppCompatActivity {
 
 
         mImageSelect = findViewById(R.id.image_picker_button);
+        mImageSelect.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getImageFromAlbum();
+            }
+        });
 
-        if (ContextCompat.checkSelfPermission(UpdataConsole.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            mImageSelect.setEnabled(false);
+        if (ContextCompat.checkSelfPermission(UpdateGame.this, READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                    UpdataConsole.this,
+                    UpdateGame.this,
                     new String[]{READ_EXTERNAL_STORAGE},
                     PERMISSION_CODE
             );
         }
 
-        mImageSelect.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bandera=false;
-                getImageFromAlbum();
-            }
-        });
-        final Button cancelButton =  findViewById(R.id.cancelButton);
+        // OnClickListener for the Cancel Button,
+        final Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 log("Entered cancelButton.OnClickListener.onClick()");
-
                 // - Implement onClick().
                 Intent data = new Intent();
                 setResult(RESULT_CANCELED, data);
@@ -112,8 +141,7 @@ public class UpdataConsole extends AppCompatActivity {
         });
 
         //OnClickListener for the Reset Button
-
-        final Button resetButton =  findViewById(R.id.resetButton);
+        final Button resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,37 +149,39 @@ public class UpdataConsole extends AppCompatActivity {
 
                 // - Reset data fields to default values
                 mTitle.setText("");
-                mCompany.setText("");
-                foto.setImageURI(Uri.parse(""));
+                mDesc.setText("");
+                mGenre.setText("");
+                imagen = "";
+                mStatusRadioGroup.check(mDefaultStatusButton.getId());
                 setDefaultDateTime();
             }
         });
 
         // OnClickListener for the Submit Button
         // Implement onClick().
-
-        final Button submitButton =  findViewById(R.id.submitButton);
+        final Button submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 log("Entered submitButton.OnClickListener.onClick()");
 
-                // Gather Console data
+                // Gather Game data
                 // -  Title
                 String titleString = mTitle.getText().toString();
-                setDefaultDateTime();
                 // Date
-                String buyDate = dateString;
+                String buyDate = dateView.getText().toString();
 
-                String company = mCompany.getText().toString();
+                String desc = mDesc.getText().toString();
 
-                String image = "";
-                if (imageUri != null)
-                    image = imagen;
+                Status status = getStatus();
+
+                String genre = mGenre.getText().toString();
+
+                //String bugs = mBugs.getText().toString();
 
                 // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-                Consolas.packageIntent(data, titleString, company, image, buyDate);
+                Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, null);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);
@@ -159,17 +189,6 @@ public class UpdataConsole extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
-            imageUri = data.getData();
-            imagen = getRealPathFromURI(imageUri);
-            foto.setImageURI(imageUri);
-        }
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -187,6 +206,16 @@ public class UpdataConsole extends AppCompatActivity {
                     mImageSelect.setEnabled(false);
                 }
                 return;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == RESULT_OK && requestCode == LOAD_IMAGE_REQUEST){
+            imagen = getRealPathFromURI(data.getData());
+            check = findViewById(R.id.check_image);
+            check.setVisibility(View.VISIBLE);
         }
     }
 
@@ -220,6 +249,18 @@ public class UpdataConsole extends AppCompatActivity {
             day = "0" + dayOfMonth;
 
         dateString = year + "-" + mon + "-" + day;
+    }
+
+    private Status getStatus() {
+
+        switch (mStatusRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.statusFinished: {
+                return Status.FINISHED;
+            }
+            default: {
+                return Status.NOTFINISHED;
+            }
+        }
     }
 
     // DialogFragment used to pick a Console deadline date
@@ -275,6 +316,7 @@ public class UpdataConsole extends AppCompatActivity {
         }
         return result;
     }
+
 
 
     private void showDatePickerDialog() {
