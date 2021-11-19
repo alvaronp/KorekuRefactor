@@ -111,6 +111,21 @@ public class ProfileDetailFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Button deleteprofile = (Button) v.findViewById(R.id.delete_profile);
+        deleteprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
+                        db.getDao3().deleteProfile(mProf.getTitle());
+                    }
+                });
+                getActivity().onBackPressed();
+            }
+        });
         return v;
     }
 
