@@ -26,12 +26,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Games.Status;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.api.OnProductsLoadedListener;
+import es.unex.giiis.koreku.api.PriceChartingService;
+import es.unex.giiis.koreku.api.Product;
+import es.unex.giiis.koreku.api.ProductsLoaderRunnable;
+import es.unex.giiis.koreku.api.ProductsNetworkLoaderRunnable;
 import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class AddGames extends AppCompatActivity {
@@ -49,6 +57,8 @@ public class AddGames extends AppCompatActivity {
 	private RadioButton mDefaultStatusButton;
 	private EditText mGenre;
 	private String imagen;
+	private ProductsNetworkLoaderRunnable api;
+	private OnProductsLoadedListener listen;
 	ImageView check;
 
 
@@ -147,9 +157,12 @@ public class AddGames extends AppCompatActivity {
 
 				String genre = mGenre.getText().toString();
 
+				api = new ProductsNetworkLoaderRunnable(titleString, listen);
+				AppExecutors.getInstance().networkIO().execute(api);
+
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, api.getFoundProduct().consolename);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);
