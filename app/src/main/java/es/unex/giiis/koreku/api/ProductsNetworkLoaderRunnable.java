@@ -31,7 +31,6 @@ public class ProductsNetworkLoaderRunnable implements Runnable{
         //FORMA ASINCRONA
         try {
             product = service.getProduct(key, mTitle).execute().body();
-            System.out.println("PORFA CARGA");
         }
         catch (IOException e) {
             e.printStackTrace();
