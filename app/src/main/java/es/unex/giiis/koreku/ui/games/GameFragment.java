@@ -175,7 +175,7 @@ public class GameFragment extends Fragment {
         }
     }
 
-    // Load stored Games
+    // Load stored Game
     private void loadItems() {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
