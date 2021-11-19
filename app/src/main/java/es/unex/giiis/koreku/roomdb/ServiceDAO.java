@@ -22,7 +22,7 @@ public interface ServiceDAO {
 
     @Query("DELETE FROM service")
     public void deleteAll();
-
+//
     @Update
     public int update(Service service);
 
