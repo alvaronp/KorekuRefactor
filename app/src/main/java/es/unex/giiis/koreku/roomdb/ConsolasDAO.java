@@ -29,4 +29,8 @@ public interface ConsolasDAO {
 
     @Query("SELECT * FROM consolas ORDER BY DATE ")
     public List<Consolas> getAllByDate();
+
+    @Query("UPDATE consolas SET title=:title,date=:date,company=:company,image=:image WHERE title=:title2")
+    public int updateSobrecargado(String title2,String title, String date,String company,String image);
+
 }

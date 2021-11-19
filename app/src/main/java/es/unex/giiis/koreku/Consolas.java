@@ -49,15 +49,22 @@ public class Consolas {
 	private String image = new String();
 
 	@Ignore
-    public Consolas(String title, Date date, String company, String image) {
+     Consolas(String title, Date date, String company, String image) {
 		this.title = title;
 		this.date = date;
 		this.company=company;
 		this.image=image;
 	}
+	public Consolas(long id, String title, Date date, String company, String image){
+		this.id =id;
+		this.date =date;
+		this.title =title;
+		this.company=company;
+		this.image=image;
+	}
 	@Ignore
-    public Consolas(long ID, String title, String date, String company, String image) {
-        this.id = ID;
+    public Consolas(long id, String title, String date, String company, String image) {
+        this.id = id;
         this.title = title;
         try {
             this.date = Consolas.FORMAT.parse(date);
@@ -81,13 +88,7 @@ public class Consolas {
 		image = intent.getStringExtra(Consolas.IMAGE);
 	}
 
-	public Consolas(long id, String title, Date date, String company, String image){
-		this.id =id;
-		this.date =date;
-		this.title =title;
-		this.company=company;
-		this.image=image;
-	}
+
 
 	@Ignore
 	public Consolas(){

@@ -26,16 +26,22 @@ import java.util.Date;
 import java.util.Locale;
 
 import es.unex.giiis.koreku.Consolas;
+import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.games.GameAddBug;
+import es.unex.giiis.koreku.ui.profile.UpdateProfile;
 
 
 public class ConsoleDetailFragment extends Fragment {
 
     private Consolas mCon;
     Button deleteCon;
+    TextView mTitle;
+    TextView mCompany ;
+    TextView mBuyDate ;
+    ImageView image ;
 
     public ConsoleDetailFragment() {
         // Required empty public constructor
@@ -58,7 +64,7 @@ public class ConsoleDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = this.getArguments();
         if (args != null) {
-            mCon = new Consolas(args.getString("title"), DateConverter.toDate(args.getLong("dateLong")),args.getString("comp"),args.getString("image"));
+            mCon = new Consolas(args.getLong("id"),args.getString("title"), DateConverter.toDate(args.getLong("dateLong")),args.getString("comp"),args.getString("image"));
         }
     }
 
@@ -68,19 +74,32 @@ public class ConsoleDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.console_detail, container, false);
         // Show item content
-        TextView mTitle = v.findViewById(R.id.titleGameDetail);
-        TextView mCompany = v.findViewById(R.id.descGameDetail);
-        TextView mBuyDate = v.findViewById(R.id.editTextDate);
-        ImageView image = v.findViewById(R.id.imageViewGame);
+         mTitle = v.findViewById(R.id.titleGameDetail);
+         mCompany = v.findViewById(R.id.descGameDetail);
+         mBuyDate = v.findViewById(R.id.editTextDate);
+         image = v.findViewById(R.id.imageViewGame);
         mTitle.setText(mCon.getTitle());
         mCompany.setText(mCon.getCompany());
         Instant buyDate = mCon.getDate().toInstant();
         Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
         mBuyDate.setText(correct.toString().subSequence(0,10));
         String imagePath = mCon.getImage();
-        if (imagePath.length()>0)
+        if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 
+        Button editButton = (Button) v.findViewById(R.id.Edit);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), UpdataConsole.class);
+
+                intent.putExtra("titulo", mCon.getTitle());
+                intent.putExtra("company", mCon.getCompany());
+                intent.putExtra("date", mCon.getDate().toInstant());
+                intent.putExtra("image", mCon.getImage());
+                startActivityForResult(intent, 0);
+            }
+        });
         Button deleteconsole = (Button) v.findViewById(R.id.delete_console);
         deleteconsole.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +119,34 @@ public class ConsoleDetailFragment extends Fragment {
 
         return v;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        //  - Check result code and request code.
+        // If user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+        if (requestCode == 0) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Consolas c = new Consolas(data);
+                mCon.setTitle(c.getTitle());
+                mCon.setImage(c.getImage());
+                mCon.setCompany(c.getCompany());
+                mCon.setDate(c.getDate());
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
+                mTitle.setText(mCon.getTitle());
+                mCompany.setText(mCon.getCompany());
+                mBuyDate.setText(mCon.getDate().toString());
+                String imagePath = mCon.getImage();
+                if (imagePath!=null)
+                 image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+
+
+            }
+
+        }
+    }
     @Override public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mCon.getTitle());

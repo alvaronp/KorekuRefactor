@@ -92,6 +92,7 @@ public class ProfileDetailFragment extends Fragment {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), UpdateProfile.class);
+
                 intent.putExtra("titulo", mProf.getTitle());
                 intent.putExtra("phone", mProf.getPhone());
                 intent.putExtra("mail", mProf.getMail());
