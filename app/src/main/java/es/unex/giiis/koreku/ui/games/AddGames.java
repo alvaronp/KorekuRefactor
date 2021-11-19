@@ -57,12 +57,12 @@ public class AddGames extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_add_game);
 
-        mTitle = findViewById(R.id.title);
-        dateView = findViewById(R.id.date);
-        mDesc = findViewById(R.id.desc);
-        mImageSelect = findViewById(R.id.image_picker_button);
-		mDefaultStatusButton =  findViewById(R.id.statusNotFinished);
-		mStatusRadioGroup =  findViewById(R.id.statusGroup);
+		mTitle = findViewById(R.id.title);
+		dateView = findViewById(R.id.date);
+		mDesc = findViewById(R.id.desc);
+		mImageSelect = findViewById(R.id.image_picker_button);
+		mDefaultStatusButton = findViewById(R.id.statusNotFinished);
+		mStatusRadioGroup = findViewById(R.id.statusGroup);
 		mGenre = findViewById(R.id.genero_edit);
 
 		// Set the default date and time
@@ -72,7 +72,7 @@ public class AddGames extends AppCompatActivity {
 		// OnClickListener for the Date button, calls showDatePickerDialog() to show
 		// the Date dialog
 
-		final Button datePickerButton =  findViewById(R.id.date_picker_button);
+		final Button datePickerButton = findViewById(R.id.date_picker_button);
 		datePickerButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -86,11 +86,11 @@ public class AddGames extends AppCompatActivity {
 		mImageSelect.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-					getImageFromAlbum();
+				getImageFromAlbum();
 			}
 		});
 
-		if (ContextCompat.checkSelfPermission(AddGames.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+		if (ContextCompat.checkSelfPermission(AddGames.this, READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(
 					AddGames.this,
 					new String[]{READ_EXTERNAL_STORAGE},
@@ -98,20 +98,20 @@ public class AddGames extends AppCompatActivity {
 			);
 		}
 		// OnClickListener for the Cancel Button,
-		final Button cancelButton =  findViewById(R.id.cancelButton);
+		final Button cancelButton = findViewById(R.id.cancelButton);
 		cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				log("Entered cancelButton.OnClickListener.onClick()");
 				// - Implement onClick().
 				Intent data = new Intent();
-				setResult(RESULT_CANCELED, data);				
+				setResult(RESULT_CANCELED, data);
 				finish();
 			}
 		});
 
 		//OnClickListener for the Reset Button
-		final Button resetButton =  findViewById(R.id.resetButton);
+		final Button resetButton = findViewById(R.id.resetButton);
 		resetButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -129,7 +129,7 @@ public class AddGames extends AppCompatActivity {
 
 		// OnClickListener for the Submit Button
 		// Implement onClick().
-		final Button submitButton =  findViewById(R.id.submitButton);
+		final Button submitButton = findViewById(R.id.submitButton);
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -152,7 +152,7 @@ public class AddGames extends AppCompatActivity {
 				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, null);
 
 				// - return data Intent and finish
-				setResult(RESULT_OK, data);				
+				setResult(RESULT_OK, data);
 				finish();
 			}
 		});
