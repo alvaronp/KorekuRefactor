@@ -17,6 +17,9 @@ public interface PerfilDAO {
     public long insert(Perfil item);
     @Query("DELETE FROM perfil")
     public void deleteAll();
+    @Query("DELETE FROM perfil WHERE TITLE = :title")
+    public void deleteProfile(String title);
     @Update
     public int update(Perfil item);
+
 }
