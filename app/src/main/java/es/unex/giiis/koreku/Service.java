@@ -16,12 +16,10 @@ import java.util.Locale;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 
 @Entity(tableName = "service") //Etiquetamos la clase e indicamos el nombre de la tabla donde se va a guardar
-
 public class Service {
 
     @Ignore
     public static final String ITEM_SEP = System.getProperty("line.separator");
-
     @Ignore
     public final static String ID = "id";
     @Ignore
@@ -34,12 +32,9 @@ public class Service {
     public final static String STARTDATE = "startDate";
     @Ignore
     public final static String DUEDATE = "dueDate";
-
     @Ignore
     public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
             "yyyy-MM-dd", Locale.US);
-
-
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -49,12 +44,12 @@ public class Service {
     private String email = new String();
     @ColumnInfo(name = "price")
     private String price;
+    @ColumnInfo(name = "startDate")
     @TypeConverters(DateConverter.class)
     private Date startDate = new Date();
+    @ColumnInfo(name = "dueDate")
     @TypeConverters(DateConverter.class)
     private Date dueDate = new Date();
-
-
 
     @Ignore
     public Service(String subscription, String email, String price, Date startDate, Date dueDate) {

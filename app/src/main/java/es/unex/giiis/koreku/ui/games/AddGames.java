@@ -86,36 +86,31 @@ public class AddGames extends AppCompatActivity {
 		mImageSelect.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				getImageFromAlbum();
+					getImageFromAlbum();
 			}
 		});
+
 		if (ContextCompat.checkSelfPermission(AddGames.this,READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-			mImageSelect.setEnabled(false);
 			ActivityCompat.requestPermissions(
 					AddGames.this,
 					new String[]{READ_EXTERNAL_STORAGE},
 					PERMISSION_CODE
 			);
 		}
-
-		// OnClickListener for the Cancel Button, 
-
+		// OnClickListener for the Cancel Button,
 		final Button cancelButton =  findViewById(R.id.cancelButton);
 		cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				log("Entered cancelButton.OnClickListener.onClick()");
-
 				// - Implement onClick().
 				Intent data = new Intent();
 				setResult(RESULT_CANCELED, data);				
-				finish();		
-
+				finish();
 			}
 		});
 
 		//OnClickListener for the Reset Button
-
 		final Button resetButton =  findViewById(R.id.resetButton);
 		resetButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -134,7 +129,6 @@ public class AddGames extends AppCompatActivity {
 
 		// OnClickListener for the Submit Button
 		// Implement onClick().
-		
 		final Button submitButton =  findViewById(R.id.submitButton);
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -155,13 +149,32 @@ public class AddGames extends AppCompatActivity {
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null);
+				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, null);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);				
 				finish();
 			}
 		});
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions,
+										   int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+		switch (requestCode) {
+			case PERMISSION_CODE:
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0 &&
+						grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					// Permission is granted. Continue the action or workflow
+					// in your app.
+					mImageSelect.setEnabled(true);
+				}  else {
+					mImageSelect.setEnabled(false);
+				}
+				return;
+		}
 	}
 
 	@Override

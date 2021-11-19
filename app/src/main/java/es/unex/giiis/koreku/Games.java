@@ -43,11 +43,12 @@ public class Games {
 	@Ignore
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd", Locale.US);
-
 	@Ignore
 	public final static String BUGS = "bugs";
 	@Ignore
 	public final static String GENERO = "genero";
+	@Ignore
+	public final static String CONSOLE = "console";
 	//Atributos de la clase
 	@ColumnInfo(name = "game_id")
 	@PrimaryKey (autoGenerate = true) //Clave primaria autogenerada para la bd
@@ -68,6 +69,8 @@ public class Games {
 	private String bugs = new String();
 	@ColumnInfo(name = "genero") //URI de la portada del juego
 	private String genero = new String();
+	@ColumnInfo(name = "consola") //URI de la portada del juego
+	private String console = new String();
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
@@ -185,12 +188,20 @@ public class Games {
 		this.genero = genero;
 	}
 
+	public String getConsole() {
+		return console;
+	}
+
+	public void setConsole(String console) {
+		this.console = console;
+	}
+
 
 	// Take a set of String data values and 
 	// package them for transport in an Intent
 
 	public static void packageIntent(Intent intent, String title,
-									 Status status, String buydate, String desc, String image, String genero, String bugs) {
+									 Status status, String buydate, String desc, String image, String genero, String bugs, String console) {
 
 		intent.putExtra(Games.TITLE, title);
 		intent.putExtra(Games.STATUS, status.toString());
@@ -199,6 +210,7 @@ public class Games {
 		intent.putExtra(Games.IMAGE, image);
 		intent.putExtra(Games.GENERO, genero);
 		intent.putExtra(Games.BUGS, bugs);
+		intent.putExtra(Games.CONSOLE, console);
 	}
 
 	public String toString() {
