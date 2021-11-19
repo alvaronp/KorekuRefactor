@@ -72,6 +72,12 @@
             android:label="Koreku"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".ui.profile.UpdateProfile"
+            android:exported="true"
+            android:label="Koreku"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
