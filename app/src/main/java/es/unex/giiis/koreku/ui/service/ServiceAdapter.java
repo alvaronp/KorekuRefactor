@@ -99,7 +99,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
         private Context mContext;
 
-        private TextView subscription;
+        private TextView title;
         private TextView price;
         private TextView dueDateView;
 
@@ -111,7 +111,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
             // - Get the references to every widget of the Item View
 
-            subscription =  itemView.findViewById(R.id.service_item_titleView);
+            title =  itemView.findViewById(R.id.service_item_titleView);
             dueDateView =  itemView.findViewById(R.id.service_item_DueDateView);
             price =  itemView.findViewById(R.id.service_item_priceView);
 
@@ -121,7 +121,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
             // - Displays in TextView
 
-            subscription.setText(service.getSubscription());
+            title.setText(service.getTitle());
             dueDateView.setText(service.FORMAT.format(service.getDueDate()));
             price.setText(service.getPrice());
 

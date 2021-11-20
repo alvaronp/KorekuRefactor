@@ -6,9 +6,11 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,8 @@ public class AddService extends AppCompatActivity {
     private static String dueDateString;
     private static TextView dueDateView;
 
-    private EditText mSubscription;
+    private EditText mTitle;
+    private Spinner mSubscription;
     private EditText mEmail;
     private EditText mPrice;
     private Date mStartDate;
@@ -42,11 +45,22 @@ public class AddService extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_add_service);
 
-        mSubscription = findViewById(R.id.serviceName);
+        mTitle = findViewById(R.id.serviceName);
+        mSubscription = findViewById(R.id.serviceSpinner);
         mEmail = findViewById(R.id.serviceEmail);
         mPrice = findViewById(R.id.servicePrice);
         startDateView = findViewById(R.id.serviceStartDate);
         dueDateView = findViewById(R.id.serviceDueDate);
+
+        // Spinner options
+
+        String [] opciones = {"EA Access", "GeForce Now ", "Google Stadia", "Humble Monthly",
+                "Nintendo Switch Online", "PlayStation Plus", "PlayStation Now", "Twitch Prime",
+                "UPlay+","Xbox Game Pass", "Xbox Live Gold", "Other"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                                        android.R.layout.simple_spinner_dropdown_item, opciones);
+        mSubscription.setAdapter(adapter);
 
         // Set the default date
 
@@ -108,7 +122,8 @@ public class AddService extends AppCompatActivity {
 
                 // - Reset data fields to default values
 
-                mSubscription.setText("");
+                mTitle.setText("");
+                mSubscription.setSelection(0);
                 mEmail.setText("");
                 mPrice.setText("");
                 setDefaultDate();
@@ -128,7 +143,8 @@ public class AddService extends AppCompatActivity {
 
                 // Gather Console data
 
-                String subscriptionString = mSubscription.getText().toString();
+                String titleString = mTitle.getText().toString();
+                String subscriptionString = mSubscription.getSelectedItem().toString();
                 String emailString = mEmail.getText().toString();
                 String priceString = mPrice.getText().toString();
                 String startString = startDateString;
@@ -137,7 +153,7 @@ public class AddService extends AppCompatActivity {
                 // Package ToDoItem data into an Intent
 
                 Intent data = new Intent();
-                Service.packageIntent(data, subscriptionString, emailString, priceString, startString, dueString);
+                Service.packageIntent(data, titleString, subscriptionString, emailString, priceString, startString, dueString);
 
                 // - return data Intent and finish
 

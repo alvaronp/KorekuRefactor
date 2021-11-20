@@ -20,6 +20,7 @@ import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ServiceDetailFragment extends Fragment {
+
     Button delete;
     private Service mSer;
 
@@ -35,6 +36,7 @@ public class ServiceDetailFragment extends Fragment {
         Bundle args = new Bundle();
 
         args.putLong("id", service.getId());
+        args.putString("title",service.getTitle());
         args.putString("subscription",service.getSubscription());
         args.putString("email",service.getEmail());
         args.putString("price",service.getPrice());
@@ -55,8 +57,10 @@ public class ServiceDetailFragment extends Fragment {
 
         if (args != null) {
 
-            mSer = new Service(args.getString("subscription"), args.getString("email"), args.getString("price"),
-                    DateConverter.toDate(args.getLong("startDate")), DateConverter.toDate(args.getLong("dueDate")));
+            mSer = new Service(args.getString("title"), args.getString("subscription"),
+                                args.getString("email"), args.getString("price"),
+                                DateConverter.toDate(args.getLong("startDate")),
+                                DateConverter.toDate(args.getLong("dueDate")));
 
         }
     }
@@ -70,36 +74,49 @@ public class ServiceDetailFragment extends Fragment {
 
         // Show item content
 
+        TextView mTitle = v.findViewById(R.id.titleServiceDetail);
         TextView mSubscription = v.findViewById(R.id.subsServiceDetail);
         TextView mEmail = v.findViewById(R.id.emailServiceDetail);
         TextView mPrice = v.findViewById(R.id.priceServiceDetail);
         TextView mStartDate = v.findViewById(R.id.startDateServiceDetail);
         TextView mDueDate = v.findViewById(R.id.dueDateServiceDetail);
 
+        mTitle.setText(mSer.getTitle());
         mSubscription.setText(mSer.getSubscription());
         mEmail.setText(mSer.getEmail());
         mPrice.setText(mSer.getPrice());
+
         Instant StartDate = mSer.getStartDate().toInstant();
         Instant startCorrect = StartDate.plus(1, ChronoUnit.DAYS);
         mStartDate.setText(startCorrect.toString().subSequence(0,10));
 
-        Instant DuetDate = mSer.getDueDate().toInstant();
-        Instant dueCorrect = StartDate.plus(1, ChronoUnit.DAYS);
+        Instant DueDate = mSer.getDueDate().toInstant();
+        Instant dueCorrect = DueDate.plus(1, ChronoUnit.DAYS);
         mDueDate.setText(dueCorrect.toString().subSequence(0,10));
+
         delete = (Button) v.findViewById(R.id.deleteButtonService);
+
         delete.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
+
                     @Override
                     public void run() {
+
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
                         db.getDao4().deleteService(mSer.getSubscription());
+
                     }
                 });
+
                 getActivity().onBackPressed();
+
             }
-            });
+        });
+
         return v;
 
     }
@@ -107,7 +124,7 @@ public class ServiceDetailFragment extends Fragment {
     @Override public void onResume() {
 
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mSer.getSubscription());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mSer.getTitle());
 
     }
 

@@ -11,20 +11,20 @@
         android:id="@+id/service_item_price_Label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/companyLabel"
+        android:layout_below="@+id/service_item_DueDate_Label"
         android:layout_alignParentStart="true"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="11dp"
         android:text="@string/price"></TextView>
 
     <TextView
         android:id="@+id/service_item_DueDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/service_item_titleView"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="9dp"
         android:layout_marginEnd="207dp"
         android:layout_toEndOf="@+id/service_item_DueDate_Label"></TextView>
 
@@ -32,10 +32,10 @@
         android:id="@+id/service_item_priceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/service_item_DueDateView"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="11dp"
         android:layout_marginEnd="246dp"
         android:layout_toEndOf="@+id/service_item_price_Label"></TextView>
 
@@ -43,10 +43,10 @@
         android:id="@+id/service_item_DueDate_Label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/service_item_titleView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="9dp"
         android:text="@string/due_date"></TextView>
 
     <TextView
@@ -56,6 +56,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="35dp"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 </RelativeLayout>
