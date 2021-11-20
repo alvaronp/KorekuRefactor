@@ -2,6 +2,8 @@ package es.unex.giiis.koreku.ui.games;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -75,6 +77,7 @@ public class UpdateGame extends AppCompatActivity {
         String titulo = getIntent().getExtras().getString("titulo");
         String desc = getIntent().getExtras().getString("desc");
         Instant date = (Instant) getIntent().getExtras().get("date");
+        date.plus(1,DAYS);
         String image = getIntent().getExtras().getString("image");
         String genre = getIntent().getExtras().getString("genre");
         String bugs = getIntent().getExtras().getString("bugs");
