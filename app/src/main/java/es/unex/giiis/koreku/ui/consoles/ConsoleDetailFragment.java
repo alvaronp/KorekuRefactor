@@ -129,20 +129,18 @@ public class ConsoleDetailFragment extends Fragment {
             if (resultCode == getActivity().RESULT_OK) {
                 Consolas c = new Consolas(data);
                 mCon.setTitle(c.getTitle());
+                mCon.setCompany(c.getCompany());
+                mCon.setDate(c.getDate());
                 if(!c.getImage().equals("")) {
                     mCon.setImage(c.getImage());
                 }
-                mCon.setCompany(c.getCompany());
-                mCon.setDate(c.getDate());
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
                 mTitle.setText(mCon.getTitle());
                 mCompany.setText(mCon.getCompany());
                 mBuyDate.setText(mCon.getDate().toString());
                 String imagePath = mCon.getImage();
                 if (imagePath!=null)
-                 image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
-
-
+                    image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
             }
 
         }

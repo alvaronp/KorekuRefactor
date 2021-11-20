@@ -141,7 +141,7 @@ public class UpdataConsole extends AppCompatActivity {
                 String titleString = mTitle.getText().toString();
 
                 // Date
-                String buyDate = dateString;
+                String buyDate = dateView.getText().toString();
 
                 String company = mCompany.getText().toString();
 
@@ -245,7 +245,6 @@ public class UpdataConsole extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             setDateString(year, monthOfYear, dayOfMonth);
-
             dateView.setText(dateString);
         }
 
