@@ -63,5 +63,17 @@
     <string name="subs_name">Subscription Name</string>
     <string name="title_console_api">Consola (Cargado por API) </string>
     <string name="console_not_found">Consola no encontrada con API PriceCharting :( </string>
-
+    <string name="addconsoles">Añadir Consola</string>
+    <string name="addgames">Añadir Juego</string>
+    <string name="addservices">Añadir Servicio</string>
+    <string name="addprofile">Añadir Perfil</string>
+    <string name="searchpro">Buscar Perfil</string>
+    <string name="addbug">Añadir Bug</string>
+    <string name="addcomment">Añadir Comentario</string>
+    <string name="updconsoles">Actualizar Consola</string>
+    <string name="updgames">Actualizar Juego</string>
+    <string name="updservices">Actualizar Servicio</string>
+    <string name="updprofile">Actualizar Perfil</string>
+    <string name="name_profile_search">Introduce el nombre de perfil a buscar</string>
+    <string name="notfound">No encontrado</string>
 </resources>

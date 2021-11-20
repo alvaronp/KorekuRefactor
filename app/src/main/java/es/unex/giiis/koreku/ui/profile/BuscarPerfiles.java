@@ -1,5 +1,6 @@
 package es.unex.giiis.koreku.ui.profile;
 
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,8 +39,6 @@ public class BuscarPerfiles extends AppCompatActivity {
             }
         });
 
-
-
         edtCodigo = findViewById(R.id.edtCodigo);
         edtTelefono = findViewById(R.id.Telefono);
         edtCorreo = findViewById(R.id.Correo);
@@ -47,7 +46,6 @@ public class BuscarPerfiles extends AppCompatActivity {
         Imagen = findViewById(R.id.imagen);
 
         // OnClickListener for the Cancel Button,
-
 
          Button buscar = (Button) findViewById(R.id.btnBuscar);
          buscar.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +62,14 @@ public class BuscarPerfiles extends AppCompatActivity {
                         edtTelefono.setText(perfiles.get(i).getPhone());
                         edtTitle.setText(perfiles.get(i).getTitle());
                         edtCorreo.setText(perfiles.get(i).getMail());
+                        Imagen.setImageBitmap(BitmapFactory.decodeFile(perfiles.get(i).getImage()));
                         bandera = true;
                     }else{i++;}
                 }
                 if(bandera == false){
-                    edtTelefono.setText("No encontrado ");
-                    edtTitle.setText("No encontrado ");
-                    edtCorreo.setText("No encontrado ");
+                    edtTelefono.setText(R.string.notfound);
+                    edtTitle.setText(R.string.notfound);
+                    edtCorreo.setText(R.string.notfound);
                 }
 
             }

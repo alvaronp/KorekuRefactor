@@ -23,5 +23,9 @@ public class Product {
         productname="";
         status="";
     }
+
+    public String getConsolename(){
+        return consolename;
+    }
 }
 

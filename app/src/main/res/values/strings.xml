@@ -63,5 +63,18 @@
     <string name="subs_name">Subscription Name</string>
     <string name="title_console_api">Console (Loaded by API) </string>
     <string name="console_not_found">PriceCharting API console not found :( </string>
+    <string name="addconsoles">Add Console</string>
+    <string name="addgames">Add Game</string>
+    <string name="addservices">Add Service</string>
+    <string name="addprofile">Add Profile</string>
+    <string name="searchpro">Search Profile</string>
+    <string name="addbug">Add Bug</string>
+    <string name="addcomment">Add Comment</string>
+    <string name="updconsoles">Update Console</string>
+    <string name="updgames">Update Game</string>
+    <string name="updservices">Update Service</string>
+    <string name="updprofile">Update Profile</string>
+    <string name="name_profile_search">Enter the profile name to search it</string>
+    <string name="notfound">Not found</string>
 </resources>
 

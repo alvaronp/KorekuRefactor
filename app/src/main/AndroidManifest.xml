@@ -32,67 +32,67 @@
         <activity
             android:name=".ui.consoles.AddConsoles"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/addconsoles"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.profile.BuscarPerfiles"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/searchpro"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.profile.AddProfile"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/addprofile"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.games.AddGames"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/addgames"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.games.GameAddBug"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/addbug"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.profile.NuevoComentario"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/addcomment"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.service.AddService"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/addservices"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.profile.UpdateProfile"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/updprofile"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.consoles.UpdataConsole"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/updconsoles"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.games.UpdateGame"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/updgames"
             android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.service.UpdateService"
             android:exported="true"
-            android:label="Koreku"
+            android:label="@string/updservices"
             android:screenOrientation="portrait"
             />
     </application>
