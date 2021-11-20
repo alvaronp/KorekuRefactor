@@ -54,6 +54,7 @@ public class GameDetailFragment extends Fragment {
     public static GameDetailFragment newInstance(Games g) {
         GameDetailFragment fragment = new GameDetailFragment();
         Bundle args = new Bundle();
+        args.putLong("id", g.getId());
         args.putString("title",g.getTitle());
         args.putString("desc",g.getDesc());
         args.putString("status",g.getStatus().toString());
