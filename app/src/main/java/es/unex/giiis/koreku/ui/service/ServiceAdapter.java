@@ -27,7 +27,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
     private final OnItemClickListener listener;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
+    // Provide a suitable constructor
 
     public ServiceAdapter(Context context, OnItemClickListener listener) {
 
