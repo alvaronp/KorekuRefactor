@@ -1,5 +1,6 @@
 package es.unex.giiis.koreku.ui.profile;
 
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -61,6 +62,7 @@ public class BuscarPerfiles extends AppCompatActivity {
                         edtTelefono.setText(perfiles.get(i).getPhone());
                         edtTitle.setText(perfiles.get(i).getTitle());
                         edtCorreo.setText(perfiles.get(i).getMail());
+                        Imagen.setImageBitmap(BitmapFactory.decodeFile(perfiles.get(i).getImage()));
                         bandera = true;
                     }else{i++;}
                 }
