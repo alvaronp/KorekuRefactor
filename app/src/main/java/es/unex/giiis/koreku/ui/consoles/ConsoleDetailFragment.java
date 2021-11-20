@@ -131,7 +131,9 @@ public class ConsoleDetailFragment extends Fragment {
             if (resultCode == getActivity().RESULT_OK) {
                 Consolas c = new Consolas(data);
                 mCon.setTitle(c.getTitle());
-                mCon.setImage(c.getImage());
+                if(!c.getImage().equals("")) {
+                    mCon.setImage(c.getImage());
+                }
                 mCon.setCompany(c.getCompany());
                 mCon.setDate(c.getDate());
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
