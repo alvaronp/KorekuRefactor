@@ -1,5 +1,6 @@
 package es.unex.giiis.koreku.ui.service;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,20 @@ import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.Service;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.profile.UpdateProfile;
 
 public class ServiceDetailFragment extends Fragment {
 
-    Button delete;
     private Service mSer;
+
+    Button delete;
+
+    TextView mTitle;
+    TextView mSubscription;
+    TextView mEmail;
+    TextView mPrice;
+    TextView mStartDate;
+    TextView mDueDate;
 
     public ServiceDetailFragment() {
 
@@ -36,10 +46,10 @@ public class ServiceDetailFragment extends Fragment {
         Bundle args = new Bundle();
 
         args.putLong("id", service.getId());
-        args.putString("title",service.getTitle());
-        args.putString("subscription",service.getSubscription());
-        args.putString("email",service.getEmail());
-        args.putString("price",service.getPrice());
+        args.putString("title", service.getTitle());
+        args.putString("subscription", service.getSubscription());
+        args.putString("email", service.getEmail());
+        args.putString("price", service.getPrice());
         args.putLong("startDate", DateConverter.toTimestamp(service.getStartDate()));
         args.putLong("dueDate", DateConverter.toTimestamp(service.getDueDate()));
 
@@ -74,12 +84,12 @@ public class ServiceDetailFragment extends Fragment {
 
         // Show item content
 
-        TextView mTitle = v.findViewById(R.id.titleServiceDetail);
-        TextView mSubscription = v.findViewById(R.id.subsServiceDetail);
-        TextView mEmail = v.findViewById(R.id.emailServiceDetail);
-        TextView mPrice = v.findViewById(R.id.priceServiceDetail);
-        TextView mStartDate = v.findViewById(R.id.startDateServiceDetail);
-        TextView mDueDate = v.findViewById(R.id.dueDateServiceDetail);
+        mTitle = v.findViewById(R.id.titleServiceDetail);
+        mSubscription = v.findViewById(R.id.subsServiceDetail);
+        mEmail = v.findViewById(R.id.emailServiceDetail);
+        mPrice = v.findViewById(R.id.priceServiceDetail);
+        mStartDate = v.findViewById(R.id.startDateServiceDetail);
+        mDueDate = v.findViewById(R.id.dueDateServiceDetail);
 
         mTitle.setText(mSer.getTitle());
         mSubscription.setText(mSer.getSubscription());
@@ -94,8 +104,9 @@ public class ServiceDetailFragment extends Fragment {
         Instant dueCorrect = DueDate.plus(1, ChronoUnit.DAYS);
         mDueDate.setText(dueCorrect.toString().subSequence(0,10));
 
-        delete = (Button) v.findViewById(R.id.deleteButtonService);
+        // Delete Service
 
+        delete = (Button) v.findViewById(R.id.deleteButtonService);
         delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -107,12 +118,33 @@ public class ServiceDetailFragment extends Fragment {
                     public void run() {
 
                         KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao4().deleteService(mSer.getSubscription());
+                        db.getDao4().deleteService(mSer.getTitle());
 
                     }
                 });
 
                 getActivity().onBackPressed();
+
+            }
+        });
+
+        // Edit Service
+
+        Button editButton = (Button) v.findViewById(R.id.editButton_service_detail);
+        editButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+
+                Intent intent = new Intent(getActivity(), UpdateService.class);
+
+                intent.putExtra("title", mSer.getTitle());
+                intent.putExtra("subscription", mSer.getSubscription());
+                intent.putExtra("email", mSer.getEmail());
+                intent.putExtra("startDate", mSer.getStartDate());
+                intent.putExtra("dueDate", mSer.getDueDate());
+
+                startActivityForResult(intent, 0);
 
             }
         });

@@ -15,18 +15,20 @@ public interface ServiceDAO {
 
     @Query("SELECT * FROM service")  //Antes definimos que nuestra tabla se llamaría así
     public List<Service> getAll();
-    @Query("DELETE FROM service WHERE subscription = :subscription")
-    public void deleteService(String subscription);
+
+    @Query("DELETE FROM service WHERE title = :title")
+    public void deleteService(String title);
+
     @Insert
     public long insert(Service service);
 
     @Query("DELETE FROM service")
     public void deleteAll();
-//
+
     @Update
     public int update(Service service);
 
-    @Query("SELECT * FROM service ORDER BY dueDate ")
+    @Query("SELECT * FROM service ORDER BY dueDate")
     public List<Service> getAllByDueDate();
 
 }
