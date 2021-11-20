@@ -101,7 +101,7 @@ public class GameDetailFragment extends Fragment {
             bugTitle.setVisibility(View.VISIBLE);
             bug_details.setVisibility(View.VISIBLE);
         }
-
+/a
         mTitle.setText(mGa.getTitle());
         mDesc.setText(mGa.getDesc());
         if(mGa.getStatus().toString().equals("FINISHED"))
