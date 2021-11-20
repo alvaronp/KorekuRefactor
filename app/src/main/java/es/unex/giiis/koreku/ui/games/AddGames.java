@@ -162,7 +162,7 @@ public class AddGames extends AppCompatActivity {
 
 				Intent data = new Intent();
 				try {
-					Thread.sleep(600);
+					Thread.sleep(750);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
