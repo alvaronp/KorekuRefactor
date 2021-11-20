@@ -109,8 +109,7 @@ public class GameDetailFragment extends Fragment {
         else
             mStatus.setText("NO");
         Instant buyDate = mGa.getBuydate().toInstant();
-        Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
-        mBuyDate.setText(correct.toString().subSequence(0,10));
+        mBuyDate.setText(buyDate.toString().subSequence(0,10));
         String imagePath = mGa.getImage();
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
