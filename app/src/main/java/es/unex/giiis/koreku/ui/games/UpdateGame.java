@@ -32,9 +32,12 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
+import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.Games.Status;
 import es.unex.giiis.koreku.R;
+import es.unex.giiis.koreku.api.OnProductsLoadedListener;
+import es.unex.giiis.koreku.api.ProductsNetworkLoaderRunnable;
 import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class UpdateGame extends AppCompatActivity {
@@ -43,6 +46,8 @@ public class UpdateGame extends AppCompatActivity {
     private static TextView dateView;
     private static final int LOAD_IMAGE_REQUEST = 0;
     private static final int PERMISSION_CODE = 0;
+    public static ProductsNetworkLoaderRunnable api;
+    public static OnProductsLoadedListener listen;
 
     private EditText mTitle;
     private Date mBuydate;
@@ -78,22 +83,21 @@ public class UpdateGame extends AppCompatActivity {
         String desc = getIntent().getExtras().getString("desc");
         Instant date = (Instant) getIntent().getExtras().get("date");
         date.plus(1,DAYS);
-        String image = getIntent().getExtras().getString("image");
+        imagen = getIntent().getExtras().getString("image");
+        if (imagen == null) {
+            imagen = "";
+        }
         String genre = getIntent().getExtras().getString("genre");
         String bugs = getIntent().getExtras().getString("bugs");
+        String console = getIntent().getExtras().getString("console");
 
         mTitle.setText(titulo);
         mDesc.setText(desc);
-        dateView.setText(date.toString());
+        dateView.setText(date.toString().subSequence(0,10));
         mGenre.setText(genre);
         //if (bugs != null) mBugs.setText(bugs);
 
 
-
-        // Set the default date and time
-
-
-        setDefaultDateTime();
 
         // OnClickListener for the Date button, calls showDatePickerDialog() to show
         // the Date dialog
@@ -174,11 +178,18 @@ public class UpdateGame extends AppCompatActivity {
 
                 String genre = mGenre.getText().toString();
 
-                //String bugs = mBugs.getText().toString();
+                api = new ProductsNetworkLoaderRunnable(titleString, listen);
+                AppExecutors.getInstance().networkIO().execute(api);
 
-                // Package ToDoItem data into an Intent
                 Intent data = new Intent();
-                Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, null);
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                String consolatest = api.getFoundProduct().consolename;
+                Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, bugs, consolatest);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);

@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,8 +34,6 @@ import es.unex.giiis.koreku.ui.consoles.UpdataConsole;
 
 public class UpdateService extends AppCompatActivity {
 
-    private static String startDateString;
-    private static TextView startDateView;
     private static String dueDateString;
     private static TextView dueDateView;
 
@@ -42,7 +41,6 @@ public class UpdateService extends AppCompatActivity {
     private Spinner mSubscription;
     private EditText mEmail;
     private EditText mPrice;
-    private Date mStartDate;
     private Date mDueDate;
 
 
@@ -56,7 +54,6 @@ public class UpdateService extends AppCompatActivity {
         mSubscription = findViewById(R.id.update_service_spinner);
         mEmail = findViewById(R.id.update_service_EditEmail);
         mPrice = findViewById(R.id.update_service_EditPrice);
-        startDateView = findViewById(R.id.update_service_EditStartDate);
         dueDateView = findViewById(R.id.update_service_EditDueDate);
 
         // Spinner options
@@ -76,31 +73,17 @@ public class UpdateService extends AppCompatActivity {
 
         String eMail = getIntent().getExtras().getString("email");
         String price = getIntent().getExtras().getString("price");
-        String startDate = getIntent().getExtras().getString("startDate");
-        String dueDate = getIntent().getExtras().getString("dueDate");
-
+        Date dueDate = (Date) getIntent().getExtras().get("dueDate");
+        Instant date = dueDate.toInstant();
         mTitle.setText(title);
         mSubscription.setSelection(selectionPosition);
         mEmail.setText(eMail);
         mPrice.setText(price);
-        startDateView.setText(startDate);
-        dueDateView.setText(dueDate);
+        dueDateView.setText(date.toString().subSequence(0,10));
 
-        // OnClickListener for the Date button, calls showDatePickerDialog() to show
-        // the Date dialog
 
-        final Button startDatePickerButton =  findViewById(R.id.update_service_EditStartDate_button);
-        startDatePickerButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                showDatePickerDialog();
-
-            }
-        });
-
-        final Button dueDatePickerButton =  findViewById(R.id.update_service_EditStartDate_button);
+        final Button dueDatePickerButton =  findViewById(R.id.update_service_EditDueDate_button);
         dueDatePickerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -166,14 +149,13 @@ public class UpdateService extends AppCompatActivity {
                 String subscriptionString = mSubscription.getSelectedItem().toString();
                 String emailString = mEmail.getText().toString();
                 String priceString = mPrice.getText().toString();
-               // String startString = startDateString;
-               // String dueString = dueDateString;
+                String dueString = dueDateString;
 
 
                 // Package ToDoItem data into an Intent
 
                 Intent data = new Intent();
-                Service.packageIntent(data, titleString, subscriptionString, emailString, priceString, "", "");
+                Service.packageIntent(data, titleString, subscriptionString, emailString, priceString, dueString);
 
                 // - return data Intent and finish
 
@@ -188,12 +170,10 @@ public class UpdateService extends AppCompatActivity {
 
         // Default is current time + 7 days
 
-        mStartDate = new Date();
         mDueDate = new Date();
 
         Calendar c = Calendar.getInstance();
         setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-        startDateView.setText(startDateString);
         dueDateView.setText(dueDateString);
 
     }
@@ -211,7 +191,6 @@ public class UpdateService extends AppCompatActivity {
         if (dayOfMonth < 10)
             day = "0" + dayOfMonth;
 
-        startDateString = year + "-" + mon + "-" + day;
         dueDateString = year + "-" + mon + "-" + day;
 
     }
@@ -234,22 +213,17 @@ public class UpdateService extends AppCompatActivity {
             return new DatePickerDialog(getActivity(), this, year, month, day);
 
         }
-
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
             setDateString(year, monthOfYear, dayOfMonth);
-
-            startDateView.setText(startDateString);
             dueDateView.setText(dueDateString);
-
         }
 
     }
 
     private void showDatePickerDialog() {
 
-        DialogFragment newFragment = new AddService.DatePickerFragment();
+        DialogFragment newFragment = new UpdateService.DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
 
     }

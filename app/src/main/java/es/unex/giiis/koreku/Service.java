@@ -32,8 +32,6 @@ public class Service {
     @Ignore
     public final static String PRICE = "price";
     @Ignore
-    public final static String STARTDATE = "startDate";
-    @Ignore
     public final static String DUEDATE = "dueDate";
     @Ignore
     public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
@@ -49,24 +47,19 @@ public class Service {
     private String email = new String();
     @ColumnInfo(name = "price")
     private String price;
-    @ColumnInfo(name = "startDate")
-    @TypeConverters(DateConverter.class)
-    private Date startDate = new Date();
     @ColumnInfo(name = "dueDate")
     @TypeConverters(DateConverter.class)
     private Date dueDate = new Date();
 
     @Ignore
-     Service(String title, String subscription, String email, String price, Date startDate,
+     Service(String title, String subscription, String email, String price,
                    Date dueDate) {
 
         this.title = title;
         this.subscription = subscription;
         this.email = email;
         this.price = price;
-        this.startDate = startDate;
         this.dueDate = dueDate;
-
     }
 
     @Ignore
@@ -77,16 +70,6 @@ public class Service {
         subscription = intent.getStringExtra(Service.SUBSCRIPTION);
         email = intent.getStringExtra(Service.EMAIL);
         price =intent.getStringExtra(Service.PRICE);
-
-        try {
-
-            startDate = Service.FORMAT.parse(intent.getStringExtra(Service.STARTDATE));
-
-        } catch (ParseException e) {
-
-            startDate = new Date();
-
-        }
 
         try {
 
@@ -101,14 +84,13 @@ public class Service {
     }
 
     public Service(long id, String title, String subscription, String email, String price,
-                   Date startDate, Date dueDate){
+                   Date dueDate){
 
         this.id = id;
         this.title = title;
         this.subscription = subscription;
         this.email = email;
         this.price = price;
-        this.startDate = startDate;
         this.dueDate = dueDate;
 
     }
@@ -175,18 +157,6 @@ public class Service {
 
     }
 
-    public Date getStartDate() {
-
-        return startDate;
-
-    }
-
-    public void setStartDate(Date startDate) {
-
-        this.startDate = startDate;
-
-    }
-
     public Date getDueDate() {
 
         return dueDate;
@@ -202,21 +172,19 @@ public class Service {
 
 
     public static void packageIntent(Intent intent, String title, String subscription, String email,
-                                     String price, String startDate, String dueDate) {
+                                     String price,  String dueDate) {
 
         intent.putExtra(Service.TITLE, title);
         intent.putExtra(Service.SUBSCRIPTION, subscription);
         intent.putExtra(Service.EMAIL, email);
         intent.putExtra(Service.PRICE, price);
-        intent.putExtra(Service.STARTDATE, startDate);
         intent.putExtra(Service.DUEDATE, dueDate);
-
     }
 
     public String toString() {
 
         return id + ITEM_SEP + title + ITEM_SEP + subscription + ITEM_SEP +  email + ITEM_SEP
-                + price + ITEM_SEP + FORMAT.format(startDate) + ITEM_SEP + FORMAT.format(dueDate);
+                + price + ITEM_SEP + FORMAT.format(dueDate);
 
     }
 
@@ -224,7 +192,7 @@ public class Service {
 
         return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Subscription: "
                 + subscription + ITEM_SEP + "Email: " + email + ITEM_SEP + "Price " + price
-                + ITEM_SEP + "StartDate: " + startDate +  ITEM_SEP + "DueDate: " + dueDate;
+                + ITEM_SEP + "DueDate: " + dueDate;
 
     }
 

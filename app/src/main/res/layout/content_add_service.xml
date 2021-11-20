@@ -26,38 +26,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/serviceDueDate"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="18dp"
         android:text="@string/due_date" />
 
     <TextView
         android:id="@+id/serviceDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/time_and_date"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="475dp"
-        android:text="@string/default_date" />
-
-    <Button
-        android:id="@+id/serviceStartDateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/serviceStartDate"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/start_date" />
-
-    <TextView
-        android:id="@+id/serviceStartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/time_and_date"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="375dp"
+        android:layout_below="@+id/servicePrice"
+        android:layout_alignParentLeft="false"
+        android:layout_marginTop="19dp"
         android:text="@string/default_date" />
 
     <TextView

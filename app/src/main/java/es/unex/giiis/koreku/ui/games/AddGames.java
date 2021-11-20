@@ -160,7 +160,6 @@ public class AddGames extends AppCompatActivity {
 				api = new ProductsNetworkLoaderRunnable(titleString, listen);
 				AppExecutors.getInstance().networkIO().execute(api);
 
-				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
 				try {
 					Thread.sleep(600);

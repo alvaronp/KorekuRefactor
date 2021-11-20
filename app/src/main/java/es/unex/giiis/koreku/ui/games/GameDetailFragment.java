@@ -46,6 +46,8 @@ public class GameDetailFragment extends Fragment {
     TextView mGenre;
     private Games mGa;
     private GameAdapter mAdapter;
+    TextView mConsoleAPI;
+    TextView mConsole;
 
     public GameDetailFragment() {
         // Required empty public constructor
@@ -95,7 +97,7 @@ public class GameDetailFragment extends Fragment {
         bug_details = v.findViewById(R.id.bug_details);
         mStatus = v.findViewById(R.id.statusDetail);
         mGenre = v.findViewById(R.id.genreDetail);
-        TextView mConsoleAPI = v.findViewById(R.id.consoleApiDetail);
+        mConsoleAPI = v.findViewById(R.id.consoleApiDetail);
         bugTitle = v.findViewById(R.id.bugstitle);
         if (mGa.getBugs()!=null){
             bug_details.setText(mGa.getBugs());
@@ -115,7 +117,7 @@ public class GameDetailFragment extends Fragment {
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
         mGenre.setText(mGa.getGenero());
-        TextView mConsole = v.findViewById(R.id.console);
+        mConsole = v.findViewById(R.id.console);
         if(mGa.getConsole().length() > 0) {
             mConsoleAPI.setVisibility(View.VISIBLE);
             mConsole.setVisibility(View.VISIBLE);
@@ -199,18 +201,29 @@ public class GameDetailFragment extends Fragment {
                 mGa.setTitle(g.getTitle());
                 mGa.setDesc(g.getDesc());
                 mGa.setBuydate(g.getBuydate());
-                mGa.setImage(g.getImage());
+                if(!g.getImage().equals("")) {
+                    mGa.setImage(g.getImage());
+                }
                 mGa.setStatus(g.getStatus());
                 mGa.setGenero(g.getGenero());
                 mGa.setBugs(g.getBugs());
+                mGa.setConsole(g.getConsole());
 
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao1().update(mGa));
                 mTitle.setText(mGa.getTitle());
                 mDesc.setText(mGa.getDesc());
-                //mBuyDate.setText(mGa.getBuydate());
-                //mStatus.setText(mGa.getStatus());
                 mGenre.setText(mGa.getGenero());
                 mBugs.setText(mGa.getBugs());
+                mBuyDate.setText(mGa.getBuydate().toInstant().toString().subSequence(0,10));
+                if(mGa.getConsole().length() > 0) {
+                    mConsoleAPI.setVisibility(View.VISIBLE);
+                    mConsole.setVisibility(View.VISIBLE);
+                    mConsoleAPI.setText(mGa.getConsole());
+                }
+                else {
+                    mConsole.setVisibility(View.INVISIBLE);
+                    mConsoleAPI.setVisibility(View.INVISIBLE);
+                }
 
                 String imagePath = mGa.getImage();
                 if (imagePath!=null)

@@ -52,7 +52,6 @@ public class ServiceDetailFragment extends Fragment {
         args.putString("subscription", service.getSubscription());
         args.putString("email", service.getEmail());
         args.putString("price", service.getPrice());
-        args.putLong("startDate", DateConverter.toTimestamp(service.getStartDate()));
         args.putLong("dueDate", DateConverter.toTimestamp(service.getDueDate()));
 
         fragment.setArguments(args);
@@ -71,7 +70,6 @@ public class ServiceDetailFragment extends Fragment {
 
             mSer = new Service(args.getLong("id") , args.getString("title"), args.getString("subscription"),
                                 args.getString("email"), args.getString("price"),
-                                DateConverter.toDate(args.getLong("startDate")),
                                 DateConverter.toDate(args.getLong("dueDate")));
 
         }
@@ -90,7 +88,6 @@ public class ServiceDetailFragment extends Fragment {
         mSubscription = v.findViewById(R.id.subsServiceDetail);
         mEmail = v.findViewById(R.id.emailServiceDetail);
         mPrice = v.findViewById(R.id.priceServiceDetail);
-        mStartDate = v.findViewById(R.id.startDateServiceDetail);
         mDueDate = v.findViewById(R.id.dueDateServiceDetail);
 
         mTitle.setText(mSer.getTitle());
@@ -98,13 +95,8 @@ public class ServiceDetailFragment extends Fragment {
         mEmail.setText(mSer.getEmail());
         mPrice.setText(mSer.getPrice());
 
-        Instant StartDate = mSer.getStartDate().toInstant();
-        Instant startCorrect = StartDate.plus(1, ChronoUnit.DAYS);
-        mStartDate.setText(startCorrect.toString().subSequence(0,10));
-
         Instant DueDate = mSer.getDueDate().toInstant();
-        Instant dueCorrect = DueDate.plus(1, ChronoUnit.DAYS);
-        mDueDate.setText(dueCorrect.toString().subSequence(0,10));
+        mDueDate.setText(DueDate.toString().subSequence(0,10));
 
         // Delete Service
 
@@ -144,7 +136,6 @@ public class ServiceDetailFragment extends Fragment {
                 intent.putExtra("subscription", mSer.getSubscription());
                 intent.putExtra("email", mSer.getEmail());
                 intent.putExtra("price", mSer.getPrice());
-                intent.putExtra("startDate", mSer.getStartDate());
                 intent.putExtra("dueDate", mSer.getDueDate());
 
                 startActivityForResult(intent, 0);
@@ -174,7 +165,6 @@ public class ServiceDetailFragment extends Fragment {
                 mSer.setSubscription(s.getSubscription());
                 mSer.setEmail(s.getEmail());
                 mSer.setPrice(s.getPrice());
-                mSer.setStartDate(s.getStartDate());
                 mSer.setDueDate(s.getDueDate());
 
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao4().update(mSer));
@@ -183,8 +173,7 @@ public class ServiceDetailFragment extends Fragment {
                 mSubscription.setText(mSer.getSubscription());
                 mEmail.setText(mSer.getEmail());
                 mPrice.setText(mSer.getPrice());
-                mStartDate.setText(mSer.getStartDate().toString());
-                mDueDate.setText(mSer.getDueDate().toString());
+                mDueDate.setText(mSer.getDueDate().toInstant().toString().subSequence(0,10));
 
             }
         }
