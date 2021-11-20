@@ -160,7 +160,9 @@ public class ProfileDetailFragment extends Fragment {
                 mProf.setTitle(c.getTitle());
                 mProf.setMail(c.getMail());
                 mProf.setComments(c.getComments());
-                mProf.setImage(c.getImage());
+                if(!c.getImage().equals("")) {
+                    mProf.setImage(c.getImage());
+                }
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
                 mComment.setText(mProf.getComments());
                 mTitle.setText(mProf.getTitle());

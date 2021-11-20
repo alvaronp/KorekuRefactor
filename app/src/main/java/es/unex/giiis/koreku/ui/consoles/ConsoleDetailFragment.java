@@ -82,7 +82,7 @@ public class ConsoleDetailFragment extends Fragment {
         mCompany.setText(mCon.getCompany());
         Instant buyDate = mCon.getDate().toInstant();
         Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
-        mBuyDate.setText(correct.toString().subSequence(0,10));
+        mBuyDate.setText(buyDate.toString().subSequence(0,10));
         String imagePath = mCon.getImage();
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
@@ -131,7 +131,9 @@ public class ConsoleDetailFragment extends Fragment {
             if (resultCode == getActivity().RESULT_OK) {
                 Consolas c = new Consolas(data);
                 mCon.setTitle(c.getTitle());
-                mCon.setImage(c.getImage());
+                if(!c.getImage().equals("")) {
+                    mCon.setImage(c.getImage());
+                }
                 mCon.setCompany(c.getCompany());
                 mCon.setDate(c.getDate());
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
