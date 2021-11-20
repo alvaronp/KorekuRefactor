@@ -78,13 +78,13 @@ public class ConsoleDetailFragment extends Fragment {
          mCompany = v.findViewById(R.id.descGameDetail);
          mBuyDate = v.findViewById(R.id.editTextDate);
          image = v.findViewById(R.id.imageViewGame);
-        mTitle.setText(mCon.getTitle());
-        mCompany.setText(mCon.getCompany());
-        Instant buyDate = mCon.getDate().toInstant();
-        Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
-        mBuyDate.setText(buyDate.toString().subSequence(0,10));
-        String imagePath = mCon.getImage();
-        if (imagePath!=null)
+         mTitle.setText(mCon.getTitle());
+         mCompany.setText(mCon.getCompany());
+         Instant buyDate = mCon.getDate().toInstant();
+         Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
+         mBuyDate.setText(correct.toString().subSequence(0,10));
+         String imagePath = mCon.getImage();
+         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 
         Button editButton = (Button) v.findViewById(R.id.Edit);
@@ -92,7 +92,6 @@ public class ConsoleDetailFragment extends Fragment {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), UpdataConsole.class);
-
                 intent.putExtra("titulo", mCon.getTitle());
                 intent.putExtra("company", mCon.getCompany());
                 intent.putExtra("date", mCon.getDate().toInstant());

@@ -73,9 +73,9 @@ public class GameDetailFragment extends Fragment {
         if (args != null) {
             String status = args.getString("status");
             if (status.equals("FINISHED"))
-                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"),args.getString("console"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.FINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("bugs"),args.getString("genre"),args.getString("console"));
             else
-                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("genre"),args.getString("bugs"),args.getString("console"));
+                mGa = new Games(args.getLong(("id")), args.getString("title"), Games.Status.NOTFINISHED, DateConverter.toDate(args.getLong("dateLong")),args.getString("desc"),args.getString("image"),args.getString("bugs"),args.getString("genre"),args.getString("console"));
 
         }
     }
@@ -110,7 +110,7 @@ public class GameDetailFragment extends Fragment {
             mStatus.setText("NO");
         Instant buyDate = mGa.getBuydate().toInstant();
         Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
-        mBuyDate.setText(buyDate.toString().subSequence(0,10));
+        mBuyDate.setText(correct.toString().subSequence(0,10));
         String imagePath = mGa.getImage();
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));

@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,23 +72,16 @@ public class UpdateGame extends AppCompatActivity {
         mStatusRadioGroup = findViewById(R.id.statusGroup);
         mGenre = findViewById(R.id.genero_edit);
 
-        /*
-        intent.putExtra("titulo", mGa.getTitle());
-        intent.putExtra("desc", mGa.getDesc());
-        intent.putExtra("date", mGa.getBuydate().toInstant());
-        intent.putExtra("image", mGa.getImage());
-        intent.putExtra("genre", mGa.getGenero());
-        intent.putExtra("bugs", mGa.getBugs());*/
         String titulo = getIntent().getExtras().getString("titulo");
         String desc = getIntent().getExtras().getString("desc");
-        String date = getIntent().getExtras().getString("date");
+        Instant date = (Instant) getIntent().getExtras().get("date");
         String image = getIntent().getExtras().getString("image");
         String genre = getIntent().getExtras().getString("genre");
         String bugs = getIntent().getExtras().getString("bugs");
 
         mTitle.setText(titulo);
         mDesc.setText(desc);
-        dateView.setText(date);
+        dateView.setText(date.toString());
         mGenre.setText(genre);
         //if (bugs != null) mBugs.setText(bugs);
 

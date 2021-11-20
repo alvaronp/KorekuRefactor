@@ -163,7 +163,7 @@ public class AddGames extends AppCompatActivity {
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
 				try {
-					Thread.sleep(500);
+					Thread.sleep(600);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -217,6 +217,7 @@ public class AddGames extends AppCompatActivity {
 		mBuydate = new Date();
 
 		Calendar c = Calendar.getInstance();
+		c.setTime(mBuydate);
 
 		setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
 				c.get(Calendar.DAY_OF_MONTH));
