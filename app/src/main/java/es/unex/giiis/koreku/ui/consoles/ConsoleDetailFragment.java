@@ -137,7 +137,7 @@ public class ConsoleDetailFragment extends Fragment {
                 AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
                 mTitle.setText(mCon.getTitle());
                 mCompany.setText(mCon.getCompany());
-                mBuyDate.setText(mCon.getDate().toString());
+                mBuyDate.setText(mCon.getDate().toInstant().toString().subSequence(0,10));
                 String imagePath = mCon.getImage();
                 if (imagePath!=null)
                     image.setImageBitmap(BitmapFactory.decodeFile(imagePath));

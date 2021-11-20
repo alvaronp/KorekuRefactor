@@ -87,7 +87,7 @@
         android:layout_height="43dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="496dp"
-        android:text="@string/phone_profile"
+        android:text="@string/platform_profile"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"></TextView>
@@ -145,7 +145,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="432dp"
         android:ems="10"
-        android:hint="@string/phone_txt"
+        android:hint="@string/platform_txt"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
         android:textAllCaps="true"

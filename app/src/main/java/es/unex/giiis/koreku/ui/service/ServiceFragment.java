@@ -145,7 +145,7 @@ public class ServiceFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, R.string.delete_services);
-        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, R.string.list_by_date);
+        menu.add(Menu.NONE, MENU_ListarFecha, Menu.NONE, R.string.list_by_duedate);
 
     }
 

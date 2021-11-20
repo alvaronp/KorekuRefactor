@@ -39,7 +39,7 @@
     <string name="enter_genre">Kind of your game...</string>
     <string name="genre_game_points">Genre: </string>
     <string name="name_profile">Profile Name</string>
-    <string name="phone_profile">Phone</string>
+    <string name="platform_profile">Platform</string>
     <string name="mail_profile">e-mail</string>
     <string name="new_comment">New Comment</string>
     <string name="add_comment">Add Comment</string>
@@ -51,7 +51,7 @@
     <string name="edit">Edit </string>
     <string name="account_name">Account Name</string>
     <string name="account_name_txt">Enter the account name...</string>
-    <string name="phone_txt">Enter the phone...</string>
+    <string name="platform_txt">Enter the platform...</string>
     <string name="email_txt">Enter the email...</string>
     <string name="service_name">Service Name</string>
     <string name="service_txt">Enter service name...</string>
@@ -76,5 +76,6 @@
     <string name="updprofile">Update Profile</string>
     <string name="name_profile_search">Enter the profile name to search it</string>
     <string name="notfound">Not found</string>
+    <string name="list_by_duedate">List by Due Date</string>
 </resources>
 

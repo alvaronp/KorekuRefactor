@@ -19,6 +19,8 @@
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_add_profile.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_add_service.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_console_manager.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_update_console.xml" value="0.23489583333333333" />
+        <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_update_profile.xml" value="0.23489583333333333" />
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/content_update_service.xml" value="0.3609375" />
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/fragment_console.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Koreku/app/src/main/res/layout/fragment_dashboard.xml" value="0.2957427536231884" />

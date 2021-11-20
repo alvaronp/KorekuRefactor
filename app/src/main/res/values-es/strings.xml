@@ -39,7 +39,7 @@
     <string name="enter_genre">Tipo de juego...</string>
     <string name="genre_game_points">Género: </string>
     <string name="name_profile">Nombre del perfil</string>
-    <string name="phone_profile">Teléfono</string>
+    <string name="platform_profile">Platform</string>
     <string name="mail_profile">e-mail</string>
     <string name="new_comment">Nuevo comentario</string>
     <string name="add_comment">Añadir Comentario</string>
@@ -51,7 +51,7 @@
     <string name="edit">Editar </string>
     <string name="account_name">Nombre de Usuario</string>
     <string name="account_name_txt">Introduce el usuario...</string>
-    <string name="phone_txt">Introduce el teléfono...</string>
+    <string name="platform_txt">Enter the platform...</string>
     <string name="email_txt">Introduce el email...</string>
     <string name="service_name">Nombre del servicio</string>
     <string name="service_txt">Introduce nombre del servicio...</string>
@@ -76,4 +76,5 @@
     <string name="updprofile">Actualizar Perfil</string>
     <string name="name_profile_search">Introduce el nombre de perfil a buscar</string>
     <string name="notfound">No encontrado</string>
+    <string name="list_by_duedate">Listar por fecha de fin</string>
 </resources>
