@@ -11,8 +11,8 @@
         android:id="@+id/delete_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -189,7 +189,7 @@
         android:id="@+id/error_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="96dp"
         android:text="@string/new_bug"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete_game"
@@ -225,10 +225,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/title_console_api"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bug_details" />
+        app:layout_constraintTop_toBottomOf="@+id/bug_details"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/consoleApiDetail"
