@@ -1,27 +1,37 @@
 package es.unex.giiis.koreku.ui.service;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.Service;
+import es.unex.giiis.koreku.ui.consoles.UpdataConsole;
 
-public class AddService extends AppCompatActivity {
+public class UpdateService extends AppCompatActivity {
 
     private static String startDateString;
     private static TextView startDateView;
@@ -36,21 +46,18 @@ public class AddService extends AppCompatActivity {
     private Date mDueDate;
 
 
-
-    // Funcionalidades de los botones y cuadros
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_add_service);
+        setContentView(R.layout.content_update_service);
 
-        mTitle = findViewById(R.id.serviceName);
-        mSubscription = findViewById(R.id.serviceSpinner);
-        mEmail = findViewById(R.id.serviceEmail);
-        mPrice = findViewById(R.id.servicePrice);
-        startDateView = findViewById(R.id.serviceStartDate);
-        dueDateView = findViewById(R.id.serviceDueDate);
+        mTitle = findViewById(R.id.update_service_EditName);
+        mSubscription = findViewById(R.id.update_service_spinner);
+        mEmail = findViewById(R.id.update_service_EditEmail);
+        mPrice = findViewById(R.id.update_service_EditPrice);
+        startDateView = findViewById(R.id.update_service_EditStartDate);
+        dueDateView = findViewById(R.id.update_service_EditDueDate);
 
         // Spinner options
 
@@ -59,16 +66,30 @@ public class AddService extends AppCompatActivity {
                 "UPlay+","Xbox Game Pass", "Xbox Live Gold", "Other"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                                        android.R.layout.simple_spinner_dropdown_item, opciones);
+                android.R.layout.simple_spinner_dropdown_item, opciones);
         mSubscription.setAdapter(adapter);
 
-        // Set the default date
+        String title = getIntent().getExtras().getString("title");
+        String subscription = getIntent().getExtras().getString("subscription");
 
-        setDefaultDate();
+        int selectionPosition = adapter.getPosition(subscription);
 
-        // OnClickListener for the Date buttons, calls showDatePickerDialog() to show the Date dialog
+        String eMail = getIntent().getExtras().getString("email");
+        String price = getIntent().getExtras().getString("price");
+        String startDate = getIntent().getExtras().getString("startDate");
+        String dueDate = getIntent().getExtras().getString("dueDate");
 
-        final Button startDatePickerButton =  findViewById(R.id.serviceStartDateButton);
+        mTitle.setText(title);
+        mSubscription.setSelection(selectionPosition);
+        mEmail.setText(eMail);
+        mPrice.setText(price);
+        startDateView.setText(startDate);
+        dueDateView.setText(dueDate);
+
+        // OnClickListener for the Date button, calls showDatePickerDialog() to show
+        // the Date dialog
+
+        final Button startDatePickerButton =  findViewById(R.id.update_service_EditStartDate_button);
         startDatePickerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,10 +98,9 @@ public class AddService extends AppCompatActivity {
                 showDatePickerDialog();
 
             }
-
         });
 
-        final Button dueDatePickerButton =  findViewById(R.id.serviceDueDateButton);
+        final Button dueDatePickerButton =  findViewById(R.id.update_service_EditStartDate_button);
         dueDatePickerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -92,9 +112,7 @@ public class AddService extends AppCompatActivity {
 
         });
 
-        // OnClickListener for the Cancel Button
-
-        final Button cancelButton =  findViewById(R.id.serviceCancelButton);
+        final Button cancelButton =  findViewById(R.id.update_service_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -113,8 +131,9 @@ public class AddService extends AppCompatActivity {
 
         //OnClickListener for the Reset Button
 
-        final Button resetButton =  findViewById(R.id.serviceResetButton);
+        final Button resetButton =  findViewById(R.id.update_service_reset_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -133,7 +152,7 @@ public class AddService extends AppCompatActivity {
 
         // OnClickListener for the Submit Button
 
-        final Button submitButton =  findViewById(R.id.serviceSubmitButton);
+        final Button submitButton =  findViewById(R.id.update_service_submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -196,8 +215,6 @@ public class AddService extends AppCompatActivity {
 
     }
 
-    // DialogFragment used to pick a Console deadline date
-
     public static class DatePickerFragment extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
 
@@ -231,7 +248,7 @@ public class AddService extends AppCompatActivity {
 
     private void showDatePickerDialog() {
 
-        DialogFragment newFragment = new DatePickerFragment();
+        DialogFragment newFragment = new AddService.DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
 
     }

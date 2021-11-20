@@ -70,9 +70,9 @@ public class ServiceFragment extends Fragment {
             public void onItemClick(Service service) {
 
                 ServiceDetailFragment fragment = ServiceDetailFragment.newInstance(service);
-                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment)
-                        .addToBackStack(null)  //permite mantener la navegacion del boton back
-                        .commit();
+                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main,
+                        fragment).addToBackStack(null).commit();
+
             }
         });
 
@@ -169,7 +169,9 @@ public class ServiceFragment extends Fragment {
 
                     }
                 });
+
                 return true;
+
             case MENU_Listar:
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
 
@@ -183,6 +185,8 @@ public class ServiceFragment extends Fragment {
                     }
                 });
 
+                return true;
+
             case MENU_ListarFecha:
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
 
@@ -195,6 +199,9 @@ public class ServiceFragment extends Fragment {
 
                     }
                 });
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

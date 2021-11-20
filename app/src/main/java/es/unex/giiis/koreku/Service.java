@@ -15,13 +15,16 @@ import java.util.Locale;
 
 import es.unex.giiis.koreku.roomdb.DateConverter;
 
-@Entity(tableName = "service") //Etiquetamos la clase e indicamos el nombre de la tabla donde se va a guardar
+@Entity(tableName = "service") //Etiquetamos la clase e indicamos el nombre de la tabla donde
+                                // se va a guardar
 public class Service {
 
     @Ignore
     public static final String ITEM_SEP = System.getProperty("line.separator");
     @Ignore
     public final static String ID = "id";
+    @Ignore
+    public final static String TITLE = "title";
     @Ignore
     public final static String SUBSCRIPTION = "subscription";
     @Ignore
@@ -38,6 +41,8 @@ public class Service {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
+    @ColumnInfo(name = "title")
+    private String title = new String();
     @ColumnInfo(name = "subscription")
     private String subscription = new String();
     @ColumnInfo(name = "email")
@@ -52,8 +57,10 @@ public class Service {
     private Date dueDate = new Date();
 
     @Ignore
-    public Service(String subscription, String email, String price, Date startDate, Date dueDate) {
+    public Service(String title, String subscription, String email, String price, Date startDate,
+                   Date dueDate) {
 
+        this.title = title;
         this.subscription = subscription;
         this.email = email;
         this.price = price;
@@ -63,9 +70,11 @@ public class Service {
     }
 
     @Ignore
-    public Service(long id, String subscription, String email, String price, String startDate, String dueDate) {
+    public Service(long id, String title, String subscription, String email, String price,
+                   String startDate, String dueDate) {
 
         this.id = id;
+        this.title = title;
         this.subscription = subscription;
         this.email = email;
         this.price = price;
@@ -96,6 +105,7 @@ public class Service {
     public Service(Intent intent) {
 
         id = intent.getLongExtra(Service.ID,0);
+        title = intent.getStringExtra(Service.TITLE);
         subscription = intent.getStringExtra(Service.SUBSCRIPTION);
         email = intent.getStringExtra(Service.EMAIL);
         price =intent.getStringExtra(Service.PRICE);
@@ -122,9 +132,11 @@ public class Service {
 
     }
 
-    public Service(long id, String subscription, String email, String price, Date startDate, Date dueDate){
+    public Service(long id, String title, String subscription, String email, String price,
+                   Date startDate, Date dueDate){
 
         this.id = id;
+        this.title = title;
         this.subscription = subscription;
         this.email = email;
         this.price = price;
@@ -144,6 +156,18 @@ public class Service {
     public void setId(long id) {
 
         this.id = id;
+
+    }
+
+    public String getTitle() {
+
+        return title;
+
+    }
+
+    public void setTitle(String title) {
+
+        this.title = title;
 
     }
 
@@ -209,8 +233,10 @@ public class Service {
 
 
 
-    public static void packageIntent(Intent intent, String subscription, String email, String price, String startDate, String dueDate) {
+    public static void packageIntent(Intent intent, String title, String subscription, String email,
+                                     String price, String startDate, String dueDate) {
 
+        intent.putExtra(Service.TITLE, title);
         intent.putExtra(Service.SUBSCRIPTION, subscription);
         intent.putExtra(Service.EMAIL, email);
         intent.putExtra(Service.PRICE, price);
@@ -221,13 +247,17 @@ public class Service {
 
     public String toString() {
 
-        return id + ITEM_SEP + subscription + ITEM_SEP +  email + ITEM_SEP + price + ITEM_SEP + FORMAT.format(startDate) + ITEM_SEP + FORMAT.format(dueDate);
+        return id + ITEM_SEP + title + ITEM_SEP + subscription + ITEM_SEP +  email + ITEM_SEP
+                + price + ITEM_SEP + FORMAT.format(startDate) + ITEM_SEP + FORMAT.format(dueDate);
 
     }
 
     public String toLog() {
-        return "ID: " + id + ITEM_SEP + "Subscription: " + subscription + ITEM_SEP + "Email: " + email
-                + ITEM_SEP + "Price " + price + ITEM_SEP + "StartDate: " + startDate +  ITEM_SEP + "DueDate: " + dueDate;
+
+        return "ID: " + id + ITEM_SEP + "Title:" + title + ITEM_SEP + "Subscription: "
+                + subscription + ITEM_SEP + "Email: " + email + ITEM_SEP + "Price " + price
+                + ITEM_SEP + "StartDate: " + startDate +  ITEM_SEP + "DueDate: " + dueDate;
+
     }
 
 }
