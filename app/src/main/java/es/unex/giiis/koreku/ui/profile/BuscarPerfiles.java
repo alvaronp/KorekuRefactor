@@ -38,8 +38,6 @@ public class BuscarPerfiles extends AppCompatActivity {
             }
         });
 
-
-
         edtCodigo = findViewById(R.id.edtCodigo);
         edtTelefono = findViewById(R.id.Telefono);
         edtCorreo = findViewById(R.id.Correo);
@@ -47,7 +45,6 @@ public class BuscarPerfiles extends AppCompatActivity {
         Imagen = findViewById(R.id.imagen);
 
         // OnClickListener for the Cancel Button,
-
 
          Button buscar = (Button) findViewById(R.id.btnBuscar);
          buscar.setOnClickListener(new View.OnClickListener() {
@@ -68,9 +65,9 @@ public class BuscarPerfiles extends AppCompatActivity {
                     }else{i++;}
                 }
                 if(bandera == false){
-                    edtTelefono.setText("No encontrado ");
-                    edtTitle.setText("No encontrado ");
-                    edtCorreo.setText("No encontrado ");
+                    edtTelefono.setText(R.string.notfound);
+                    edtTitle.setText(R.string.notfound);
+                    edtCorreo.setText(R.string.notfound);
                 }
 
             }

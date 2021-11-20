@@ -36,7 +36,7 @@
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="184dp"
         android:textIsSelectable="true"
         app:layout_constraintStart_toEndOf="@+id/textView11"
@@ -125,35 +125,18 @@
         tools:context=".ui.consoles.ConsoleDetailFragment" />
 
     <TextView
-        android:id="@+id/titleServiceDetail3"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="155dp"
-        android:layout_marginBottom="546dp"
-        android:textIsSelectable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:context=".ui.consoles.ConsoleDetailFragment" />
-
-    <TextView
         android:id="@+id/emailServiceDetail"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="155dp"
         android:layout_marginBottom="546dp"
         android:textIsSelectable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/subsServiceDetail"
+        app:layout_constraintVertical_bias="0.476"
         tools:context=".ui.consoles.ConsoleDetailFragment" />
 
     <TextView

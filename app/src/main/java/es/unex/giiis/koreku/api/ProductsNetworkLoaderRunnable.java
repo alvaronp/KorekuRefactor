@@ -11,7 +11,7 @@ public class ProductsNetworkLoaderRunnable implements Runnable{
     private final OnProductsLoadedListener mOnProductsLoadedListener;
     private final String mTitle;
     private static String key;
-    public static Product product;
+    public Product product;
 
     public ProductsNetworkLoaderRunnable(String gametitle, OnProductsLoadedListener onProductsLoadedListener) {
         mOnProductsLoadedListener = onProductsLoadedListener;
