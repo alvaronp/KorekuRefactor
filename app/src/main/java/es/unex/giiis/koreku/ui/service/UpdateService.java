@@ -166,13 +166,14 @@ public class UpdateService extends AppCompatActivity {
                 String subscriptionString = mSubscription.getSelectedItem().toString();
                 String emailString = mEmail.getText().toString();
                 String priceString = mPrice.getText().toString();
-                String startString = startDateString;
-                String dueString = dueDateString;
+               // String startString = startDateString;
+               // String dueString = dueDateString;
+
 
                 // Package ToDoItem data into an Intent
 
                 Intent data = new Intent();
-                Service.packageIntent(data, titleString, subscriptionString, emailString, priceString, startString, dueString);
+                Service.packageIntent(data, titleString, subscriptionString, emailString, priceString, "", "");
 
                 // - return data Intent and finish
 

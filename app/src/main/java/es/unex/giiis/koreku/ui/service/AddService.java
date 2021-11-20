@@ -172,6 +172,7 @@ public class AddService extends AppCompatActivity {
         mDueDate = new Date();
 
         Calendar c = Calendar.getInstance();
+        c.setTime(mStartDate);
         setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
         startDateView.setText(startDateString);
         dueDateView.setText(dueDateString);

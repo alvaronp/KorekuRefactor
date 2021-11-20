@@ -74,7 +74,7 @@ public class Games {
 
 
 	@Ignore //Room no tiene porque saber los constructores de la clase
-	public Games(String title, Status status, Date buydate, String desc, String image, String genero, String bugs, String console) {
+	 Games(String title, Status status, Date buydate, String desc, String image, String genero, String bugs, String console) {
 		this.title = title;
 		this.status = status;
 		this.buydate = buydate;
@@ -84,23 +84,6 @@ public class Games {
 		this.genero = genero;
 		this.console = console;
 	}
-
-	@Ignore
-	public Games(long ID, String title, String status, String buydate, String desc, String image, String genero, String bugs, String console) {
-        this.id = ID;
-        this.title = title;
-        this.status = Status.valueOf(status);
-        try {
-            this.buydate = Games.FORMAT.parse(buydate);
-        } catch (ParseException e) {
-            this.buydate = new Date();
-        }
-        this.desc = desc;
-        this.image = image;
-        this.bugs = bugs;
-		this.genero = genero;
-		this.console = console;
-    }
 
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore

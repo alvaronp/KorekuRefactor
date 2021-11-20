@@ -57,7 +57,7 @@ public class Service {
     private Date dueDate = new Date();
 
     @Ignore
-    public Service(String title, String subscription, String email, String price, Date startDate,
+     Service(String title, String subscription, String email, String price, Date startDate,
                    Date dueDate) {
 
         this.title = title;
@@ -66,38 +66,6 @@ public class Service {
         this.price = price;
         this.startDate = startDate;
         this.dueDate = dueDate;
-
-    }
-
-    @Ignore
-    public Service(long id, String title, String subscription, String email, String price,
-                   String startDate, String dueDate) {
-
-        this.id = id;
-        this.title = title;
-        this.subscription = subscription;
-        this.email = email;
-        this.price = price;
-
-        try {
-
-            this.startDate = Service.FORMAT.parse(startDate);
-
-        } catch (ParseException e) {
-
-            this.startDate = new Date();
-
-        }
-
-        try {
-
-            this.dueDate = Service.FORMAT.parse(dueDate);
-
-        } catch (ParseException e) {
-
-            this.dueDate = new Date();
-
-        }
 
     }
 

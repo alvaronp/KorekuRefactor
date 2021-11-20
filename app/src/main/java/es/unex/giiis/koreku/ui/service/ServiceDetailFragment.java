@@ -1,6 +1,7 @@
 package es.unex.giiis.koreku.ui.service;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.Service;
 import es.unex.giiis.koreku.roomdb.DateConverter;
@@ -67,7 +69,7 @@ public class ServiceDetailFragment extends Fragment {
 
         if (args != null) {
 
-            mSer = new Service(args.getString("title"), args.getString("subscription"),
+            mSer = new Service(args.getLong("id") , args.getString("title"), args.getString("subscription"),
                                 args.getString("email"), args.getString("price"),
                                 DateConverter.toDate(args.getLong("startDate")),
                                 DateConverter.toDate(args.getLong("dueDate")));
@@ -141,6 +143,7 @@ public class ServiceDetailFragment extends Fragment {
                 intent.putExtra("title", mSer.getTitle());
                 intent.putExtra("subscription", mSer.getSubscription());
                 intent.putExtra("email", mSer.getEmail());
+                intent.putExtra("price", mSer.getPrice());
                 intent.putExtra("startDate", mSer.getStartDate());
                 intent.putExtra("dueDate", mSer.getDueDate());
 
@@ -151,6 +154,40 @@ public class ServiceDetailFragment extends Fragment {
 
         return v;
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //  - Check result code and request code.
+        // If user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+        if (requestCode == 0) {
+
+            if (resultCode == getActivity().RESULT_OK) {
+
+                Service s = new Service(data);
+                mSer.setTitle(s.getTitle());
+                mSer.setSubscription(s.getSubscription());
+                mSer.setEmail(s.getEmail());
+                mSer.setPrice(s.getPrice());
+                mSer.setStartDate(s.getStartDate());
+                mSer.setDueDate(s.getDueDate());
+
+                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao4().update(mSer));
+
+                mTitle.setText(mSer.getTitle());
+                mSubscription.setText(mSer.getSubscription());
+                mEmail.setText(mSer.getEmail());
+                mPrice.setText(mSer.getPrice());
+                mStartDate.setText(mSer.getStartDate().toString());
+                mDueDate.setText(mSer.getDueDate().toString());
+
+            }
+        }
     }
 
     @Override public void onResume() {
