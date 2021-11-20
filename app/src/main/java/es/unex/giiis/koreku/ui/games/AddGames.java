@@ -162,7 +162,14 @@ public class AddGames extends AppCompatActivity {
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
-				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null, api.getFoundProduct().consolename);
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String consolatest = api.getFoundProduct().consolename;
+				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null,consolatest );
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);
