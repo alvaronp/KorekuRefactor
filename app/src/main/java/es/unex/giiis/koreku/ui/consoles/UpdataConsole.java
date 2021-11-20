@@ -139,7 +139,7 @@ public class UpdataConsole extends AppCompatActivity {
                 // Gather Console data
                 // -  Title
                 String titleString = mTitle.getText().toString();
-                setDefaultDateTime();
+
                 // Date
                 String buyDate = dateString;
 

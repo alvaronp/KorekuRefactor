@@ -82,7 +82,7 @@ public class ConsoleDetailFragment extends Fragment {
         mCompany.setText(mCon.getCompany());
         Instant buyDate = mCon.getDate().toInstant();
         Instant correct = buyDate.plus(1, ChronoUnit.DAYS);
-        mBuyDate.setText(correct.toString().subSequence(0,10));
+        mBuyDate.setText(buyDate.toString().subSequence(0,10));
         String imagePath = mCon.getImage();
         if (imagePath!=null)
             image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
