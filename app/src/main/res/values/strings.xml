@@ -75,7 +75,7 @@
     <string name="updservices">Update Service</string>
     <string name="updprofile">Update Profile</string>
     <string name="name_profile_search">Enter the profile name to search it</string>
-    <string name="notfound">Not found</string>
+    <string name="notfound">Oops...Profile Not found</string>
     <string name="list_by_duedate">List by Due Date</string>
 </resources>
 

@@ -22,8 +22,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_service_recycledView"
-        android:layout_width="380dp"
-        android:layout_height="630dp"
+        android:layout_width="382dp"
+        android:layout_height="588dp"
         android:backgroundTint="@color/koreku"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

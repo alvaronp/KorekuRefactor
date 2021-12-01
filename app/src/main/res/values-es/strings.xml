@@ -75,6 +75,6 @@
     <string name="updservices">Actualizar Servicio</string>
     <string name="updprofile">Actualizar Perfil</string>
     <string name="name_profile_search">Introduce el nombre de perfil a buscar</string>
-    <string name="notfound">No encontrado</string>
+    <string name="notfound">Ups...Perfil no encontrado</string>
     <string name="list_by_duedate">Listar por fecha de fin</string>
 </resources>

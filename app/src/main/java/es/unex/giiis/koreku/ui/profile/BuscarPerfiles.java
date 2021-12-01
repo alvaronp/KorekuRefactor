@@ -11,6 +11,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.utils.widget.ImageFilterView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
@@ -56,9 +58,11 @@ public class BuscarPerfiles extends AppCompatActivity {
                 boolean bandera = false;
                 while(i<perfiles.size() && bandera ==false){
                     String titulo=perfiles.get(i).getTitle();
-
                     if(codigo.equals(titulo)){
-                        //Imagen.setImageURI(Uri.parse(perfiles.get(i).getImage()));
+                        edtTelefono.setVisibility(View.VISIBLE);
+                        edtCorreo.setVisibility(View.VISIBLE);
+                        edtTitle.setVisibility(View.VISIBLE);
+                        Imagen.setVisibility(View.VISIBLE);
                         edtTelefono.setText(perfiles.get(i).getPhone());
                         edtTitle.setText(perfiles.get(i).getTitle());
                         edtCorreo.setText(perfiles.get(i).getMail());
@@ -67,6 +71,8 @@ public class BuscarPerfiles extends AppCompatActivity {
                     }else{i++;}
                 }
                 if(bandera == false){
+                    Snackbar.make(v, R.string.notfound, Snackbar.LENGTH_LONG)
+                            .show();
                     edtTelefono.setText(R.string.notfound);
                     edtTitle.setText(R.string.notfound);
                     edtCorreo.setText(R.string.notfound);
