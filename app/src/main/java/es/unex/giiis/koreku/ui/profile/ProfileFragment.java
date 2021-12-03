@@ -3,6 +3,7 @@ package es.unex.giiis.koreku.ui.profile;
 import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +45,8 @@ public class ProfileFragment extends Fragment {
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        TransitionInflater tInf = TransitionInflater.from(this.getActivity());
+        setExitTransition(tInf.inflateTransition(R.transition.fade_in));
 
         busqueda = (FloatingActionButton) root.findViewById(R.id.Busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {

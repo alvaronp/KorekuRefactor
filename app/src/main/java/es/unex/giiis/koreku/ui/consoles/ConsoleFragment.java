@@ -2,6 +2,7 @@ package es.unex.giiis.koreku.ui.consoles;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +43,8 @@ public class ConsoleFragment extends Fragment {
 
         binding = FragmentConsoleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        TransitionInflater tInf = TransitionInflater.from(this.getActivity());
+        setExitTransition(tInf.inflateTransition(R.transition.fade_in));
         FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@ package es.unex.giiis.koreku.ui.service;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,8 @@ public class ServiceDetailFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.service_detail, container, false);
-
+        TransitionInflater tInf = TransitionInflater.from(this.getActivity());
+        setEnterTransition(tInf.inflateTransition(R.transition.slide_right));
         // Show item content
 
         mTitle = v.findViewById(R.id.titleServiceDetail);
