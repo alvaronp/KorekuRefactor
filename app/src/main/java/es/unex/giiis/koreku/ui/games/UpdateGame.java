@@ -31,8 +31,11 @@ import androidx.core.content.ContextCompat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.api.Product;
 import es.unex.giiis.koreku.ui.games.Games.Status;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.api.OnProductsLoadedListener;
@@ -178,15 +181,23 @@ public class UpdateGame extends AppCompatActivity {
 
                 api = new ProductsNetworkLoaderRunnable(titleString, listen);
                 AppExecutors.getInstance().networkIO().execute(api);
+                synchronized (AddGames.lock) {
+                    try {
+                        AddGames.lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 Intent data = new Intent();
+                Product consolatest = null;
                 try {
-                    Thread.sleep(750);
-                } catch (InterruptedException e) {
+                    consolatest = api.getFoundProduct();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String consolatest = api.getFoundProduct().consolename;
-                Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, bugs, consolatest);
+                String consolaApi = consolatest.consolename;
+                Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, bugs, consolaApi);
 
                 // - return data Intent and finish
                 setResult(RESULT_OK, data);

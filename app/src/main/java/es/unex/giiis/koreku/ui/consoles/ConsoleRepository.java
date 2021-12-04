@@ -25,26 +25,46 @@ public class ConsoleRepository {
     private static ConsoleRepository sInstance;
     private final ConsolasDAO mConsolasDAO;
     private final AppExecutors mExecutors = AppExecutors.getInstance();
-    private final MutableLiveData<String> userFilterLiveData = new MutableLiveData<>();
-    private final Map<String, Long> lastUpdateTimeMillisMap = new HashMap<>();
+    private LiveData<List<Consolas>> consolas;
     private static final long MIN_TIME_FROM_LAST_FETCH_MILLIS = 30000;
 
     private ConsoleRepository(ConsolasDAO consolasDAO) {
         mConsolasDAO = consolasDAO;
-        // LiveData that fetches repos from network
-        LiveData<List<Consolas>> allData = consolasDAO.getAll();
-        // As long as the repository exists, observe the network LiveData.
-        // If that LiveData changes, update the database.
-        allData.observeForever(newConsolasFromDB -> {
-            mExecutors.diskIO().execute(() -> {
-                // Deleting cached repos of user
-                if (newConsolasFromDB.size() > 0){
-                    mConsolasDAO.deleteConsole(newConsolasFromDB.get(0).getTitle());
-                }
-                // Insert our new repos into local database
-                mConsolasDAO.bulkInsert(newConsolasFromDB);
-                Log.d(LOG_TAG, "New values inserted in Room");
-            });
+        consolas = mConsolasDAO.getAll();
+    }
+
+    public synchronized static ConsoleRepository getInstance(ConsolasDAO dao) {
+        Log.d(LOG_TAG, "Getting the repository");
+        if (sInstance == null) {
+            sInstance = new ConsoleRepository(dao);
+            Log.d(LOG_TAG, "Made new repository");
+        }
+        return sInstance;
+    }
+
+    private void doFetchConsoles(){
+        Log.d(LOG_TAG, "Fetching Consoles from DB");
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            consolas = mConsolasDAO.getAll();
         });
+    }
+
+    /**
+     * Database related operations
+     **/
+
+    public LiveData<List<Consolas>> getConsoles() {
+        doFetchConsoles();
+        return consolas;
+    }
+
+    public LiveData<List<Consolas>> getConsolesByDate(){
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                consolas = mConsolasDAO.getAllByDate();
+            }
+        });
+        return consolas;
     }
 }

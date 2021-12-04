@@ -118,4 +118,5 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
         }
     }
 
+
 }

@@ -13,13 +13,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentConsoleBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -146,15 +150,11 @@ public class ConsoleFragment extends Fragment {
                 return true;
 
             case MENU_ListarFecha:
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        List<Consolas>consolas =db.getDao2().getAllByDate();
-                        getActivity().runOnUiThread(() -> mAdapter.load( consolas));
-                    }
+                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+                ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
+                mViewModel.getConsolesByDate().observe(this, consolas -> {
+                    mAdapter.load(consolas);
                 });
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -164,12 +164,10 @@ public class ConsoleFragment extends Fragment {
     private void loadItems() {
         //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
         //List<ToDoItem> items = crud.getAll();
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                List <Consolas> cons = KorekuDatabase.getInstance(getActivity()).getDao2().getAll();
-                getActivity().runOnUiThread(()->mAdapter.load(cons));
-            }
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
+        mViewModel.getConsoles().observe(this, consolas -> {
+            mAdapter.load(consolas);
         });
     }
 }

@@ -28,8 +28,11 @@ import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.Future;
+import java.util.concurrent.locks.Lock;
 
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.api.Product;
 import es.unex.giiis.koreku.ui.games.Games.Status;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.api.OnProductsLoadedListener;
@@ -41,6 +44,7 @@ public class AddGames extends AppCompatActivity {
 	private static TextView dateView;
 	private static final int LOAD_IMAGE_REQUEST = 0;
 	private static final int PERMISSION_CODE = 0;
+	public static final Object lock = new Object();
 
 	private EditText mTitle;
 	private Date mBuydate;
@@ -152,16 +156,23 @@ public class AddGames extends AppCompatActivity {
 
 				api = new ProductsNetworkLoaderRunnable(titleString, listen);
 				AppExecutors.getInstance().networkIO().execute(api);
+				synchronized (lock) {
+					try {
+						lock.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 
 				Intent data = new Intent();
+				Product consolatest = null;
 				try {
-					Thread.sleep(750);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					consolatest = api.getFoundProduct();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				String consolatest = api.getFoundProduct().consolename;
-				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null,consolatest );
+				String consolaApi = consolatest.consolename;
+				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null,consolaApi);
 
 				// - return data Intent and finish
 				setResult(RESULT_OK, data);
