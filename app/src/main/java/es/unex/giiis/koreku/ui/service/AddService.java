@@ -19,7 +19,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.Service;
 
 public class AddService extends AppCompatActivity {
 

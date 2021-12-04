@@ -2,7 +2,7 @@ package es.unex.giiis.koreku.roomdb;
 
 import androidx.room.TypeConverter;
 
-import es.unex.giiis.koreku.Games;
+import es.unex.giiis.koreku.ui.games.Games;
 
 public class StatusConverter {
     @TypeConverter

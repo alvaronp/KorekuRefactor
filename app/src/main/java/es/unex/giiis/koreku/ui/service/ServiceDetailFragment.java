@@ -1,7 +1,6 @@
 package es.unex.giiis.koreku.ui.service;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
@@ -14,15 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.Service;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
-import es.unex.giiis.koreku.ui.profile.UpdateProfile;
 
 public class ServiceDetailFragment extends Fragment {
 

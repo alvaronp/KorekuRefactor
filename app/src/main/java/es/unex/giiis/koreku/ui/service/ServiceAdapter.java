@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.Service;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder>{
 

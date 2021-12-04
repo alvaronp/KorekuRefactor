@@ -19,10 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class UpdateProfile extends AppCompatActivity {
 

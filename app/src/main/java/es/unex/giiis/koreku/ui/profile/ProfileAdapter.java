@@ -1,13 +1,9 @@
 package es.unex.giiis.koreku.ui.profile;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 
 

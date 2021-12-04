@@ -1,6 +1,5 @@
 package es.unex.giiis.koreku.ui.profile;
 
-import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -10,8 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ShareActionProvider;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,7 +21,6 @@ import java.util.List;
 
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;

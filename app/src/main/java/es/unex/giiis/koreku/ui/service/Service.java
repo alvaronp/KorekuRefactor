@@ -1,4 +1,4 @@
-package es.unex.giiis.koreku;
+package es.unex.giiis.koreku.ui.service;
 
 import android.content.Intent;
 

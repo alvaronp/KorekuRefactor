@@ -2,36 +2,24 @@ package es.unex.giiis.koreku.ui.games;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
-
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-
-import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
-import es.unex.giiis.koreku.ui.consoles.UpdataConsole;
-import es.unex.giiis.koreku.ui.profile.BuscarPerfiles;
-import es.unex.giiis.koreku.ui.profile.NuevoComentario;
 
 
 public class GameDetailFragment extends Fragment {

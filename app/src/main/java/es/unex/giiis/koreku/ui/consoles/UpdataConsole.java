@@ -27,7 +27,6 @@ import androidx.core.content.ContextCompat;
 import java.util.Calendar;
 import java.util.Date;
 
-import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
 
 public class UpdataConsole extends AppCompatActivity {

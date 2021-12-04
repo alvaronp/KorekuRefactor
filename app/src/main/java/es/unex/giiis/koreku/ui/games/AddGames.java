@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,21 +26,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Games;
-import es.unex.giiis.koreku.Games.Status;
+import es.unex.giiis.koreku.ui.games.Games.Status;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.api.OnProductsLoadedListener;
-import es.unex.giiis.koreku.api.PriceChartingService;
-import es.unex.giiis.koreku.api.Product;
-import es.unex.giiis.koreku.api.ProductsLoaderRunnable;
 import es.unex.giiis.koreku.api.ProductsNetworkLoaderRunnable;
-import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class AddGames extends AppCompatActivity {
 

@@ -1,20 +1,15 @@
-package es.unex.giiis.koreku;
+package es.unex.giiis.koreku.ui.profile;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import es.unex.giiis.koreku.roomdb.DateConverter;
 
 @Entity(tableName="perfil")
 public class Perfil {

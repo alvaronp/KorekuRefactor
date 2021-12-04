@@ -1,6 +1,5 @@
 package es.unex.giiis.koreku.ui.games;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -10,31 +9,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnticipateOvershootInterpolator;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.Explode;
-import androidx.transition.TransitionManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentGameBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
-import es.unex.giiis.koreku.ui.games.AddGames;
-import es.unex.giiis.koreku.ui.games.GameAdapter;
-import es.unex.giiis.koreku.ui.games.GameDetailFragment;
 
 public class GameFragment extends Fragment {
 

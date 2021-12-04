@@ -1,7 +1,6 @@
 package es.unex.giiis.koreku.ui.consoles;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,22 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import es.unex.giiis.koreku.AppExecutors;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Perfil;
+import java.time.Instant;
+
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
-import es.unex.giiis.koreku.ui.games.GameAddBug;
-import es.unex.giiis.koreku.ui.profile.UpdateProfile;
 
 
 public class ConsoleDetailFragment extends Fragment {

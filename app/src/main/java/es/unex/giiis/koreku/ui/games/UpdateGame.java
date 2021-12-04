@@ -33,12 +33,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Games;
-import es.unex.giiis.koreku.Games.Status;
+import es.unex.giiis.koreku.ui.games.Games.Status;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.api.OnProductsLoadedListener;
 import es.unex.giiis.koreku.api.ProductsNetworkLoaderRunnable;
-import es.unex.giiis.koreku.ui.consoles.AddConsoles;
 
 public class UpdateGame extends AppCompatActivity {
 

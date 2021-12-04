@@ -1,10 +1,9 @@
-package es.unex.giiis.koreku;
+package es.unex.giiis.koreku.ui.games;
 
 import android.content.Intent;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;

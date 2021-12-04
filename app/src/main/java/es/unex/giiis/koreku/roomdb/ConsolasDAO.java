@@ -7,8 +7,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Games;
+import es.unex.giiis.koreku.ui.consoles.Consolas;
 
 @Dao
 public interface ConsolasDAO {

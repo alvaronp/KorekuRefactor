@@ -20,9 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Games;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.Service;
 import es.unex.giiis.koreku.databinding.FragmentServiceBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 

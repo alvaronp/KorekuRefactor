@@ -7,7 +7,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.unex.giiis.koreku.Perfil;
+import es.unex.giiis.koreku.ui.profile.Perfil;
 
 @Dao
 public interface PerfilDAO {

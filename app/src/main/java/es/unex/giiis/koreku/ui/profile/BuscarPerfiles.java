@@ -1,7 +1,6 @@
 package es.unex.giiis.koreku.ui.profile;
 
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.Perfil;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;

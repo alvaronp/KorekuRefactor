@@ -1,15 +1,13 @@
 package es.unex.giiis.koreku.roomdb;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
 
-import es.unex.giiis.koreku.Consolas;
-import es.unex.giiis.koreku.Games;
+import es.unex.giiis.koreku.ui.games.Games;
 
 @Dao //Esta interfaz es un Dao, así, Room sabrá que lo tiene que implementar como eso
 public interface GamesDAO {

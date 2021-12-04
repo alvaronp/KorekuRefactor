@@ -1,36 +1,25 @@
 package es.unex.giiis.koreku.ui.service;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
-import es.unex.giiis.koreku.Consolas;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.Service;
-import es.unex.giiis.koreku.ui.consoles.UpdataConsole;
 
 public class UpdateService extends AppCompatActivity {
 
