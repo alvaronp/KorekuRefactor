@@ -1,5 +1,8 @@
 package es.unex.giiis.koreku.roomdb;
 
+import static androidx.room.OnConflictStrategy.REPLACE;
+
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -12,7 +15,7 @@ import es.unex.giiis.koreku.ui.consoles.Consolas;
 @Dao
 public interface ConsolasDAO {
     @Query("SELECT * FROM consolas")
-    public List<Consolas> getAll();
+    public LiveData<List<Consolas>> getAll();
     @Insert
     public long insert(Consolas item);
     @Query("DELETE FROM consolas")
@@ -27,9 +30,11 @@ public interface ConsolasDAO {
     public Consolas get(Long id);
 
     @Query("SELECT * FROM consolas ORDER BY DATE ")
-    public List<Consolas> getAllByDate();
+    public LiveData<List<Consolas>> getAllByDate();
 
     @Query("UPDATE consolas SET title=:title,date=:date,company=:company,image=:image WHERE title=:title2")
     public int updateSobrecargado(String title2,String title, String date,String company,String image);
 
+    @Insert(onConflict = REPLACE)
+    void bulkInsert(List<Consolas> c);
 }
