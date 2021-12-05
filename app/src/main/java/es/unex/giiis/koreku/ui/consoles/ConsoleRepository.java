@@ -29,7 +29,7 @@ public class ConsoleRepository {
     private LiveData<List<Consolas>> consolas;
     private static final long MIN_TIME_FROM_LAST_FETCH_MILLIS = 30000;
 
-    private ConsoleRepository(ConsolasDAO consolasDAO) {
+    public ConsoleRepository(ConsolasDAO consolasDAO) {
         mConsolasDAO = consolasDAO;
         consolas = mConsolasDAO.getAll();
     }

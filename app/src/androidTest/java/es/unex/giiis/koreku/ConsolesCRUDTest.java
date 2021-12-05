@@ -27,6 +27,7 @@ import java.util.List;
 import es.unex.giiis.koreku.roomdb.ConsolasDAO;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.consoles.Consolas;
+import es.unex.giiis.koreku.ui.consoles.ConsoleFragment;
 import es.unex.giiis.koreku.ui.consoles.ConsoleRepository;
 import es.unex.giiis.koreku.ui.consoles.ConsoleViewModel;
 
@@ -39,6 +40,9 @@ import es.unex.giiis.koreku.ui.consoles.ConsoleViewModel;
 public class ConsolesCRUDTest {
     private KorekuDatabase db;
     private ConsolasDAO dao;
+    private ConsoleRepository repo;
+    private ConsoleViewModel mViewModel;
+    private Consolas c;
 
     // necessary to test the LiveData
     @Rule
@@ -49,66 +53,54 @@ public class ConsolesCRUDTest {
         Context context = getInstrumentation().getTargetContext();
         db = Room.inMemoryDatabaseBuilder(context, KorekuDatabase.class).allowMainThreadQueries().build();
         dao = db.getDao2();
+        repo = new ConsoleRepository(dao);
+        mViewModel = new ConsoleViewModel(repo);
+        c = new Consolas();
+        c.setTitle("Wii");
+        c.setDate(Date.from(Instant.now()));
+        c.setCompany("Nintendo");
     }
 
     @After
-    public void closeDb() {
+    public void closeDb(){
         db.close();
     }
 
     @Test
     public void shouldAddConsoleToDB() throws InterruptedException {
-        Consolas c = new Consolas();
-        c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
-        c.setCompany("Nintendo");
-
-        dao.insert(c);
-        LiveData<List<Consolas>> consolas = dao.getAll();
+        mViewModel.insert(c);
+        LiveData<List<Consolas>> consolas = mViewModel.getConsoles();
         List<Consolas> clist = LiveDataTestUtils.getValue(consolas);
 
         assertEquals(clist.size(), 1);
         assertEquals(clist.get(0).getTitle(), "Wii");
     }
 
-
     @Test
     public void shouldUpdateConsoleOnDB() throws InterruptedException {
-        Consolas c = new Consolas();
-        c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
-        c.setCompany("Nintendo");
-        dao.insert(c);
-        LiveData <List<Consolas>> consolas = dao.getAll();
+        mViewModel.insert(c);
+
+        LiveData <List<Consolas>> consolas = mViewModel.getConsoles();
         List<Consolas> clist = LiveDataTestUtils.getValue(consolas);
         assertEquals(clist.size(), 1);
         assertEquals(clist.get(0).getTitle(), "Wii");
 
         c.setTitle("Nintendo DS");
-        dao.update(c);
-        clist = LiveDataTestUtils.getValue(dao.getAll());
+        mViewModel.update(c);
+        clist = LiveDataTestUtils.getValue(consolas);
         assertEquals(clist.size(), 1);
         assertEquals(clist.get(0).getTitle(), "Nintendo DS");
     }
 
-
     @Test
-    public void shouldDeleteAllConsolesOnDB() {
-        Consolas c = new Consolas();
-        c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
-        c.setCompany("Nintendo");
+    public void shouldDeleteAllConsolesOnDB() throws InterruptedException {
+        mViewModel.insert(c);
+        LiveData<List<Consolas>> consolas = mViewModel.getConsoles();
+        List<Consolas> clist = LiveDataTestUtils.getValue(consolas);
+        assertEquals(clist.size(), 1);
 
-        dao.insert(c);
-    }
-
-    @Test
-    public void shouldGetCorrectConsoleFromDB(){
-        Consolas c = new Consolas();
-        c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
-        c.setCompany("Nintendo");
-
-        dao.insert(c);
+        mViewModel.delete(c.getTitle());
+        clist = LiveDataTestUtils.getValue(consolas);
+        assertEquals(clist.size(), 0);
     }
 }
