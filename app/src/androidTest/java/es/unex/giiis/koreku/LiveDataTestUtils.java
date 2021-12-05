@@ -42,7 +42,7 @@ public class LiveDataTestUtils {
             }
         };
         liveData.observeForever(observer);
-        latch.await(1, TimeUnit.MICROSECONDS);
+        latch.await(2, TimeUnit.SECONDS);
         //noinspection unchecked
         return (T) data[0];
     }
