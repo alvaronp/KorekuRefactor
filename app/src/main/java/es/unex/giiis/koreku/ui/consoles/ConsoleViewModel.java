@@ -41,4 +41,5 @@ class ConsoleViewModel extends ViewModel {
     public void update (Consolas c){
         mRepository.update(c);
     }
+
 }
