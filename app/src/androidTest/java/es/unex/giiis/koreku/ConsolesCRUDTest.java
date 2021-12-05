@@ -58,7 +58,6 @@ public class ConsolesCRUDTest {
     public void shouldAddConsoleToDB() throws Exception {
 
         // Se crea el item
-
         Consolas c = new Consolas();
 
         c.setTitle("Wii");
@@ -67,69 +66,55 @@ public class ConsolesCRUDTest {
         c.setImage("");
 
         // Se inserta el item
-
         consolasDAO.insert(c);
-
         // Se recupera en el LiveData
-
         LiveData<List<Consolas>> liveConsoles = consolasDAO.getAll();
-
         List<Consolas> consolas = LiveDataTestUtils.getValue(liveConsoles);
 
         assertEquals(consolas.size(), 1);
-
         assertEquals(consolas.get(0).getTitle(), "Wii");
         assertEquals(consolas.get(0).getDate(), new Date(2021, 12, 05));
         assertEquals(consolas.get(0).getCompany(), "Nintendo");
         assertEquals(consolas.get(0).getImage(), "");
-
     }
-
 
     @Test
     public void shouldUpdateConsoleOnDB() throws InterruptedException {
-
         // Se crea el Item a insertar
         Consolas c = new Consolas(1, "Ps5", new Date(2006, 11, 11),
                 "Sony",
                 "https://es.wikipedia.org/wiki/PlayStation_3#/media/Archivo:PS3Versions.png");
-
         // Se inserta el item
         consolasDAO.insert(c);
-
         // Se cambia algún parámetro
         c.setTitle("Ps3");
-
         // Se hace el update
         consolasDAO.update(c);
-
         // Se recupera en el LiveData
         LiveData<List<Consolas>> liveConsolas = consolasDAO.getAll();
         List<Consolas> consolasList = LiveDataTestUtils.getValue(liveConsolas);
-
         // Se inician las comprobaciones de que el update se ha realizado correctamente
         assertEquals(consolasList.get(0).getTitle(), "Ps3");
-
     }
 
 
     @Test
-    public void shouldDeleteAllConsolesOnDB() {
-       /* Consolas c = new Consolas();
+    public void shouldDeleteAllConsolesOnDB() throws InterruptedException {
+        Consolas c = new Consolas();
+
         c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
+        c.setDate(new Date(2021, 12, 05));
         c.setCompany("Nintendo");
+        c.setImage("");
 
-        dao.insert(c); */
-    }
-
-    @Test
-    public void shouldGetCorrectConsoleFromDB(){
-      /*  Consolas c = new Consolas();
-        c.setTitle("Wii");
-        c.setDate(Date.from(Instant.now()));
-        c.setCompany("Nintendo");
-
-        dao.insert(c);*/
+        // Se inserta el item
+        consolasDAO.insert(c);
+        LiveData<List<Consolas>> liveConsolas = consolasDAO.getAll();
+        List<Consolas> consolasList = LiveDataTestUtils.getValue(liveConsolas);
+        assertEquals(consolasList.size(), 1);
+        //Se borra
+        consolasDAO.deleteConsole(c.getTitle());
+        consolasList = LiveDataTestUtils.getValue(liveConsolas);
+        assertEquals(consolasList.size(), 0);
     }
 }
