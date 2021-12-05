@@ -4,6 +4,7 @@ package es.unex.giiis.koreku.roomdb;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -15,7 +16,7 @@ import es.unex.giiis.koreku.ui.consoles.Consolas;
 public interface ConsolasDAO {
     @Query("SELECT * FROM consolas")
     public LiveData<List<Consolas>> getAll();
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insert(Consolas item);
     @Query("DELETE FROM consolas")
     public void deleteAll();

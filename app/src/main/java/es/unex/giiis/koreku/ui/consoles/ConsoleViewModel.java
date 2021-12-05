@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * {@link ViewModel} for {@link ConsoleFragment}
  */
-class ConsoleViewModel extends ViewModel {
+public class ConsoleViewModel extends ViewModel {
 
     private final ConsoleRepository mRepository;
     private final LiveData<List<Consolas>> mConsoles;
