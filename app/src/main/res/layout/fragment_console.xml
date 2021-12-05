@@ -20,6 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/apiFab"
+        android:layout_width="61dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="148dp"
+        android:clickable="true"
+        android:src="@drawable/ic_web"
+        app:backgroundTint="@color/koreku"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:layout_width="383dp"

@@ -77,5 +77,8 @@
     <string name="name_profile_search">Enter the profile name to search it</string>
     <string name="notfound">Oops...Profile Not found</string>
     <string name="list_by_duedate">List by Due Date</string>
+    <string name="priceapi">PriceCharting: Accesories and Games</string>
+    <string name="search_box_hint">Search by console name</string>
+    <string name="search">Search</string>
 </resources>
 

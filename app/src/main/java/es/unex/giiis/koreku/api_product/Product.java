@@ -1,4 +1,4 @@
-package es.unex.giiis.koreku.api;
+package es.unex.giiis.koreku.api_product;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

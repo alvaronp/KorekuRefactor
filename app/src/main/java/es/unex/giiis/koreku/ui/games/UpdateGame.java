@@ -31,15 +31,13 @@ import androidx.core.content.ContextCompat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import es.unex.giiis.koreku.AppExecutors;
-import es.unex.giiis.koreku.api.Product;
+import es.unex.giiis.koreku.api_product.Product;
 import es.unex.giiis.koreku.ui.games.Games.Status;
 import es.unex.giiis.koreku.R;
-import es.unex.giiis.koreku.api.OnProductsLoadedListener;
-import es.unex.giiis.koreku.api.ProductsNetworkLoaderRunnable;
+import es.unex.giiis.koreku.api_product.OnProductsLoadedListener;
+import es.unex.giiis.koreku.api_product.ProductsNetworkLoaderRunnable;
 
 public class UpdateGame extends AppCompatActivity {
 

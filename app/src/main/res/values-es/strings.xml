@@ -77,4 +77,7 @@
     <string name="name_profile_search">Introduce el nombre de perfil a buscar</string>
     <string name="notfound">Ups...Perfil no encontrado</string>
     <string name="list_by_duedate">Listar por fecha de fin</string>
+    <string name="priceapi">PriceCharting: Accesorios y Juegos</string>
+    <string name="search_box_hint">Buscar por consola</string>
+    <string name="search">Buscar</string>
 </resources>

@@ -1,6 +1,5 @@
-package es.unex.giiis.koreku.api;
+package es.unex.giiis.koreku.api_product;
 
-import es.unex.giiis.koreku.api.Product;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

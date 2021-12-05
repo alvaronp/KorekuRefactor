@@ -1,12 +1,7 @@
-package es.unex.giiis.koreku.api;
+package es.unex.giiis.koreku.api_product;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-import es.unex.giiis.koreku.api.Product;
-import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.ui.games.AddGames;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,12 +1,10 @@
-package es.unex.giiis.koreku.api;
+package es.unex.giiis.koreku.api_product;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
 
 import es.unex.giiis.koreku.AppExecutors;
 

@@ -52,6 +52,16 @@ public class ConsoleFragment extends Fragment {
             }
         });
 
+        FloatingActionButton fab2 = (FloatingActionButton) root.findViewById(R.id.apiFab);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // - Attach Listener to FloatingActionButton. Implement onClick()
+                Intent intent = new Intent(getActivity(), APISearch.class);
+                startActivity(intent);
+            }
+        });
+
         mRecyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());

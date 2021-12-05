@@ -96,6 +96,12 @@
             android:label="@string/updservices"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".ui.consoles.APISearch"
+            android:exported="true"
+            android:label="@string/priceapi"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
