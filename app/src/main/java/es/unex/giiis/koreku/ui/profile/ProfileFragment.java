@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +21,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+
+
 
 public class ProfileFragment extends Fragment {
     FloatingActionButton busqueda, anadirPerfil;
@@ -86,8 +90,6 @@ public class ProfileFragment extends Fragment {
         });
 
         mRecyclerView.setAdapter(mAdapter);
-
-        KorekuDatabase.getInstance(getActivity());
         setHasOptionsMenu(true);
         return root;
     }
@@ -103,21 +105,10 @@ public class ProfileFragment extends Fragment {
         if (requestCode == ADD_PROFILE_REQUEST) {
             if (resultCode == getActivity().RESULT_OK) {
                 Perfil c = new Perfil(data);
-
-                //insert into DB
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        long id = db.getDao3().insert(c);
-
-                        //update item ID
-                        c.setId(id);
-
-                        //insert into adapter list
-                        getActivity().runOnUiThread(() -> mAdapter.add(c));
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+                ProfileViewModel mViewModel = new ViewModelProvider(this, appContainer.pfactory).get(ProfileViewModel.class);
+                mViewModel.insert(c);
+                mAdapter.add(c);
             }
         }
     }
@@ -143,17 +134,16 @@ public class ProfileFragment extends Fragment {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ProfileViewModel mViewModel = new ViewModelProvider(this, appContainer.pfactory).get(ProfileViewModel.class);
+
         switch (item.getItemId()) {
             case MENU_DELETE:
                 //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
                 //crud.deleteAll();
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao3().deleteAll();
-                        getActivity().runOnUiThread(() -> mAdapter.clear());
-                    }
+                mViewModel.deleteAll();
+                mViewModel.getPerfiles().observe(this, perfiles -> {
+                    mAdapter.load(perfiles);
                 });
                 return true;
             default:
@@ -163,14 +153,10 @@ public class ProfileFragment extends Fragment {
 
     // Load stored ToDoItems
     private void loadItems() {
-        //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
-        //List<ToDoItem> items = crud.getAll();
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                List <Perfil> cons = KorekuDatabase.getInstance(getActivity()).getDao3().getAll();
-                getActivity().runOnUiThread(()->mAdapter.load(cons));
-            }
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ProfileViewModel mViewModel = new ViewModelProvider(this, appContainer.pfactory).get(ProfileViewModel.class);
+        mViewModel.getPerfiles().observe(this, perfiles -> {
+            mAdapter.load(perfiles);
         });
     }
 }

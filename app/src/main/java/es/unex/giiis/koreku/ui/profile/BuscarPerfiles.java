@@ -9,18 +9,23 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.utils.widget.ImageFilterView;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentProfileBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class BuscarPerfiles extends AppCompatActivity {
-  private static    List<Perfil> perfiles= null;
+
+    private static Perfil perfil= null;
     EditText edtCodigo,edtTelefono,edtCorreo,edtTitle;
     ImageFilterView Imagen;
     private FragmentProfileBinding binding;
@@ -31,13 +36,6 @@ public class BuscarPerfiles extends AppCompatActivity {
         setContentView(R.layout.busqueda_profile);
 
 
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                perfiles=  KorekuDatabase.getInstance(BuscarPerfiles.this).getDao3().getAll();
-
-            }
-        });
 
         edtCodigo = findViewById(R.id.edtCodigo);
         edtTelefono = findViewById(R.id.Telefono);
@@ -45,28 +43,30 @@ public class BuscarPerfiles extends AppCompatActivity {
         edtTitle = findViewById(R.id.Nombre);
         Imagen = findViewById(R.id.imagen);
 
+        AppContainer appContainer = ((MyApplication) getApplication()).appContainer;
+        ProfileViewModel mViewModel = new ViewModelProvider(this, appContainer.pfactory).get(ProfileViewModel.class);
+
         // OnClickListener for the Cancel Button,
 
          Button buscar = (Button) findViewById(R.id.btnBuscar);
          buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int i =0;
                 String codigo=edtCodigo.getText().toString();
+                perfil=mViewModel.getPerfil(codigo);
                 boolean bandera = false;
-                while(i<perfiles.size() && bandera ==false){
-                    String titulo=perfiles.get(i).getTitle();
-                    if(codigo.equals(titulo)){
+                if( perfil !=null){
+
                         edtTelefono.setVisibility(View.VISIBLE);
                         edtCorreo.setVisibility(View.VISIBLE);
                         edtTitle.setVisibility(View.VISIBLE);
                         Imagen.setVisibility(View.VISIBLE);
-                        edtTelefono.setText(perfiles.get(i).getPhone());
-                        edtTitle.setText(perfiles.get(i).getTitle());
-                        edtCorreo.setText(perfiles.get(i).getMail());
-                        Imagen.setImageBitmap(BitmapFactory.decodeFile(perfiles.get(i).getImage()));
-                        bandera = true;
-                    }else{i++;}
+                        edtTelefono.setText(perfil.getPhone());
+                        edtTitle.setText(perfil.getTitle());
+                        edtCorreo.setText(perfil.getMail());
+                        Imagen.setImageBitmap(BitmapFactory.decodeFile(perfil.getImage()));
+                       bandera =true;
+
                 }
                 if(bandera == false){
                     Snackbar.make(v, R.string.notfound, Snackbar.LENGTH_LONG)

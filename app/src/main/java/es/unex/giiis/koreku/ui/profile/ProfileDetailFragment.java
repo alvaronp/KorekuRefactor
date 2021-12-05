@@ -13,10 +13,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+
 
 
 public class ProfileDetailFragment extends Fragment {
@@ -123,15 +127,11 @@ public class ProfileDetailFragment extends Fragment {
         deleteprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao3().deleteProfile(mProf.getTitle());
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) ProfileDetailFragment.this.getActivity().getApplication()).appContainer;
+                ProfileViewModel mViewModel = new ViewModelProvider(ProfileDetailFragment.this, appContainer.pfactory).get(ProfileViewModel.class);
+                mViewModel.delete(mProf.getTitle());
                 getActivity().onBackPressed();
-            }
+                }
         });
         return v;
     }
@@ -147,7 +147,9 @@ public class ProfileDetailFragment extends Fragment {
         if (requestCode == COMMENT_SET) {
             if (resultCode == getActivity().RESULT_OK) {
                 mProf.setComments(data.getStringExtra("comment"));
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
+                AppContainer appContainer = ((MyApplication) ProfileDetailFragment.this.getActivity().getApplication()).appContainer;
+                ProfileViewModel mViewModel = new ViewModelProvider(ProfileDetailFragment.this, appContainer.pfactory).get(ProfileViewModel.class);
+                mViewModel.update(mProf);
                 mComment.setText(mProf.getComments());
             }
 
@@ -162,7 +164,9 @@ public class ProfileDetailFragment extends Fragment {
                 if(!c.getImage().equals("")) {
                     mProf.setImage(c.getImage());
                 }
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao3().update(mProf));
+                AppContainer appContainer = ((MyApplication) ProfileDetailFragment.this.getActivity().getApplication()).appContainer;
+                ProfileViewModel mViewModel = new ViewModelProvider(ProfileDetailFragment.this, appContainer.pfactory).get(ProfileViewModel.class);
+                mViewModel.update(mProf);
                 mComment.setText(mProf.getComments());
                 mTitle.setText(mProf.getTitle());
                 mTelefono.setText(mProf.getPhone());
