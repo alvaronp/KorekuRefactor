@@ -52,7 +52,7 @@ public class Service {
     private Date dueDate = new Date();
 
     @Ignore
-     Service(String title, String subscription, String email, String price,
+    Service(String title, String subscription, String email, String price,
                    Date dueDate) {
 
         this.title = title;

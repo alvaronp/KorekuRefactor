@@ -87,8 +87,6 @@ public class Consolas {
 		image = intent.getStringExtra(Consolas.IMAGE);
 	}
 
-
-
 	@Ignore
 	public Consolas(){
 		this.id =0;
@@ -97,6 +95,7 @@ public class Consolas {
 		this.company="";
 		this.image="";
 	}
+
     public long getId() { return id; }
 
     public void setId(long ID) { this.id = ID; }
