@@ -12,21 +12,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.List;
 
 import es.unex.giiis.koreku.AppContainer;
-import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentConsoleBinding;
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 public class ConsoleFragment extends Fragment {
 
@@ -75,8 +70,6 @@ public class ConsoleFragment extends Fragment {
         });
 
         mRecyclerView.setAdapter(mAdapter);
-
-        KorekuDatabase.getInstance(getActivity());
         setHasOptionsMenu(true);
         return root;
     }
@@ -92,21 +85,10 @@ public class ConsoleFragment extends Fragment {
         if (requestCode == ADD_CONSOLES_REQUEST) {
             if (resultCode == getActivity().RESULT_OK) {
                 Consolas c = new Consolas(data);
-
-                //insert into DB
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        long id = db.getDao2().insert(c);
-
-                        //update item ID
-                        c.setId(id);
-
-                        //insert into adapter list
-                        getActivity().runOnUiThread(() -> mAdapter.add(c));
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+                ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
+                mViewModel.insert(c);
+                mAdapter.add(c);
             }
         }
     }
@@ -135,23 +117,17 @@ public class ConsoleFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
         switch (item.getItemId()) {
             case MENU_DELETE:
-                //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
-                //crud.deleteAll();
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao2().deleteAll();
-                        getActivity().runOnUiThread(() -> mAdapter.clear());
-                    }
+                mViewModel.deleteAll();
+                mViewModel.getConsoles().observe(this, consolas -> {
+                    mAdapter.load(consolas);
                 });
                 return true;
 
             case MENU_ListarFecha:
-                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
-                ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
                 mViewModel.getConsolesByDate().observe(this, consolas -> {
                     mAdapter.load(consolas);
                 });
@@ -162,8 +138,6 @@ public class ConsoleFragment extends Fragment {
 
     // Load stored ToDoItems
     private void loadItems() {
-        //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
-        //List<ToDoItem> items = crud.getAll();
         AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
         ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
         mViewModel.getConsoles().observe(this, consolas -> {

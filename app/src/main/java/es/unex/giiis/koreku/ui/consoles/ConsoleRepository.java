@@ -13,6 +13,7 @@ import androidx.lifecycle.Transformations;
 
 import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.roomdb.ConsolasDAO;
+import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 
 
 /**
@@ -66,5 +67,41 @@ public class ConsoleRepository {
             }
         });
         return consolas;
+    }
+
+    public void deleteAll(){
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mConsolasDAO.deleteAll();
+            }
+        });
+    }
+
+    public void delete(String nombre){
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mConsolasDAO.deleteConsole(nombre);
+            }
+        });
+    }
+
+    public void insert(Consolas c){
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mConsolasDAO.insert(c);
+            }
+        });
+    }
+
+    public void update(Consolas c){
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mConsolasDAO.update(c);
+            }
+        });
     }
 }

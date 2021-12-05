@@ -25,4 +25,20 @@ class ConsoleViewModel extends ViewModel {
     public LiveData<List<Consolas>> getConsolesByDate() {
         return mRepository.getConsolesByDate();
     }
+
+    public void deleteAll(){
+        mRepository.deleteAll();
+    }
+
+    public void delete(String nombre){
+        mRepository.delete(nombre);
+    }
+
+    public void insert (Consolas c){
+        mRepository.insert(c);
+    }
+
+    public void update (Consolas c){
+        mRepository.update(c);
+    }
 }

@@ -73,7 +73,6 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
         mCon.clear();
         mCon = items;
         notifyDataSetChanged();
-
     }
 
     public Object getConsole(int pos) { return mCon.get(pos); }

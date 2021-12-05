@@ -13,11 +13,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
 
 import java.time.Instant;
 
+import es.unex.giiis.koreku.MainActivity;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -94,15 +98,10 @@ public class ConsoleDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // - Attach Listener to FloatingActionButton. Implement onClick()
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao2().deleteConsole(mCon.getTitle());
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) ConsoleDetailFragment.this.getActivity().getApplication()).appContainer;
+                ConsoleViewModel mViewModel = new ViewModelProvider(ConsoleDetailFragment.this, appContainer.cfactory).get(ConsoleViewModel.class);
+                mViewModel.delete(mCon.getTitle());
                 getActivity().onBackPressed();
-
             }
         });
 
@@ -125,7 +124,11 @@ public class ConsoleDetailFragment extends Fragment {
                 if(!c.getImage().equals("")) {
                     mCon.setImage(c.getImage());
                 }
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao2().update(mCon));
+
+                AppContainer appContainer = ((MyApplication) ConsoleDetailFragment.this.getActivity().getApplication()).appContainer;
+                ConsoleViewModel mViewModel = new ViewModelProvider(ConsoleDetailFragment.this, appContainer.cfactory).get(ConsoleViewModel.class);
+                mViewModel.update(mCon);
+
                 mTitle.setText(mCon.getTitle());
                 mCompany.setText(mCon.getCompany());
                 mBuyDate.setText(mCon.getDate().toInstant().toString().subSequence(0,10));
@@ -133,7 +136,6 @@ public class ConsoleDetailFragment extends Fragment {
                 if (imagePath!=null)
                     image.setImageBitmap(BitmapFactory.decodeFile(imagePath));
             }
-
         }
     }
     @Override public void onResume() {
