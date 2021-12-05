@@ -62,13 +62,12 @@ public class UpdateService extends AppCompatActivity {
 
         String eMail = getIntent().getExtras().getString("email");
         String price = getIntent().getExtras().getString("price");
-        Date dueDate = (Date) getIntent().getExtras().get("dueDate");
-        Instant date = dueDate.toInstant();
+        String dueDate = getIntent().getExtras().getString("dueDate");
         mTitle.setText(title);
         mSubscription.setSelection(selectionPosition);
         mEmail.setText(eMail);
         mPrice.setText(price);
-        dueDateView.setText(date.toString().subSequence(0,10));
+        dueDateView.setText(dueDate);
 
 
 
@@ -138,7 +137,7 @@ public class UpdateService extends AppCompatActivity {
                 String subscriptionString = mSubscription.getSelectedItem().toString();
                 String emailString = mEmail.getText().toString();
                 String priceString = mPrice.getText().toString();
-                String dueString = dueDateString;
+                String dueString = dueDateView.getText().toString();
 
 
                 // Package ToDoItem data into an Intent

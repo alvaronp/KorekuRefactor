@@ -1,5 +1,6 @@
 package es.unex.giiis.koreku.roomdb;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -13,7 +14,7 @@ import es.unex.giiis.koreku.ui.service.Service;
 public interface ServiceDAO {
 
     @Query("SELECT * FROM service")  //Antes definimos que nuestra tabla se llamaría así
-    public List<Service> getAll();
+    public LiveData<List<Service>> getAll();
 
     @Query("DELETE FROM service WHERE title = :title")
     public void deleteService(String title);
@@ -28,6 +29,6 @@ public interface ServiceDAO {
     public int update(Service service);
 
     @Query("SELECT * FROM service ORDER BY dueDate")
-    public List<Service> getAllByDueDate();
+    public LiveData<List<Service>> getAllByDueDate();
 
 }

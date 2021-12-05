@@ -11,13 +11,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.time.Instant;
 
-import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.AppContainer;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
-import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+
 
 public class ServiceDetailFragment extends Fragment {
 
@@ -29,7 +31,6 @@ public class ServiceDetailFragment extends Fragment {
     TextView mSubscription;
     TextView mEmail;
     TextView mPrice;
-    TextView mStartDate;
     TextView mDueDate;
 
     public ServiceDetailFragment() {
@@ -103,17 +104,11 @@ public class ServiceDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                // - Attach Listener to FloatingActionButton. Implement onClick()
 
-                    @Override
-                    public void run() {
-
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao4().deleteService(mSer.getTitle());
-
-                    }
-                });
-
+                AppContainer appContainer = ((MyApplication) ServiceDetailFragment.this.getActivity().getApplication()).appContainer;
+                ServiceViewModel mViewModel = new ViewModelProvider(ServiceDetailFragment.this, appContainer.sfactory).get(ServiceViewModel.class);
+                mViewModel.delete(mSer.getTitle());
                 getActivity().onBackPressed();
 
             }
@@ -133,7 +128,7 @@ public class ServiceDetailFragment extends Fragment {
                 intent.putExtra("subscription", mSer.getSubscription());
                 intent.putExtra("email", mSer.getEmail());
                 intent.putExtra("price", mSer.getPrice());
-                intent.putExtra("dueDate", mSer.getDueDate());
+                intent.putExtra("dueDate", mSer.getDueDate().toInstant().toString().subSequence(0, 10));
 
                 startActivityForResult(intent, 0);
 
@@ -164,7 +159,9 @@ public class ServiceDetailFragment extends Fragment {
                 mSer.setPrice(s.getPrice());
                 mSer.setDueDate(s.getDueDate());
 
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao4().update(mSer));
+                AppContainer appContainer = ((MyApplication) ServiceDetailFragment.this.getActivity().getApplication()).appContainer;
+                ServiceViewModel mViewModel = new ViewModelProvider(ServiceDetailFragment.this, appContainer.sfactory).get(ServiceViewModel.class);
+                mViewModel.update(mSer);
 
                 mTitle.setText(mSer.getTitle());
                 mSubscription.setText(mSer.getSubscription());

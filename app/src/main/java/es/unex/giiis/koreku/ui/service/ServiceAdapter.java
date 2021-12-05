@@ -38,7 +38,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     // Create new views (invoked by the layout manager)
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ServiceAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // - Inflate the View for every element
 

@@ -95,7 +95,27 @@ public class Service {
 
     }
 
+    @Ignore
+    public Service(long id, String title, String subscription, String email, String price,
+                   String dueDate) {
 
+        this.id = id;
+        this.title = title;
+        this.subscription = subscription;
+        this.email = email;
+        this.price = price;
+
+        try {
+
+            this.dueDate = Service.FORMAT.parse(dueDate);
+
+        } catch (ParseException e) {
+
+            this.dueDate = new Date();
+
+        }
+
+    }
 
     public long getId() {
 

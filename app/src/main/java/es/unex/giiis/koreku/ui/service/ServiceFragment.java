@@ -12,14 +12,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
-
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentServiceBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -29,7 +30,6 @@ public class ServiceFragment extends Fragment {
     private FragmentServiceBinding binding;
 
     private static final int MENU_DELETE = Menu.FIRST;
-    private static final int MENU_Listar = 4;
     private static final int MENU_ListarFecha = 5;
     private static final int ADD_SERVICE_REQUEST = 0;
 
@@ -152,52 +152,24 @@ public class ServiceFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ServiceViewModel mViewModel = new ViewModelProvider(this, appContainer.sfactory).get(ServiceViewModel.class);
+
         switch (item.getItemId()) {
 
             case MENU_DELETE:
-                //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
-                //crud.deleteAll();
 
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao4().deleteAll();
-                        getActivity().runOnUiThread(() -> mAdapter.clear());
-
-                    }
-                });
-
-                return true;
-
-            case MENU_Listar:
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        List<Service> services = db.getDao4().getAll();
-                        getActivity().runOnUiThread(() -> mAdapter.load(services));
-
-                    }
+                mViewModel.deleteAll();
+                mViewModel.getServices().observe(this, services -> {
+                    mAdapter.load(services);
                 });
 
                 return true;
 
             case MENU_ListarFecha:
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
 
-                    @Override
-                    public void run() {
-
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        List<Service> services = db.getDao4().getAllByDueDate();
-                        getActivity().runOnUiThread(() -> mAdapter.load(services));
-
-                    }
+                mViewModel.getServicesByDueDate().observe(this, services -> {
+                    mAdapter.load(services);
                 });
 
                 return true;
@@ -211,16 +183,12 @@ public class ServiceFragment extends Fragment {
 
     private void loadItems() {
 
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-
-            @Override
-            public void run() {
-
-                List<Service> services = KorekuDatabase.getInstance(getActivity()).getDao4().getAll();
-                getActivity().runOnUiThread(()->mAdapter.load(services));
-
-            }
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        ServiceViewModel mViewModel = new ViewModelProvider(this, appContainer.sfactory).get(ServiceViewModel.class);
+        mViewModel.getServices().observe(this, services -> {
+            mAdapter.load(services);
         });
+
     }
 
 }
