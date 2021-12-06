@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Comparator;
 import java.util.List;
 
 import es.unex.giiis.koreku.AppContainer;
@@ -134,15 +135,25 @@ public class GameFragment extends Fragment {
                 });
                 return true;
             case MENU_Listar:
-                mViewModel.getGamesByGenre().observe(this, games -> {
-                    mAdapter.load(games);
+                List<Games> g1 = mViewModel.getGames().getValue();
+                g1.sort(new Comparator<Games>() {
+                    @Override
+                    public int compare(Games t1, Games t2) {
+                        return t1.getGenero().compareTo(t2.getGenero());
+                    }
                 });
+                mAdapter.load(g1);
                 return true;
             case MENU_ListarFecha:
-                mViewModel.getGamesByDate().observe(this, games -> {
-                mAdapter.load(games);
-            });
-            return true;
+                List<Games> g2 = mViewModel.getGames().getValue();
+                g2.sort(new Comparator<Games>() {
+                    @Override
+                    public int compare(Games t1, Games t2) {
+                        return t1.getBuydate().compareTo(t2.getBuydate());
+                    }
+                });
+                mAdapter.load(g2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

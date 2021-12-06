@@ -147,7 +147,7 @@ public class UIConsolesTest {
         openContextualActionModeOverflowMenu();
         onView(withText(R.string.list_by_date)).perform(click());
         onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(withId(R.id.titleGameDetail)).check(matches(hasDescendant(withText("Segundo"))));
+        onView(withId(R.id.titleGameDetail)).check(matches(withText("Segundo")));
         Espresso.pressBack();
     }
 

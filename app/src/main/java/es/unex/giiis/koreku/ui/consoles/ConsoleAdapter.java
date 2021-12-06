@@ -16,7 +16,6 @@ import es.unex.giiis.koreku.R;
 
 public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHolder> {
     private List<Consolas> mCon = new ArrayList<Consolas>();
-    Context mContext;
 
     public interface OnItemClickListener {
         void onItemClick(Consolas consola);     //Type of the element to be returned
@@ -25,8 +24,8 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
     private final OnItemClickListener listener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ConsoleAdapter(Context context, OnItemClickListener listener) {
-        mContext = context;
+    public ConsoleAdapter(List<Consolas> c, OnItemClickListener listener) {
+        this.mCon = c;
         this.listener = listener;
     }
 
@@ -38,7 +37,7 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.console_item, parent, false);
 
-        return new ViewHolder(mContext,v);
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -55,41 +54,32 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
     }
 
     public void add(Consolas c) {
-
         mCon.add(c);
         notifyDataSetChanged();
 
     }
 
     public void clear(){
-
         mCon.clear();
         notifyDataSetChanged();
 
     }
 
     public void load(List<Consolas> items){
-
-        mCon.clear();
         mCon = items;
         notifyDataSetChanged();
     }
 
     public Object getConsole(int pos) { return mCon.get(pos); }
 
-     static class ViewHolder extends RecyclerView.ViewHolder {
+     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-         private Context mContext;
+        public TextView title;
+        public TextView company;
+        public TextView dateView;
 
-        private TextView title;
-        private TextView company;
-        private TextView dateView;
-
-        public ViewHolder(Context context, View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-
-            mContext = context;
-
             // - Get the references to every widget of the Item View
             title =  itemView.findViewById(R.id.titleView);
             company =  itemView.findViewById(R.id.companyView);
@@ -97,16 +87,12 @@ public class ConsoleAdapter extends RecyclerView.Adapter<ConsoleAdapter.ViewHold
         }
 
         public void bind(final Consolas c, final OnItemClickListener listener) {
-
             // - Display Title in TextView
             title.setText(c.getTitle());
-
             // - Display Company in a TextView
             company.setText(c.getCompany());
-
             //  - Display Date.
             dateView.setText(Consolas.FORMAT.format(c.getDate()).subSequence(0,10));
-
             itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override

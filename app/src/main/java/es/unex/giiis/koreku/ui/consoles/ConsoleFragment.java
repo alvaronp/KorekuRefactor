@@ -18,6 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
@@ -63,12 +68,11 @@ public class ConsoleFragment extends Fragment {
         });
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // - Create a new Adapter for the RecyclerView
-        mAdapter = new ConsoleAdapter(getActivity(), new ConsoleAdapter.OnItemClickListener() {
+        mAdapter = new ConsoleAdapter(new ArrayList<>(), new ConsoleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Consolas c) {
                 ConsoleDetailFragment fragment = ConsoleDetailFragment.newInstance(c);
@@ -138,12 +142,14 @@ public class ConsoleFragment extends Fragment {
                 return true;
 
             case MENU_ListarFecha:
-                mViewModel.getConsolesByDate().observe(this, consolas -> {
-                    mAdapter.load(consolas);
+                List<Consolas> c = mViewModel.getConsoles().getValue();
+                c.sort(new Comparator<Consolas>() {
+                    @Override
+                    public int compare(Consolas t1, Consolas t2) {
+                        return t1.getDate().compareTo(t2.getDate());
+                    }
                 });
-                mViewModel.getConsolesByDate().observe(this, consolas -> {
-                    mAdapter.load(consolas);
-                });
+                mAdapter.load(c);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

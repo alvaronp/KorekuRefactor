@@ -18,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Comparator;
+import java.util.List;
+
 import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
 import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentServiceBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.consoles.Consolas;
 
 public class ServiceFragment extends Fragment {
 
@@ -155,9 +159,14 @@ public class ServiceFragment extends Fragment {
 
             case MENU_ListarFecha:
 
-                mViewModel.getServicesByDueDate().observe(this, services -> {
-                    mAdapter.load(services);
+                List<Service> s = mViewModel.getServices().getValue();
+                s.sort(new Comparator<Service>() {
+                    @Override
+                    public int compare(Service t1, Service t2) {
+                        return t1.getDueDate().compareTo(t2.getDueDate());
+                    }
                 });
+                mAdapter.load(s);
 
                 return true;
 

@@ -32,7 +32,7 @@ public interface ConsolasDAO {
     @Update
     public int update(Consolas item);
 
-    @Query("SELECT * FROM consolas ORDER BY DATE ")
+    @Query("SELECT * FROM consolas ORDER BY DATE ASC")
     public LiveData<List<Consolas>> getAllByDate();
 
 }
