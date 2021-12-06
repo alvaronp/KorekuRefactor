@@ -99,24 +99,11 @@ public class ServiceFragment extends Fragment {
 
                 //insert into DB
 
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+                ServiceViewModel mViewModel = new ViewModelProvider(this, appContainer.sfactory).get(ServiceViewModel.class);
+                mViewModel.insert(service);
+                mAdapter.add(service);
 
-                    @Override
-                    public void run() {
-
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        long id = db.getDao4().insert(service);
-
-                        //update item ID
-
-                        service.setId(id);
-
-                        //insert into adapter list
-
-                        getActivity().runOnUiThread(() -> mAdapter.add(service));
-
-                    }
-                });
             }
         }
     }

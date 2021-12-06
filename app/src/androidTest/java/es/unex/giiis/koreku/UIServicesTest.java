@@ -7,6 +7,9 @@ import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -15,7 +18,6 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
-import android.content.Intent;
 import android.widget.DatePicker;
 
 import androidx.test.espresso.contrib.PickerActions;
@@ -44,8 +46,6 @@ public class UIServicesTest {
     @Test
     public void shouldAddServiceToRecyclerView() {
 
-        mActivityRule.launchActivity(new Intent());
-
         String titleTest = "Testeo del insertar";
         String eMailTest = "gguibert@alumnos.unex.es";
         String priceTest = "5";
@@ -73,8 +73,6 @@ public class UIServicesTest {
 
     @Test
     public void shouldEditServiceOfRecyclerView(){
-
-        mActivityRule.launchActivity(new Intent());
 
         String titleTest = "Testeo del update";
         String eMailTest = "gguibert@alumnos.unex.es";
@@ -114,8 +112,6 @@ public class UIServicesTest {
     @Test
     public void shouldDeleteServiceOfRecyclerView(){
 
-        mActivityRule.launchActivity(new Intent());
-
         String titleTest = "Testeo del delete unitario";
         String eMailTest = "gguibert@alumnos.unex.es";
         String priceTest = "5";
@@ -144,6 +140,79 @@ public class UIServicesTest {
 
         // Se borra
         onView(withId(R.id.deleteButtonService)).perform(click());
+        onView(withId(R.id.navigation_services)).perform(click());
+
+    }
+
+    @Test
+    public void shouldOrderByDueDateOnRecyclerView(){
+
+        String eMailTest = "gguibert@alumnos.unex.es";
+        String priceTest = "5";
+
+        // Nos vamos a Service
+        onView(withId(R.id.navigation_services)).perform(click());
+
+        // Para hacer click en el botón del añadir
+        onView(withId(R.id.fragmentService_Button)).perform(click());
+
+        // Rellenamos los campos
+        onView(withId(R.id.serviceName)).perform(typeText("Primero"), closeSoftKeyboard());
+        onView(withId(R.id.serviceSpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Twitch Prime"))).perform(click());
+        onView(withId(R.id.serviceEmail)).perform(typeText(eMailTest), closeSoftKeyboard());
+        onView(withId(R.id.servicePrice)).perform(typeText(priceTest), closeSoftKeyboard());
+        onView(withId(R.id.serviceDueDateButton)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        // Se inserta
+        onView(withId(R.id.serviceSubmitButton)).perform(click());
+
+        // Para hacer click en el botón del añadir
+        onView(withId(R.id.fragmentService_Button)).perform(click());
+
+        // Rellenamos los campos
+        onView(withId(R.id.serviceName)).perform(typeText("Tercero"), closeSoftKeyboard());
+        onView(withId(R.id.serviceSpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Twitch Prime"))).perform(click());
+        onView(withId(R.id.serviceEmail)).perform(typeText(eMailTest), closeSoftKeyboard());
+        onView(withId(R.id.servicePrice)).perform(typeText(priceTest), closeSoftKeyboard());
+        onView(withId(R.id.serviceDueDateButton)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2024, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        // Se inserta
+        onView(withId(R.id.serviceSubmitButton)).perform(click());
+
+        // Para hacer click en el botón del añadir
+        onView(withId(R.id.fragmentService_Button)).perform(click());
+
+        // Rellenamos los campos
+        onView(withId(R.id.serviceName)).perform(typeText("Segundo"), closeSoftKeyboard());
+        onView(withId(R.id.serviceSpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Twitch Prime"))).perform(click());
+        onView(withId(R.id.serviceEmail)).perform(typeText(eMailTest), closeSoftKeyboard());
+        onView(withId(R.id.servicePrice)).perform(typeText(priceTest), closeSoftKeyboard());
+        onView(withId(R.id.serviceDueDateButton)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2020, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        // Se inserta
+        onView(withId(R.id.serviceSubmitButton)).perform(click());
+
+        // Open Contextual Action Mode Overflow Menu (abrir menu de 3 puntos)
+        openContextualActionModeOverflowMenu();
+        // Perform a click() action on the view withText "Delete all" (Should be a R.string.* reference)
+        onView(withText(R.string.list_by_duedate)).perform(click());
+
+        // Se selecciona el segundo
+        onView(withId(R.id.fragment_service_recycledView)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        // Se comprueba que se han ordenado
+        onView(withId(R.id.titleServiceDetail)).check(matches(hasDescendant(withText("Segundo"))));
+
+        // Nos vamos a Service
         onView(withId(R.id.navigation_services)).perform(click());
 
     }

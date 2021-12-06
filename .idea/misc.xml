@@ -71,6 +71,10 @@
         <entry key="..\:/Users/34608/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/profile_item.xml" value="0.536" />
         <entry key="..\:/Users/34608/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout-car/car_alert_dialog_button_bar.xml" value="0.264" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/content_add_service.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/content_update_service.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/fragment_console.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/fragment_service.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/KorekuRefactor/app/src/main/res/layout/service_detail.xml" value="0.23541666666666666" />
       </map>
     </option>
   </component>
