@@ -84,6 +84,20 @@ public class UIConsolesTest {
         onView(withId(R.id.navigation_consoles)).perform(click());
     }
 
+    @Test
+    public void shouldDeleteConsoleOfRecyclerView(){
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("tituloConsola"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+        onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.delete_console)).perform(click());
+        onView(withId(R.id.navigation_consoles)).perform(click());
+    }
+
     @After
     public void deleteElements(){
         // Open Contextual Action Mode Overflow Menu (abrir menu de 3 puntos)
