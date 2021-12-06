@@ -78,7 +78,6 @@ public class ConsoleFragment extends Fragment {
                         .commit();
             }
         });
-
         mRecyclerView.setAdapter(mAdapter);
         setHasOptionsMenu(true);
         return root;
@@ -99,6 +98,7 @@ public class ConsoleFragment extends Fragment {
                 ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);
                 mViewModel.insert(c);
                 mAdapter.add(c);
+                loadItems();
             }
         }
     }
@@ -135,12 +135,14 @@ public class ConsoleFragment extends Fragment {
                 mViewModel.getConsoles().observe(this, consolas -> {
                     mAdapter.load(consolas);
                 });
+                loadItems();
                 return true;
 
             case MENU_ListarFecha:
                 mViewModel.getConsolesByDate().observe(this, consolas -> {
                     mAdapter.load(consolas);
                 });
+
             default:
                 return super.onOptionsItemSelected(item);
         }
