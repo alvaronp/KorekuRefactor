@@ -45,7 +45,7 @@ public class Perfil {
 	@ColumnInfo(name="comments")
 	private String comments = new String();
 	@Ignore
-    Perfil(String title, Date date, String phone, String mail, String image, String comments) {
+    Perfil(String title, String phone, String mail, String image, String comments) {
 
 		this.title = title;
 		this.phone=phone;
@@ -83,7 +83,13 @@ public class Perfil {
 		this.mail=mail;
 		this.image=image;
 	}
-
+	public Perfil(){
+		this.id =0;
+		this.title ="";
+		this.phone="";
+		this.mail="";
+		this.image="";
+	}
 
 	public long getId() { return id; }
 
