@@ -89,7 +89,7 @@ public class UIConsolesTest {
     }
 
     @Test
-    public void shouldDeleteConsoleOfRecyclerView(){
+    public void shouldDeleteConsoleOfRecyclerView() {
         onView(withId(R.id.fab)).perform(click());
         onView(withId(R.id.title)).perform(typeText("tituloConsola"), closeSoftKeyboard());
         onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
