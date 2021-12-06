@@ -3,6 +3,7 @@ package es.unex.giiis.koreku;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -210,11 +211,9 @@ public class UIServicesTest {
         onView(withId(R.id.fragment_service_recycledView)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
         // Se comprueba que se han ordenado
-        onView(withId(R.id.titleServiceDetail)).check(matches(hasDescendant(withText("Segundo"))));
-
+        onView(withId(R.id.titleServiceDetail)).check(matches(withText("Segundo")));
         // Nos vamos a Service
         onView(withId(R.id.navigation_services)).perform(click());
-
     }
 
     @After

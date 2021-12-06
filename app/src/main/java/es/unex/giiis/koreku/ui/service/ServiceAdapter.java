@@ -81,8 +81,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     }
 
     public void load(List<Service> items){
-
-        mServices.clear();
         mServices = items;
         notifyDataSetChanged();
 
