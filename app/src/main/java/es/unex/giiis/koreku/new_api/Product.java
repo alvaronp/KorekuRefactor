@@ -30,6 +30,13 @@ public class Product {
         status="";
     }
 
+    public Product(int id, String consolename, String productname, String status){
+        this.id = id;
+        this.consolename = consolename;
+        this.productname = productname;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
