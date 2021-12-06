@@ -51,12 +51,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     //Incluimos JUnit en nuestro proyecto
     testImplementation 'junit:junit:4.12'
-    //Incluimos Espresso en nuestro proyecto
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    
 }

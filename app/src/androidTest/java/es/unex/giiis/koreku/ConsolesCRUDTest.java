@@ -25,7 +25,6 @@ import java.util.List;
 import es.unex.giiis.koreku.roomdb.ConsolasDAO;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 import es.unex.giiis.koreku.ui.consoles.Consolas;
-import es.unex.giiis.koreku.ui.service.Service;
 
 @RunWith(AndroidJUnit4.class)
 public class ConsolesCRUDTest {
@@ -44,14 +43,11 @@ public class ConsolesCRUDTest {
         Context context = getInstrumentation().getTargetContext();
         db = Room.inMemoryDatabaseBuilder(context, KorekuDatabase.class).allowMainThreadQueries().build();
         consolasDAO = db.getDao2();
-
     }
 
     @After
     public void closeDb() throws IOException {
-
         db.close();
-
     }
 
     @Test
