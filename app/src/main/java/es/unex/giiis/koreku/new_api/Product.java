@@ -30,13 +30,35 @@ public class Product {
         status="";
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getConsolename(){
         return consolename;
     }
 
+    public void setConsolename(String consolename) {
+        this.consolename = consolename;
+    }
     public String getProductname() {
         return productname;
     }
 
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
 

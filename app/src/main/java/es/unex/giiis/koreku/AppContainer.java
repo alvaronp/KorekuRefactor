@@ -57,10 +57,8 @@ public class AppContainer {
         networkDataSource = ProductNetworkDataSource.getInstance();
         repository = ProductRepository.getInstance(database.getDao5(), networkDataSource);
         afactory = new ProductViewModelFactory(repository);
-
         servicerepo = ServiceRepository.getInstance(database.getDao4());
         sfactory = new ServiceViewModelFactory(servicerepo);
-
         pfactory = new ProfileViewModelFactory(profilerepo);
         /*
         gfactory = new GamesViewModelFactory(gamesrepo);

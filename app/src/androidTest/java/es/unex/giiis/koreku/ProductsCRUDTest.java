@@ -18,19 +18,23 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.unex.giiis.koreku.new_api.Product;
 import es.unex.giiis.koreku.roomdb.ConsolasDAO;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.roomdb.ProductsDAO;
 import es.unex.giiis.koreku.ui.consoles.Consolas;
+import es.unex.giiis.koreku.ui.profile.Perfil;
 
 @RunWith(AndroidJUnit4.class)
 public class ProductsCRUDTest {
 
     // created instances for the DAO to test and our implementation of RoomDatabase
     private KorekuDatabase db;
-    private ConsolasDAO consolasDAO;
+    private ProductsDAO productsDAO;
 
     // necessary to test the LiveData
     @Rule
@@ -38,10 +42,9 @@ public class ProductsCRUDTest {
 
     @Before
     public void createDb() {
-
         Context context = getInstrumentation().getTargetContext();
         db = Room.inMemoryDatabaseBuilder(context, KorekuDatabase.class).allowMainThreadQueries().build();
-        consolasDAO = db.getDao2();
+        productsDAO = db.getDao5();
     }
 
     @After
@@ -50,66 +53,36 @@ public class ProductsCRUDTest {
     }
 
     @Test
-    public void shouldAddConsoleToDB() throws Exception {
+    public void shouldAddProductToDB() throws Exception {
 
-        // Se crea el item
-        Consolas c = new Consolas();
+        List<Product> products = new ArrayList<>();
 
-        c.setTitle("Wii");
-        c.setDate(new Date(2021, 12, 05));
-        c.setCompany("Nintendo");
-        c.setImage("");
+        Product p1 = new Product();
+        p1.setId(0);
+        p1.setProductname("Mario Party");
+        p1.setConsolename("Nintendo DS");
+        p1.setStatus("success");
+        products.add(p1);
+
+        Product p2 = new Product();
+        p2.setId(1);
+        p2.setProductname("Ejemplo");
+        p2.setConsolename("Consola ejemplo");
+        p2.setStatus("failed");
+        products.add(p2);
 
         // Se inserta el item
-        consolasDAO.insert(c);
+        productsDAO.bulkInsert(products);
         // Se recupera en el LiveData
-        LiveData<List<Consolas>> liveConsoles = consolasDAO.getAll();
-        List<Consolas> consolas = LiveDataTestUtils.getValue(liveConsoles);
+        LiveData<List<Product>> liveProducts = productsDAO.getProductsByConsole("Nintendo DS");
+        List<Product> ps = LiveDataTestUtils.getValue(liveProducts);
 
-        assertEquals(consolas.size(), 1);
-        assertEquals(consolas.get(0).getTitle(), "Wii");
-        assertEquals(consolas.get(0).getDate(), new Date(2021, 12, 05));
-        assertEquals(consolas.get(0).getCompany(), "Nintendo");
-        assertEquals(consolas.get(0).getImage(), "");
-    }
+        assertEquals(ps.size(), 1);
+        assertEquals(products.get(0).getConsolename(), "Nintendo DS");
+        assertEquals(products.get(0).getProductname(), "Mario Party");
+        assertEquals(products.get(0).getStatus(),"success");
 
-    @Test
-    public void shouldUpdateConsoleOnDB() throws InterruptedException {
-        // Se crea el Item a insertar
-        Consolas c = new Consolas(1, "Ps5", new Date(2006, 11, 11),
-                "Sony",
-                "https://es.wikipedia.org/wiki/PlayStation_3#/media/Archivo:PS3Versions.png");
-        // Se inserta el item
-        consolasDAO.insert(c);
-        // Se cambia algún parámetro
-        c.setTitle("Ps3");
-        // Se hace el update
-        consolasDAO.update(c);
-        // Se recupera en el LiveData
-        LiveData<List<Consolas>> liveConsolas = consolasDAO.getAll();
-        List<Consolas> consolasList = LiveDataTestUtils.getValue(liveConsolas);
-        // Se inician las comprobaciones de que el update se ha realizado correctamente
-        assertEquals(consolasList.get(0).getTitle(), "Ps3");
-    }
-
-
-    @Test
-    public void shouldDeleteAllConsolesOnDB() throws InterruptedException {
-        Consolas c = new Consolas();
-
-        c.setTitle("Wii");
-        c.setDate(new Date(2021, 12, 05));
-        c.setCompany("Nintendo");
-        c.setImage("");
-
-        // Se inserta el item
-        consolasDAO.insert(c);
-        LiveData<List<Consolas>> liveConsolas = consolasDAO.getAll();
-        List<Consolas> consolasList = LiveDataTestUtils.getValue(liveConsolas);
-        assertEquals(consolasList.size(), 1);
-        //Se borra
-        consolasDAO.deleteConsole(c.getTitle());
-        consolasList = LiveDataTestUtils.getValue(liveConsolas);
-        assertEquals(consolasList.size(), 0);
+        int n = productsDAO.getNumberProductsByConsole("Consola ejemplo");
+        assertEquals(n,1);
     }
 }

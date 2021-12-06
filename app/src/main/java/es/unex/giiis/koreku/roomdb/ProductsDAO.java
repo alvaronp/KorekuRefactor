@@ -24,6 +24,6 @@ public interface ProductsDAO {
     @Query("SELECT count(*) FROM product WHERE consolename = :cname")
     int getNumberProductsByConsole(String cname);
 
-    @Query("SELECT * FROM product WHERE consolename = :cname")
+    @Query("DELETE FROM product WHERE consolename = :cname")
     int deleteReposByUser(String cname);
 }
