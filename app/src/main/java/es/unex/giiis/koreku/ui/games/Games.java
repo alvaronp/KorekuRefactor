@@ -84,6 +84,19 @@ public class Games {
 		this.console = console;
 	}
 
+	@Ignore
+	public Games(){
+		this.id =0;
+		this.title = "";
+		this.status = null;
+		this.buydate = null;
+		this.desc = "";
+		this.image = "";
+		this.bugs = "";
+		this.genero = "";
+		this.console = "";
+	}
+
 	// Create a new ToDoItem from data packaged in an Intent
 	@Ignore
     public Games(Intent intent) {
