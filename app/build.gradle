@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.compose.material3:material3:1.0.0-alpha01'
     implementation 'com.airbnb.android:lottie:3.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-    //Incluimos JUnit en nuestro proyecto
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
