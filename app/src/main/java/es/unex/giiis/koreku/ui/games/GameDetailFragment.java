@@ -13,10 +13,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.time.Instant;
 
+import es.unex.giiis.koreku.AppContainer;
 import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.roomdb.DateConverter;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -134,13 +137,9 @@ public class GameDetailFragment extends Fragment {
         deletegame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao1().deleteGame(mGa.getTitle());
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) GameDetailFragment.this.getActivity().getApplication()).appContainer;
+                GamesViewModel mViewModel = new ViewModelProvider(GameDetailFragment.this, appContainer.gfactory).get(GamesViewModel.class);
+                mViewModel.delete(mGa.getTitle());
                 getActivity().onBackPressed();
             }
         });
@@ -175,15 +174,9 @@ public class GameDetailFragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == getActivity().RESULT_OK) {
                 mGa.setBugs(data.getStringExtra("bugs"));
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao1().update(mGa.getTitle(),mGa.getBugs());
-                    }
-                });
-                mBugs.setVisibility(View.VISIBLE);
-                bugTitle.setVisibility(View.VISIBLE);
+                AppContainer appContainer = ((MyApplication) GameDetailFragment.this.getActivity().getApplication()).appContainer;
+                GamesViewModel mViewModel = new ViewModelProvider(GameDetailFragment.this, appContainer.gfactory).get(GamesViewModel.class);
+                mViewModel.update(mGa);
                 mBugs.setText(mGa.getBugs());
             }
         }
@@ -201,7 +194,10 @@ public class GameDetailFragment extends Fragment {
                 mGa.setBugs(g.getBugs());
                 mGa.setConsole(g.getConsole());
 
-                AppExecutors.getInstance().diskIO().execute(() -> KorekuDatabase.getInstance(getActivity()).getDao1().update(mGa));
+                AppContainer appContainer = ((MyApplication) GameDetailFragment.this.getActivity().getApplication()).appContainer;
+                GamesViewModel mViewModel = new ViewModelProvider(GameDetailFragment.this, appContainer.gfactory).get(GamesViewModel.class);
+                mViewModel.update(mGa);
+
                 mTitle.setText(mGa.getTitle());
                 mDesc.setText(mGa.getDesc());
                 mGenre.setText(mGa.getGenero());

@@ -1,20 +1,23 @@
 package es.unex.giiis.koreku.roomdb;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
 
+import es.unex.giiis.koreku.ui.consoles.Consolas;
 import es.unex.giiis.koreku.ui.games.Games;
 
 @Dao //Esta interfaz es un Dao, así, Room sabrá que lo tiene que implementar como eso
 public interface GamesDAO {
     @Query("SELECT * FROM game") //Antes definimos que nuestra tabla se llamaría así
-    public List<Games> getAll();
+    public LiveData<List<Games>> getAll();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public long insert(Games game);
 
     @Query("DELETE FROM game")
@@ -30,9 +33,9 @@ public interface GamesDAO {
     public int update(String title, String bugs);
 
     @Query("SELECT * FROM game ORDER BY GENERO ") //Antes definimos que nuestra tabla se llamaría así
-    public List<Games> getAllByGender();
+    public LiveData<List<Games>> getAllByGender();
 
     @Query("SELECT * FROM game ORDER BY DATE ")
-    public List<Games> getAllByDate();
+    public LiveData<List<Games>> getAllByDate();
 
 }

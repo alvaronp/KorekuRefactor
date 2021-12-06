@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,10 +20,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-import es.unex.giiis.koreku.AppExecutors;
+import es.unex.giiis.koreku.AppContainer;
+import es.unex.giiis.koreku.MyApplication;
 import es.unex.giiis.koreku.R;
 import es.unex.giiis.koreku.databinding.FragmentGameBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
+import es.unex.giiis.koreku.ui.consoles.Consolas;
+import es.unex.giiis.koreku.ui.consoles.ConsoleViewModel;
+import es.unex.giiis.koreku.ui.consoles.ConsoleViewModelFactory;
 
 public class GameFragment extends Fragment {
 
@@ -34,6 +39,7 @@ public class GameFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private GameAdapter mAdapter;
+    public GamesViewModelFactory gfactory;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -88,21 +94,10 @@ public class GameFragment extends Fragment {
         if (requestCode == ADD_GAMES_REQUEST) {
             if (resultCode == getActivity().RESULT_OK) {
                 Games g = new Games(data);
-
-                //insert into DB
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        long id = db.getDao1().insert(g);
-
-                        //update item ID
-                        g.setId(id);
-
-                        //insert into adapter list
-                        getActivity().runOnUiThread(() -> mAdapter.add(g));
-                    }
-                });
+                AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+                GamesViewModel mViewModel = new ViewModelProvider(this, appContainer.gfactory).get(GamesViewModel.class);
+                mViewModel.insert(g);
+                mAdapter.add(g);
             }
         }
     }
@@ -132,51 +127,36 @@ public class GameFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        GamesViewModel mViewModel = new ViewModelProvider(this, appContainer.gfactory).get(GamesViewModel.class);
         switch (item.getItemId()) {
             case MENU_DELETE:
-                //ToDoItemCRUD crud = ToDoItemCRUD.getInstance(this);
-                //crud.deleteAll();
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        db.getDao1().deleteAll();
-                        getActivity().runOnUiThread(() -> mAdapter.clear());
-                    }
+                mViewModel.deleteAll();
+                mViewModel.getGames().observe(this, games -> {
+                    mAdapter.load(games);
                 });
                 return true;
             case MENU_Listar:
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        List<Games>juegos =db.getDao1().getAllByGender();
-                        getActivity().runOnUiThread(() -> mAdapter.load(juegos));
-                    }
+                mViewModel.getGamesByGenre().observe(this, games -> {
+                    mAdapter.load(games);
                 });
                 return true;
             case MENU_ListarFecha:
-                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        KorekuDatabase db = KorekuDatabase.getInstance(getActivity());
-                        List<Games>juegos =db.getDao1().getAllByDate();
-                        getActivity().runOnUiThread(() -> mAdapter.load(juegos));
-                    }
-                });
+                mViewModel.getGamesByDate().observe(this, games -> {
+                mAdapter.load(games);
+            });
+            return true;
             default:
-                return true;
+                return super.onOptionsItemSelected(item);
         }
     }
 
     // Load stored Game
     private void loadItems() {
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                List<Games> games = KorekuDatabase.getInstance(getActivity()).getDao1().getAll();
-                getActivity().runOnUiThread(()->mAdapter.load(games));
-            }
+        AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
+        GamesViewModel mViewModel = new ViewModelProvider(this, appContainer.gfactory).get(GamesViewModel.class);
+        mViewModel.getGames().observe(this, games -> {
+            mAdapter.load(games);
         });
     }
 }
