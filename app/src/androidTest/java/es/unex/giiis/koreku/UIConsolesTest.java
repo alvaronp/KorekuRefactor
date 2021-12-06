@@ -147,8 +147,9 @@ public class UIConsolesTest {
         openContextualActionModeOverflowMenu();
         onView(withText(R.string.list_by_date)).perform(click());
         onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(withId(R.id.titleGameDetail)).check(matches(withText("Segundo")));
+        onView(withId(R.id.titleGameDetail)).check(matches(withText("tituloConsola3")));
         Espresso.pressBack();
+        onView(withId(R.id.navigation_consoles)).perform(click());
     }
 
     @After
