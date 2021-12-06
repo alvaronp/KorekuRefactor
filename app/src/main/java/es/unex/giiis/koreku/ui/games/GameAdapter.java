@@ -71,7 +71,6 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
     }
 
     public void load(List<Games> items){
-        mGa.clear();
         mGa = items;
         notifyDataSetChanged();
     }
