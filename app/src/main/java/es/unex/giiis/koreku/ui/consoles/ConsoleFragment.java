@@ -106,7 +106,9 @@ public class ConsoleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         // Load saved consoles, if necessary
+
         if (mAdapter.getItemCount() == 0)
             loadItems();
     }
