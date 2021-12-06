@@ -17,7 +17,7 @@ public class Product {
     @Expose
     public String status;
 
-    Product(){
+    public Product(){
         id=0;
         consolename="";
         productname="";

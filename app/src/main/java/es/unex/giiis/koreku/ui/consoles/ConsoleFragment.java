@@ -106,9 +106,7 @@ public class ConsoleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         // Load saved consoles, if necessary
-
         if (mAdapter.getItemCount() == 0)
             loadItems();
     }
@@ -141,12 +139,16 @@ public class ConsoleFragment extends Fragment {
                 mViewModel.getConsolesByDate().observe(this, consolas -> {
                     mAdapter.load(consolas);
                 });
+                mViewModel.getConsolesByDate().observe(this, consolas -> {
+                    mAdapter.load(consolas);
+                });
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    // Load stored ToDoItems
+    // Load stored Consoles
     private void loadItems() {
         AppContainer appContainer = ((MyApplication) this.getActivity().getApplication()).appContainer;
         ConsoleViewModel mViewModel = new ViewModelProvider(this, appContainer.cfactory).get(ConsoleViewModel.class);

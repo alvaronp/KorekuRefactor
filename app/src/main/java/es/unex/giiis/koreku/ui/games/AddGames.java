@@ -163,13 +163,15 @@ public class AddGames extends AppCompatActivity {
 				}
 
 				Intent data = new Intent();
-				Product consolatest = null;
+				Product consolatest = new Product();
 				try {
 					consolatest = api.getFoundProduct();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				String consolaApi = consolatest.consolename;
+				String consolaApi = "";
+				if (consolatest != null)
+					consolaApi = consolatest.consolename;
 				Games.packageIntent(data, titleString, status, buyDate, desc, imagen, genre, null,consolaApi);
 
 				// - return data Intent and finish

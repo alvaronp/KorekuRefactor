@@ -39,7 +39,6 @@ public class GameFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private GameAdapter mAdapter;
-    public GamesViewModelFactory gfactory;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -77,8 +76,6 @@ public class GameFragment extends Fragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-
-        KorekuDatabase.getInstance(getActivity());
         setHasOptionsMenu(true);
         return root;
     }

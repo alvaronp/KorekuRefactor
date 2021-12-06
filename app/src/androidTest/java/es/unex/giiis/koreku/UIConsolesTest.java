@@ -1,5 +1,7 @@
 package es.unex.giiis.koreku;
 
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onIdle;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static androidx.test.espresso.action.ViewActions.clearText;
@@ -17,7 +19,9 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 import android.widget.DatePicker;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.PickerActions;
@@ -52,6 +56,7 @@ public class UIConsolesTest {
     public void initTest(){
         mMainActivity = mActivityRule.getActivity();
         onView(withId(R.id.navigation_consoles)).perform(click());
+        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
     }
 
     @Test
@@ -103,23 +108,52 @@ public class UIConsolesTest {
     }
 
     @Test
-    public void shouldGetAPIInfoOnConsoles(){
-        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
-        Espresso.registerIdlingResources(mIdlingResource);
-
+    public void shouldGetAPIInfoOnConsoles() throws InterruptedException {
+        IdlingRegistry.getInstance().register(mIdlingResource);
         onView(withId(R.id.apiFab)).perform(click());
         onView(withId(R.id.searchBox)).perform(typeText("Wii"), closeSoftKeyboard());
         onView(withId(R.id.searchButton)).perform(click());
-        onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        Thread.sleep(3000);
+        Espresso.pressBack();
         onView(withId(R.id.navigation_consoles)).perform(click());
-        Espresso.unregisterIdlingResources(mIdlingResource);
+    }
+
+    @Test
+    public void shouldOrderConsolesByBuyDate(){
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("tituloConsola1"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("tituloConsola2"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2018, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("tituloConsola3"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2016, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+
+        openContextualActionModeOverflowMenu();
+        onView(withText(R.string.list_by_date)).perform(click());
+        onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.titleGameDetail)).check(matches(hasDescendant(withText("Segundo"))));
+        Espresso.pressBack();
     }
 
     @After
-    public void deleteElements(){
-        // Open Contextual Action Mode Overflow Menu (abrir menu de 3 puntos)
+    public void deleteElements() {
         openContextualActionModeOverflowMenu();
-        // Perform a click() action on the view withText "Delete all" (Should be a R.string.* reference)
         onView(withText(R.string.delete_consoles)).perform(click());
     }
 }

@@ -61,37 +61,29 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
     }
 
     public void add(Games g) {
-
         mGa.add(g);
         notifyDataSetChanged();
-
     }
 
     public void clear(){
-
         mGa.clear();
         notifyDataSetChanged();
-
     }
 
     public void load(List<Games> items){
-
         mGa.clear();
         mGa = items;
         notifyDataSetChanged();
-
     }
 
     public Object getGame(int pos) { return mGa.get(pos); }
 
      static class ViewHolder extends RecyclerView.ViewHolder {
 
-         private Context mContext;
-
+        private Context mContext;
         private TextView title;
         private CheckBox statusView;
         private TextView dateView;
-        private ImageView imageView;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
