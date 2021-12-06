@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -15,7 +16,9 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 import android.widget.DatePicker;
 
+import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -23,6 +26,7 @@ import androidx.test.rule.ActivityTestRule;
 
 import org.hamcrest.*;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,30 +44,48 @@ public class UIConsolesTest {
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
 
+    @Before
+    public void initTest(){
+        onView(withId(R.id.navigation_consoles)).perform(click());
+    }
+
     @Test
     public void shouldAddConsoleToRecyclerView(){
-        onView(withId(R.id.navigation_consoles)).perform(click());
         onView(withId(R.id.fab)).perform(click());
         onView(withId(R.id.title)).perform(typeText("tituloConsola"), closeSoftKeyboard());
         onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
-        onView(withId(R.id.date_picker_button)).perform(click()).perform(PickerActions.setDate(2017, 6, 30));
-
-        // Perform a click() action on R.id.submitButton
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.submitButton)).perform(click());
-/*
-        // Check that R.id.my_recycler_view hasDescendant withId R.id.titleView
+
         onView(withId(R.id.my_recycler_view)).check(matches(hasDescendant(withId(R.id.titleView))));
         // Check that R.id.my_recycler_view hasDescendant with the input text
-        onView(withId(R.id.my_recycler_view)).check(matches(hasDescendant(withText(testingString))));
-        // Check that R.id.my_recycler_view hasDescendant withId R.id.statusCheckBox
-        onView(withId(R.id.my_recycler_view)).check(matches(hasDescendant(withId(R.id.statusCheckBox))));*/
+        onView(withId(R.id.my_recycler_view)).check(matches(hasDescendant(withText("tituloConsola"))));
+    }
+
+    @Test
+    public void shouldEditConsoleOfRecyclerView(){
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("tituloConsola"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("companyConsola"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+
+        onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.Edit)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("cambio el titulo"), closeSoftKeyboard());
+        onView(withId(R.id.submitButton)).perform(click());
+        onView(withId(R.id.navigation_consoles)).perform(click());
     }
 
     @After
     public void deleteElements(){
         // Open Contextual Action Mode Overflow Menu (abrir menu de 3 puntos)
-        /*openContextualActionModeOverflowMenu();
+        openContextualActionModeOverflowMenu();
         // Perform a click() action on the view withText "Delete all" (Should be a R.string.* reference)
-        onView(withText(R.string.delete_consoles)).perform(click());*/
+        onView(withText(R.string.delete_consoles)).perform(click());
     }
 }
