@@ -6,11 +6,15 @@ import android.view.MenuInflater;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.test.espresso.IdlingResource;
 
 import es.unex.giiis.koreku.databinding.ActivityMainBinding;
 import es.unex.giiis.koreku.roomdb.KorekuDatabase;
@@ -18,6 +22,10 @@ import es.unex.giiis.koreku.roomdb.KorekuDatabase;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
 
+    }
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
     }
 }

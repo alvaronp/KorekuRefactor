@@ -17,6 +17,8 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 import android.widget.DatePicker;
 
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -42,11 +44,13 @@ import org.junit.runner.RunWith;
 public class UIConsolesTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> mActivityRule=new ActivityTestRule<>(MainActivity.class,true,true);
+    private IdlingResource mIdlingResource;
+    private MainActivity mMainActivity = null;
 
     @Before
     public void initTest(){
+        mMainActivity = mActivityRule.getActivity();
         onView(withId(R.id.navigation_consoles)).perform(click());
     }
 
@@ -96,6 +100,19 @@ public class UIConsolesTest {
         onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.delete_console)).perform(click());
         onView(withId(R.id.navigation_consoles)).perform(click());
+    }
+
+    @Test
+    public void shouldGetAPIInfoOnConsoles(){
+        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
+        Espresso.registerIdlingResources(mIdlingResource);
+
+        onView(withId(R.id.apiFab)).perform(click());
+        onView(withId(R.id.searchBox)).perform(typeText("Wii"), closeSoftKeyboard());
+        onView(withId(R.id.searchButton)).perform(click());
+        onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.navigation_consoles)).perform(click());
+        Espresso.unregisterIdlingResources(mIdlingResource);
     }
 
     @After
