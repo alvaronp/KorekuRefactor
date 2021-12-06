@@ -2,6 +2,7 @@ package es.unex.giiis.koreku;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressBack;
@@ -76,7 +77,9 @@ public class UIConsolesTest {
 
         onView(withId(R.id.my_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.Edit)).perform(click());
-        onView(withId(R.id.title)).perform(typeText("cambio el titulo"), closeSoftKeyboard());
+        onView(withId(R.id.title)).perform(clearText())
+                                  .perform(click())
+                                  .perform(typeText("cambio el titulo"), closeSoftKeyboard());
         onView(withId(R.id.submitButton)).perform(click());
         onView(withId(R.id.navigation_consoles)).perform(click());
     }
