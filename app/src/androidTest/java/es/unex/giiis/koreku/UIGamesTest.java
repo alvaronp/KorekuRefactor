@@ -43,6 +43,10 @@ public class UIGamesTest {
             new ActivityTestRule<>(MainActivity.class);
 
 
+    @Before
+    public void initTest() {
+        onView(withId(R.id.navigation_games)).perform(click());
+    }
     @Test
     public void shouldAddGameToRecyclerView(){
         onView(withId(R.id.fab)).perform(click());
@@ -189,7 +193,6 @@ public class UIGamesTest {
 
         // Nos vamos a Service
         onView(withId(R.id.navigation_games)).perform(click());
-
     }
 
     @After
