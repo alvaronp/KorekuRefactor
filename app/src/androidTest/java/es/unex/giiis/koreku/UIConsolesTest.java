@@ -107,6 +107,7 @@ public class UIConsolesTest {
         onView(withId(R.id.navigation_consoles)).perform(click());
     }
 
+
     @Test
     public void shouldGetAPIInfoOnConsoles() throws InterruptedException {
         IdlingRegistry.getInstance().register(mIdlingResource);
