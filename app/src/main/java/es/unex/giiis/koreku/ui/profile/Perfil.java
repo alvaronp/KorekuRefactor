@@ -75,7 +75,7 @@ public class Perfil {
 		comments = intent.getStringExtra(Perfil.COMMENTS);
 	}
 
-
+	@Ignore
 	public Perfil(long id, String title, String phone, String mail, String image){
 		this.id =id;
 		this.title =title;
