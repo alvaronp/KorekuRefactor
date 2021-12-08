@@ -62,6 +62,7 @@ public class UIGamesTest {
         onView(withId(R.id.my_recycler_view_game)).check(matches(hasDescendant(withText("Test Games"))));
     }
 
+
     @Test
     public void shouldEditGameOnRecyclerView(){
         onView(withId(R.id.fab)).perform(click());
@@ -193,6 +194,26 @@ public class UIGamesTest {
 
         // Nos vamos a Service
         onView(withId(R.id.navigation_games)).perform(click());
+    }
+
+    @Test
+    public void shouldAddBug(){
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.title)).perform(typeText("Test Games"), closeSoftKeyboard());
+        onView(withId(R.id.desc)).perform(typeText("Test Games Desc"), closeSoftKeyboard());
+        onView(withId(R.id.genero_edit)).perform(typeText("Test Games Genre"), closeSoftKeyboard());
+        onView(withId(R.id.date_picker_button)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2017, 8, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.submitButton)).perform(click());
+
+        onView(withId(R.id.my_recycler_view_game)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.error_button)).perform(click());
+        onView(withId(R.id.bug_text)).perform(typeText("Test bug"), closeSoftKeyboard());
+        onView(withId(R.id.submit_bug_button)).perform(click());
+        onView(withId(R.id.navigation_games)).perform(click());
+
+
     }
 
     @After
